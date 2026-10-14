@@ -1,0 +1,267 @@
+{
+ "request": {
+  "method": "POST",
+  "url": "https://spansh.co.uk/api/systems/search",
+  "params": [],
+  "form": null,
+  "json": {
+   "filters": {
+    "controlling_power": {
+     "value": [
+      "Li Yong-Rui"
+     ]
+    },
+    "power_state": {
+     "value": [
+      "Exploited",
+      "Fortified",
+      "Stronghold"
+     ]
+    }
+   },
+   "sort": [
+    {
+     "distance": {
+      "direction": "asc"
+     }
+    }
+   ],
+   "reference_coords": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+   },
+   "size": 10,
+   "page": 0
+  }
+ },
+ "status": 200,
+ "body": {
+  "count": 2185,
+  "from": 0,
+  "results": [
+   {
+    "id64": 121569805492,
+    "name": "Sirius",
+    "x": 6.25,
+    "y": -1.28125,
+    "z": -5.75,
+    "controlling_power": "Li Yong-Rui",
+    "power": [
+     "Aisling Duval",
+     "Denton Patreus",
+     "Edmund Mahon",
+     "Felicia Winters",
+     "Li Yong-Rui",
+     "Yuri Grom",
+     "Zemina Torval",
+     "Jerome Archer"
+    ],
+    "power_state": "Stronghold",
+    "power_state_control_progress": 0.905325,
+    "power_state_reinforcement": 218800,
+    "power_state_undermining": 114875,
+    "updated_at": "2026-10-12T19:26:45Z"
+   },
+   {
+    "id64": 22959284702024,
+    "name": "WISE 0410+1502",
+    "x": -0.46875,
+    "y": -6.125,
+    "z": -12.59375,
+    "controlling_power": "Li Yong-Rui",
+    "power": [
+     "Aisling Duval",
+     "Edmund Mahon",
+     "Li Yong-Rui",
+     "Yuri Grom",
+     "Zemina Torval",
+     "Jerome Archer"
+    ],
+    "power_state": "Fortified",
+    "power_state_control_progress": 0.278351,
+    "power_state_reinforcement": 6249,
+    "power_state_undermining": 2921,
+    "updated_at": "2026-10-12T16:50:00Z"
+   },
+   {
+    "id64": 22661187052969,
+    "name": "LHS 292",
+    "x": 10.9375,
+    "y": 9.71875,
+    "z": -1.75,
+    "controlling_power": "Li Yong-Rui",
+    "power": [
+     "Aisling Duval",
+     "Edmund Mahon",
+     "Felicia Winters",
+     "Li Yong-Rui",
+     "Yuri Grom",
+     "Zemina Torval",
+     "Jerome Archer"
+    ],
+    "power_state": "Stronghold",
+    "power_state_control_progress": 0.229065,
+    "power_state_reinforcement": 668,
+    "power_state_undermining": 603,
+    "updated_at": "2026-10-12T16:45:47Z"
+   },
+   {
+    "id64": 2869977687457,
+    "name": "LHS 1827",
+    "x": 13.40625,
+    "y": -5.8125,
+    "z": -11.78125,
+    "controlling_power": "Li Yong-Rui",
+    "power": [
+     "Aisling Duval",
+     "Denton Patreus",
+     "Edmund Mahon",
+     "Felicia Winters",
+     "Li Yong-Rui",
+     "Yuri Grom",
+     "Zemina Torval",
+     "Jerome Archer"
+    ],
+    "power_state": "Fortified",
+    "power_state_control_progress": 0.352397,
+    "power_state_reinforcement": 5676,
+    "power_state_undermining": 12618,
+    "updated_at": "2026-10-12T19:07:59Z"
+   },
+   {
+    "id64": 22960358443856,
+    "name": "WISE 0359-5401",
+    "x": 13.125,
+    "y": -13.9375,
+    "z": -1.34375,
+    "controlling_power": "Li Yong-Rui",
+    "power": [
+     "Aisling Duval",
+     "Denton Patreus",
+     "Edmund Mahon",
+     "Felicia Winters",
+     "Li Yong-Rui",
+     "Yuri Grom",
+     "Zemina Torval",
+     "Jerome Archer"
+    ],
+    "power_state": "Stronghold",
+    "power_state_control_progress": 0.327284,
+    "power_state_reinforcement": 18569,
+    "power_state_undermining": 15485,
+    "updated_at": "2026-10-12T18:09:00Z"
+   },
+   {
+    "id64": 4786481006955,
+    "name": "Zhi",
+    "x": 2.1875,
+    "y": -20.53125,
+    "z": -8.96875,
+    "controlling_power": "Li Yong-Rui",
+    "power": [
+     "Aisling Duval",
+     "Denton Patreus",
+     "Li Yong-Rui",
+     "Yuri Grom",
+     "Zemina Torval",
+     "Jerome Archer"
+    ],
+    "power_state": "Stronghold",
+    "power_state_control_progress": 0.197045,
+    "power_state_reinforcement": 397,
+    "power_state_undermining": 352,
+    "updated_at": "2026-10-12T18:40:56Z"
+   },
+   {
+    "id64": 3446451210603,
+    "name": "V1201 Orionis",
+    "x": 9.5,
+    "y": -4.40625,
+    "z": -23.875,
+    "controlling_power": "Li Yong-Rui",
+    "power": [
+     "Aisling Duval",
+     "Edmund Mahon",
+     "Felicia Winters",
+     "Li Yong-Rui",
+     "Yuri Grom",
+     "Zemina Torval",
+     "Jerome Archer"
+    ],
+    "power_state": "Exploited",
+    "power_state_control_progress": 0.287067,
+    "power_state_reinforcement": 1332,
+    "power_state_undermining": 1058,
+    "updated_at": "2026-10-12T18:25:52Z"
+   },
+   {
+    "id64": 9466779018657,
+    "name": "LHS 1375",
+    "x": -9.125,
+    "y": -19.3125,
+    "z": -17.5,
+    "controlling_power": "Li Yong-Rui",
+    "power": [
+     "Aisling Duval",
+     "Li Yong-Rui",
+     "Yuri Grom",
+     "Zemina Torval",
+     "Jerome Archer"
+    ],
+    "power_state": "Exploited",
+    "power_state_control_progress": 0.195998,
+    "power_state_reinforcement": 0,
+    "power_state_undermining": 0,
+    "updated_at": "2026-10-10T00:59:24Z"
+   },
+   {
+    "id64": 2282942894802,
+    "name": "LTT 2151",
+    "x": 15.71875,
+    "y": -15.0625,
+    "z": -17.59375,
+    "controlling_power": "Li Yong-Rui",
+    "power": [
+     "Aisling Duval",
+     "Denton Patreus",
+     "Edmund Mahon",
+     "Felicia Winters",
+     "Li Yong-Rui",
+     "Yuri Grom",
+     "Zemina Torval",
+     "Jerome Archer"
+    ],
+    "power_state": "Stronghold",
+    "power_state_control_progress": 0.350823,
+    "power_state_reinforcement": 56506,
+    "power_state_undermining": 11883,
+    "updated_at": "2026-10-12T06:16:08Z"
+   },
+   {
+    "id64": 358730437330,
+    "name": "LHS 200",
+    "x": 10.84375,
+    "y": -12.71875,
+    "z": -22.96875,
+    "controlling_power": "Li Yong-Rui",
+    "power": [
+     "Aisling Duval",
+     "Denton Patreus",
+     "Edmund Mahon",
+     "Li Yong-Rui",
+     "Yuri Grom",
+     "Zemina Torval",
+     "Jerome Archer"
+    ],
+    "power_state": "Stronghold",
+    "power_state_control_progress": 0.307227,
+    "power_state_reinforcement": 813,
+    "power_state_undermining": 15386,
+    "updated_at": "2026-10-12T18:01:38Z"
+   }
+  ],
+  "search_reference": "16AA547A-C675-11F1-8E14-DC0C6B5976FF",
+  "size": 10
+ }
+}

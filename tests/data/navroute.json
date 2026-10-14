@@ -1,0 +1,9 @@
+{ "timestamp":"2026-10-12T10:39:11Z", "event":"NavRoute", "Route":[ 
+{ "StarSystem":"Trianguli Sector EL-Y c7", "SystemAddress":2008132063938, "StarPos":[93.21875,-38.37500,-65.12500], "StarClass":"TTS" }, 
+{ "StarSystem":"Trianguli Sector XU-O a6-1", "SystemAddress":22967874243360, "StarPos":[75.37500,-42.43750,-62.53125], "StarClass":"T" }, 
+{ "StarSystem":"Trianguli Sector ZA-N a7-0", "SystemAddress":5373540715304, "StarPos":[57.87500,-43.56250,-53.96875], "StarClass":"L" }, 
+{ "StarSystem":"Buzhang Ku", "SystemAddress":13865630705041, "StarPos":[44.03125,-52.43750,-45.93750], "StarClass":"M" }, 
+{ "StarSystem":"Keltim", "SystemAddress":4207088177866, "StarPos":[33.84375,-66.78125,-42.12500], "StarClass":"K" }, 
+{ "StarSystem":"Ceti Sector FW-V b2-2", "SystemAddress":5069269181849, "StarPos":[19.37500,-75.06250,-33.71875], "StarClass":"TTS" }, 
+{ "StarSystem":"76 Sigma Ceti", "SystemAddress":1213068200291, "StarPos":[7.71875,-77.71875,-38.53125], "StarClass":"F" }
+ ] }

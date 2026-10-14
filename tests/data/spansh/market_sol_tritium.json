@@ -1,0 +1,738 @@
+{
+ "request": {
+  "method": "POST",
+  "url": "https://spansh.co.uk/api/stations/search",
+  "params": [],
+  "form": null,
+  "json": {
+   "filters": {
+    "market": [
+     {
+      "name": "Tritium",
+      "demand": {
+       "value": [
+        10,
+        999999999
+       ],
+       "comparison": "<=>"
+      }
+     }
+    ],
+    "market_updated_at": {
+     "value": [
+      "2026-10-09T15:18:50Z",
+      "2026-10-13T15:18:50Z"
+     ],
+     "comparison": "<=>"
+    },
+    "has_large_pad": {
+     "value": true
+    }
+   },
+   "sort": [
+    {
+     "distance": {
+      "direction": "asc"
+     }
+    }
+   ],
+   "reference_coords": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "size": 25,
+   "page": 0
+  }
+ },
+ "status": 200,
+ "body": {
+  "count": 5188,
+  "from": 0,
+  "results": [
+   {
+    "name": "Stronghold Carrier",
+    "type": "Planetary Outpost",
+    "distance_to_arrival": 4485.999568,
+    "has_large_pad": true,
+    "medium_pads": 4,
+    "small_pads": 4,
+    "is_planetary": true,
+    "system_id64": 1178708478315,
+    "system_name": "Alpha Centauri",
+    "system_x": 3.03125,
+    "system_y": -0.09375,
+    "system_z": 3.15625,
+    "large_pads": 2,
+    "market_updated_at": "2026-10-12T05:16:26Z",
+    "controlling_minor_faction": "Aisling Duval",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 78,
+      "sell_price": 53744,
+      "supply": 0
+     }
+    ]
+   },
+   {
+    "name": "HFB-33L",
+    "type": "Drake-Class Carrier",
+    "distance_to_arrival": 4470.430911,
+    "has_large_pad": true,
+    "medium_pads": 4,
+    "small_pads": 4,
+    "is_planetary": false,
+    "system_id64": 1178708478315,
+    "system_name": "Alpha Centauri",
+    "system_x": 3.03125,
+    "system_y": -0.09375,
+    "system_z": 3.15625,
+    "large_pads": 8,
+    "market_updated_at": "2026-10-11T22:46:18Z",
+    "controlling_minor_faction": "FleetCarrier",
+    "carrier_docking_access": "All",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 3000,
+      "sell_price": 59374,
+      "supply": 0
+     }
+    ]
+   },
+   {
+    "name": "K5F-8KJ",
+    "type": "Drake-Class Carrier",
+    "distance_to_arrival": 61.876633,
+    "has_large_pad": true,
+    "medium_pads": 4,
+    "small_pads": 4,
+    "is_planetary": false,
+    "system_id64": 18263140541865,
+    "system_name": "Barnard's Star",
+    "system_x": -3.03125,
+    "system_y": 1.375,
+    "system_z": 4.9375,
+    "large_pads": 8,
+    "market_updated_at": "2026-10-10T21:01:15Z",
+    "controlling_minor_faction": "FleetCarrier",
+    "carrier_docking_access": "All",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 330,
+      "sell_price": 56926,
+      "supply": 0
+     }
+    ]
+   },
+   {
+    "name": "TBQ-NVJ",
+    "type": "Drake-Class Carrier",
+    "distance_to_arrival": 52.894542,
+    "has_large_pad": true,
+    "medium_pads": 4,
+    "small_pads": 4,
+    "is_planetary": false,
+    "system_id64": 24860210308521,
+    "system_name": "Wolf 359",
+    "system_x": 3.875,
+    "system_y": 6.46875,
+    "system_z": -1.90625,
+    "large_pads": 8,
+    "market_updated_at": "2026-10-11T19:11:47Z",
+    "controlling_minor_faction": "FleetCarrier",
+    "carrier_docking_access": "All",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 5074,
+      "sell_price": 51294,
+      "supply": 0
+     }
+    ]
+   },
+   {
+    "name": "T5M-47Y",
+    "type": "Drake-Class Carrier",
+    "distance_to_arrival": 98.803016,
+    "has_large_pad": true,
+    "medium_pads": 4,
+    "small_pads": 4,
+    "is_planetary": false,
+    "system_id64": 24860210308521,
+    "system_name": "Wolf 359",
+    "system_x": 3.875,
+    "system_y": 6.46875,
+    "system_z": -1.90625,
+    "large_pads": 8,
+    "market_updated_at": "2026-10-12T05:54:51Z",
+    "controlling_minor_faction": "FleetCarrier",
+    "carrier_docking_access": "Squadron Friends",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 1336,
+      "sell_price": 65029,
+      "supply": 0
+     }
+    ]
+   },
+   {
+    "name": "Beveridge Enterprise",
+    "type": "Orbis Starport",
+    "distance_to_arrival": 5.059203,
+    "has_large_pad": true,
+    "medium_pads": 11,
+    "small_pads": 7,
+    "is_planetary": false,
+    "system_id64": 9467047519657,
+    "system_name": "Lalande 21185",
+    "system_x": 0.3125,
+    "system_y": 7.5625,
+    "system_z": -3.375,
+    "large_pads": 7,
+    "market_updated_at": "2026-10-11T23:46:12Z",
+    "controlling_minor_faction": "Earth Defense Fleet",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 5958,
+      "sell_price": 53540,
+      "supply": 0
+     }
+    ]
+   },
+   {
+    "name": "Stronghold Carrier",
+    "type": "Planetary Outpost",
+    "distance_to_arrival": 952.57578,
+    "has_large_pad": true,
+    "medium_pads": 4,
+    "small_pads": 4,
+    "is_planetary": true,
+    "system_id64": 121569805492,
+    "system_name": "Sirius",
+    "system_x": 6.25,
+    "system_y": -1.28125,
+    "system_z": -5.75,
+    "large_pads": 2,
+    "market_updated_at": "2026-10-12T11:25:24Z",
+    "controlling_minor_faction": "Li Yong-Rui",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 478,
+      "sell_price": 53767,
+      "supply": 0
+     }
+    ]
+   },
+   {
+    "name": "VNG-03Q",
+    "type": "Drake-Class Carrier",
+    "distance_to_arrival": 232.759966,
+    "has_large_pad": true,
+    "medium_pads": 4,
+    "small_pads": 4,
+    "is_planetary": false,
+    "system_id64": 4339804408171,
+    "system_name": "Duamta",
+    "system_x": 2.1875,
+    "system_y": 6.625,
+    "system_z": -7.0,
+    "large_pads": 8,
+    "market_updated_at": "2026-10-11T13:10:38Z",
+    "controlling_minor_faction": "FleetCarrier",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 5000,
+      "sell_price": 106078,
+      "supply": 0
+     }
+    ]
+   },
+   {
+    "name": "V9T-W9G",
+    "type": "Drake-Class Carrier",
+    "distance_to_arrival": 1281.319907,
+    "has_large_pad": true,
+    "medium_pads": 4,
+    "small_pads": 4,
+    "is_planetary": false,
+    "system_id64": 5366025046864,
+    "system_name": "Ross 248",
+    "system_x": -9.3125,
+    "system_y": -3.03125,
+    "system_z": -3.40625,
+    "large_pads": 8,
+    "market_updated_at": "2026-10-11T14:27:48Z",
+    "controlling_minor_faction": "FleetCarrier",
+    "carrier_docking_access": "Friends",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 3000,
+      "sell_price": 100786,
+      "supply": 0
+     }
+    ]
+   },
+   {
+    "name": "Christiano's Inheritance",
+    "type": "Coriolis Starport",
+    "distance_to_arrival": 93833.512073,
+    "has_large_pad": true,
+    "medium_pads": 14,
+    "small_pads": 8,
+    "is_planetary": false,
+    "system_id64": 5366025046864,
+    "system_name": "Ross 248",
+    "system_x": -9.3125,
+    "system_y": -3.03125,
+    "system_z": -3.40625,
+    "large_pads": 6,
+    "market_updated_at": "2026-10-11T05:34:32Z",
+    "controlling_minor_faction": "Earth Defense Fleet",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 8901,
+      "sell_price": 57106,
+      "supply": 0
+     }
+    ]
+   },
+   {
+    "name": "Dobrovolskiy Enterprise",
+    "type": "Ocellus Starport",
+    "distance_to_arrival": 214.768158,
+    "has_large_pad": true,
+    "medium_pads": 18,
+    "small_pads": 17,
+    "is_planetary": false,
+    "system_id64": 5366025177936,
+    "system_name": "WISE 1506+7027",
+    "system_x": -7.375,
+    "system_y": 7.09375,
+    "system_z": -2.4375,
+    "large_pads": 9,
+    "market_updated_at": "2026-10-12T11:34:21Z",
+    "controlling_minor_faction": "Redshift Logistics",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 1922,
+      "sell_price": 56912,
+      "supply": 0
+     }
+    ]
+   },
+   {
+    "name": "TZT-4KG",
+    "type": "Drake-Class Carrier",
+    "distance_to_arrival": 74.351766,
+    "has_large_pad": true,
+    "medium_pads": 4,
+    "small_pads": 4,
+    "is_planetary": false,
+    "system_id64": 11666070709673,
+    "system_name": "Lacaille 9352",
+    "system_x": -0.40625,
+    "system_y": -9.8125,
+    "system_z": 4.21875,
+    "large_pads": 8,
+    "market_updated_at": "2026-10-11T21:17:15Z",
+    "controlling_minor_faction": "FleetCarrier",
+    "carrier_docking_access": "All",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 1000,
+      "sell_price": 82526,
+      "supply": 0
+     }
+    ]
+   },
+   {
+    "name": "Magnus Gateway",
+    "type": "Coriolis Starport",
+    "distance_to_arrival": 408.947775,
+    "has_large_pad": true,
+    "medium_pads": 11,
+    "small_pads": 9,
+    "is_planetary": false,
+    "system_id64": 22661186987433,
+    "system_name": "EZ Aquarii",
+    "system_x": -4.4375,
+    "system_y": -9.3125,
+    "system_z": 4.09375,
+    "large_pads": 5,
+    "market_updated_at": "2026-10-12T13:06:25Z",
+    "controlling_minor_faction": "Future of EZ Aquarii",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 5328,
+      "sell_price": 56806,
+      "supply": 0
+     }
+    ]
+   },
+   {
+    "name": "Briscoe Arms Base",
+    "type": "Settlement",
+    "distance_to_arrival": 6644.824002,
+    "has_large_pad": true,
+    "medium_pads": 0,
+    "small_pads": 2,
+    "is_planetary": true,
+    "system_id64": 800751356267,
+    "system_name": "Procyon",
+    "system_x": 6.21875,
+    "system_y": 2.65625,
+    "system_z": -9.1875,
+    "large_pads": 1,
+    "market_updated_at": "2026-10-12T03:15:18Z",
+    "controlling_minor_faction": "People's Procyon Values Party",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 13,
+      "sell_price": 53322,
+      "supply": 0
+     }
+    ]
+   },
+   {
+    "name": "Ford City",
+    "type": "Coriolis Starport",
+    "distance_to_arrival": 75437.420488,
+    "has_large_pad": true,
+    "medium_pads": 12,
+    "small_pads": 8,
+    "is_planetary": false,
+    "system_id64": 7267755828641,
+    "system_name": "Groombridge 34",
+    "system_x": -9.90625,
+    "system_y": -3.6875,
+    "system_z": -5.09375,
+    "large_pads": 5,
+    "market_updated_at": "2026-10-11T18:37:25Z",
+    "controlling_minor_faction": "Equestrian Naval Fleet",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 8840,
+      "sell_price": 61713,
+      "supply": 0
+     }
+    ]
+   },
+   {
+    "name": "Matthews City",
+    "type": "Coriolis Starport",
+    "distance_to_arrival": 75344.440582,
+    "has_large_pad": true,
+    "medium_pads": 12,
+    "small_pads": 6,
+    "is_planetary": false,
+    "system_id64": 7267755828641,
+    "system_name": "Groombridge 34",
+    "system_x": -9.90625,
+    "system_y": -3.6875,
+    "system_z": -5.09375,
+    "large_pads": 5,
+    "market_updated_at": "2026-10-10T16:54:26Z",
+    "controlling_minor_faction": "Equestrian Naval Fleet",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 9073,
+      "sell_price": 61713,
+      "supply": 0
+     }
+    ]
+   },
+   {
+    "name": "Clement Orbital",
+    "type": "Coriolis Starport",
+    "distance_to_arrival": 1246.828352,
+    "has_large_pad": true,
+    "medium_pads": 13,
+    "small_pads": 7,
+    "is_planetary": false,
+    "system_id64": 2869977687465,
+    "system_name": "YZ Ceti",
+    "system_x": -1.1875,
+    "system_y": -11.8125,
+    "system_z": -2.15625,
+    "large_pads": 6,
+    "market_updated_at": "2026-10-11T15:08:22Z",
+    "controlling_minor_faction": "Equestrian Naval Fleet",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 18871,
+      "sell_price": 61206,
+      "supply": 0
+     }
+    ]
+   },
+   {
+    "name": "Darica Station",
+    "type": "Coriolis Starport",
+    "distance_to_arrival": 4985.444803,
+    "has_large_pad": true,
+    "medium_pads": 11,
+    "small_pads": 8,
+    "is_planetary": false,
+    "system_id64": 5368172399440,
+    "system_name": "WISE 0350-5658",
+    "system_x": 8.28125,
+    "system_y": -8.8125,
+    "system_z": -0.15625,
+    "large_pads": 6,
+    "market_updated_at": "2026-10-12T03:34:30Z",
+    "controlling_minor_faction": "Earth Defense Fleet",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 13377,
+      "sell_price": 53761,
+      "supply": 0
+     }
+    ]
+   },
+   {
+    "name": "Frost Vision",
+    "type": "Orbis Starport",
+    "distance_to_arrival": 3379.321888,
+    "has_large_pad": true,
+    "medium_pads": 12,
+    "small_pads": 9,
+    "is_planetary": false,
+    "system_id64": 5069000943017,
+    "system_name": "Kapteyn's Star",
+    "system_x": 9.75,
+    "system_y": -7.46875,
+    "system_z": -3.46875,
+    "large_pads": 5,
+    "market_updated_at": "2026-10-12T10:41:12Z",
+    "controlling_minor_faction": "Crimson Legal & Co",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 102981,
+      "sell_price": 53898,
+      "supply": 0
+     }
+    ]
+   },
+   {
+    "name": "Zhen Horizons",
+    "type": "Orbis Starport",
+    "distance_to_arrival": 1122.617048,
+    "has_large_pad": true,
+    "medium_pads": 14,
+    "small_pads": 7,
+    "is_planetary": false,
+    "system_id64": 5069000943017,
+    "system_name": "Kapteyn's Star",
+    "system_x": 9.75,
+    "system_y": -7.46875,
+    "system_z": -3.46875,
+    "large_pads": 5,
+    "market_updated_at": "2026-10-11T22:47:48Z",
+    "controlling_minor_faction": "Crimson Legal & Co",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 78107,
+      "sell_price": 53898,
+      "supply": 0
+     }
+    ]
+   },
+   {
+    "name": "Kepler Gateway",
+    "type": "Coriolis Starport",
+    "distance_to_arrival": 3362.6118,
+    "has_large_pad": true,
+    "medium_pads": 12,
+    "small_pads": 11,
+    "is_planetary": false,
+    "system_id64": 22660918617513,
+    "system_name": "Kruger 60",
+    "system_x": -12.625,
+    "system_y": 0.0,
+    "system_z": -3.40625,
+    "large_pads": 5,
+    "market_updated_at": "2026-10-12T08:08:25Z",
+    "controlling_minor_faction": "Mars Congressional Republic Navy",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 7425,
+      "sell_price": 57014,
+      "supply": 0
+     }
+    ]
+   },
+   {
+    "name": "Arai Town",
+    "type": "Coriolis Starport",
+    "distance_to_arrival": 963.434019,
+    "has_large_pad": true,
+    "medium_pads": 12,
+    "small_pads": 9,
+    "is_planetary": false,
+    "system_id64": 5368172530504,
+    "system_name": "UGPS 0722-05",
+    "system_x": 8.875,
+    "system_y": 0.03125,
+    "system_z": -10.03125,
+    "large_pads": 5,
+    "market_updated_at": "2026-10-12T00:27:21Z",
+    "controlling_minor_faction": "Earth Defense Fleet",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 31328,
+      "sell_price": 53841,
+      "supply": 0
+     }
+    ]
+   },
+   {
+    "name": "Pasteur Hub",
+    "type": "Orbis Starport",
+    "distance_to_arrival": 4.305956,
+    "has_large_pad": true,
+    "medium_pads": 11,
+    "small_pads": 9,
+    "is_planetary": false,
+    "system_id64": 13865094030753,
+    "system_name": "Ross 614",
+    "system_x": 7.3125,
+    "system_y": -1.34375,
+    "system_z": -11.1875,
+    "large_pads": 4,
+    "market_updated_at": "2026-10-12T12:04:40Z",
+    "controlling_minor_faction": "Earth Defense Fleet",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 16160,
+      "sell_price": 57485,
+      "supply": 0
+     }
+    ]
+   },
+   {
+    "name": "Qureshi Orbital",
+    "type": "Coriolis Starport",
+    "distance_to_arrival": 1467.247274,
+    "has_large_pad": true,
+    "medium_pads": 18,
+    "small_pads": 17,
+    "is_planetary": false,
+    "system_id64": 13865094030761,
+    "system_name": "LHS 380",
+    "system_x": 5.28125,
+    "system_y": 6.75,
+    "system_z": 10.875,
+    "large_pads": 9,
+    "market_updated_at": "2026-10-12T10:37:24Z",
+    "controlling_minor_faction": "Star Pilots",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 3484,
+      "sell_price": 57441,
+      "supply": 0
+     }
+    ]
+   },
+   {
+    "name": "Crook Hub",
+    "type": "Coriolis Starport",
+    "distance_to_arrival": 12.715985,
+    "has_large_pad": true,
+    "medium_pads": 12,
+    "small_pads": 8,
+    "is_planetary": false,
+    "system_id64": 35855326520745,
+    "system_name": "Toolfa",
+    "system_x": 8.0,
+    "system_y": -11.1875,
+    "system_z": -2.65625,
+    "large_pads": 7,
+    "market_updated_at": "2026-10-12T13:21:54Z",
+    "controlling_minor_faction": "Alliance of Chinese Elite",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 11125,
+      "sell_price": 53350,
+      "supply": 0
+     }
+    ]
+   }
+  ],
+  "search_reference": "3B69AF42-C650-11F1-9A89-832A16A4E498",
+  "size": 25
+ }
+}

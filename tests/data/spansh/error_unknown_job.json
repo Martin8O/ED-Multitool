@@ -1,0 +1,12 @@
+{
+ "request": {
+  "method": "GET",
+  "url": "https://spansh.co.uk/api/results/00000000-0000-0000-0000-000000000000",
+  "params": [],
+  "form": null
+ },
+ "status": 404,
+ "body": {
+  "error": "Unable to find route"
+ }
+}

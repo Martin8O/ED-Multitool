@@ -1,0 +1,75 @@
+{
+ "request": {
+  "method": "GET",
+  "url": "https://spansh.co.uk/api/systems/field_values/system_names",
+  "params": [
+   [
+    "q",
+    "Keian Gu"
+   ]
+  ],
+  "form": null
+ },
+ "status": 200,
+ "body": {
+  "min_max": [
+   {
+    "id64": 3274652518755,
+    "name": "Keian Gu",
+    "x": -16.0625,
+    "y": 51.125,
+    "z": -32.8125
+   },
+   {
+    "id64": 2832698643138,
+    "name": "Ga Gu",
+    "x": 32.03125,
+    "y": -102.625,
+    "z": -76.34375
+   },
+   {
+    "id64": 7269634155969,
+    "name": "Koya Gu",
+    "x": 134.53125,
+    "y": -225.0,
+    "z": 68.28125
+   },
+   {
+    "id64": 3961847269755,
+    "name": "Chao Gu",
+    "x": -54.875,
+    "y": -46.21875,
+    "z": 139.21875
+   },
+   {
+    "id64": 5581410669250,
+    "name": "Girya Gu",
+    "x": -13.625,
+    "y": -10.625,
+    "z": -75.25
+   }
+  ],
+  "values": [
+   "Keian Gu",
+   "Ga Gu",
+   "Koya Gu",
+   "Chao Gu",
+   "Girya Gu",
+   "We Gu",
+   "Kuan Gu",
+   "Ten Gu",
+   "Yena Gu",
+   "Phra Gu",
+   "GU Muscae",
+   "San Gu",
+   "Ts'in Gu",
+   "Nu Gu",
+   "Tao Gu",
+   "Gong Gu",
+   "Celeng Gu",
+   "Guenae GU-A c29-0",
+   "Guenooe GU-R c7-1",
+   "He Xian Gu"
+  ]
+ }
+}

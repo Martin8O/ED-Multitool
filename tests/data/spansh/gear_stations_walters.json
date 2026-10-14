@@ -1,0 +1,62 @@
+{
+ "request": {
+  "method": "POST",
+  "url": "https://spansh.co.uk/api/stations/search",
+  "params": [],
+  "form": null,
+  "json": {
+   "filters": {
+    "name": {
+     "value": [
+      "Walters Port"
+     ]
+    }
+   },
+   "sort": [],
+   "size": 50,
+   "page": 0
+  }
+ },
+ "status": 200,
+ "body": {
+  "count": 1,
+  "from": 0,
+  "reference": {
+   "id64": 10477373803,
+   "name": "Sol",
+   "x": 0.0,
+   "y": 0.0,
+   "z": 0.0
+  },
+  "results": [
+   {
+    "name": "Walters Port",
+    "type": "Coriolis Starport",
+    "distance_to_arrival": 6131.04286,
+    "has_large_pad": true,
+    "medium_pads": 18,
+    "small_pads": 17,
+    "is_planetary": false,
+    "system_id64": 671759476145,
+    "system_name": "Condovichs",
+    "system_x": 64.9375,
+    "system_y": -93.53125,
+    "system_z": 25.46875
+   }
+  ],
+  "search": {
+   "filters": {
+    "name": {
+     "value": [
+      "Walters Port"
+     ]
+    }
+   },
+   "page": 0,
+   "size": 50,
+   "sort": []
+  },
+  "search_reference": "3D896684-C644-11F1-B6C4-C872C7851249",
+  "size": 50
+ }
+}

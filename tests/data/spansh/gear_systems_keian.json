@@ -1,0 +1,256 @@
+{
+ "request": {
+  "method": "POST",
+  "url": "https://spansh.co.uk/api/systems/search",
+  "params": [],
+  "form": null,
+  "json": {
+   "filters": {
+    "name": {
+     "value": [
+      "Keian Gu"
+     ]
+    }
+   },
+   "sort": [],
+   "size": 2,
+   "page": 0
+  }
+ },
+ "status": 200,
+ "body": {
+  "count": 1,
+  "from": 0,
+  "reference": {
+   "id64": 10477373803,
+   "name": "Sol",
+   "x": 0.0,
+   "y": 0.0,
+   "z": 0.0
+  },
+  "results": [
+   {
+    "id64": 3274652518755,
+    "name": "Keian Gu",
+    "x": -16.0625,
+    "y": 51.125,
+    "z": -32.8125,
+    "stations": [
+     {
+      "name": "Hahn Terminal",
+      "type": "Outpost",
+      "distance_to_arrival": 6302.000225,
+      "has_large_pad": false,
+      "medium_pads": 1,
+      "small_pads": 2
+     },
+     {
+      "name": "Nelson Orbital",
+      "type": "Outpost",
+      "distance_to_arrival": 6221.667314,
+      "has_large_pad": false,
+      "medium_pads": 1,
+      "small_pads": 2
+     },
+     {
+      "name": "Morris Beacon",
+      "distance_to_arrival": 6346.352888,
+      "has_large_pad": false
+     },
+     {
+      "name": "Shi's Venue",
+      "type": "Settlement",
+      "distance_to_arrival": 6353.992505,
+      "has_large_pad": true,
+      "medium_pads": 0,
+      "small_pads": 2
+     },
+     {
+      "name": "Umburter Industrial Silo",
+      "type": "Settlement",
+      "distance_to_arrival": 6363.230087,
+      "has_large_pad": true,
+      "medium_pads": 0,
+      "small_pads": 0
+     },
+     {
+      "name": "Ito Manufacturing Enterprise",
+      "type": "Settlement",
+      "distance_to_arrival": 6479.497728,
+      "has_large_pad": true,
+      "medium_pads": 0,
+      "small_pads": 0
+     },
+     {
+      "name": "Yu Prospect +",
+      "distance_to_arrival": 6221.451108,
+      "has_large_pad": false
+     },
+     {
+      "name": "Clute Prospect",
+      "type": "Planetary Outpost",
+      "distance_to_arrival": 6505.363289,
+      "has_large_pad": true,
+      "medium_pads": 4,
+      "small_pads": 4
+     },
+     {
+      "name": "Taniguchi Horticultural Exchange",
+      "type": "Settlement",
+      "distance_to_arrival": 6510.5315,
+      "has_large_pad": true,
+      "medium_pads": 0,
+      "small_pads": 1
+     },
+     {
+      "name": "Grinchenko's Conservatory",
+      "type": "Settlement",
+      "distance_to_arrival": 6445.314319,
+      "has_large_pad": true,
+      "medium_pads": 0,
+      "small_pads": 1
+     },
+     {
+      "name": "Baltazar Nutrition Nursery",
+      "type": "Settlement",
+      "distance_to_arrival": 6445.386834,
+      "has_large_pad": false,
+      "medium_pads": 0,
+      "small_pads": 1
+     },
+     {
+      "name": "Craig Industrial Creations",
+      "type": "Settlement",
+      "distance_to_arrival": 6528.824654,
+      "has_large_pad": true,
+      "medium_pads": 0,
+      "small_pads": 0
+     },
+     {
+      "name": "Flores Synthetics Moulding",
+      "type": "Settlement",
+      "distance_to_arrival": 6462.76506,
+      "has_large_pad": true,
+      "medium_pads": 0,
+      "small_pads": 0
+     },
+     {
+      "name": "Lastra Hydroponics Holding",
+      "type": "Settlement",
+      "distance_to_arrival": 6549.503715,
+      "has_large_pad": true,
+      "medium_pads": 0,
+      "small_pads": 1
+     },
+     {
+      "name": "Esposito Medical",
+      "type": "Settlement",
+      "distance_to_arrival": 6549.527516,
+      "has_large_pad": true,
+      "medium_pads": 0,
+      "small_pads": 1
+     },
+     {
+      "name": "Gentle Camp",
+      "distance_to_arrival": 6016.775842,
+      "has_large_pad": false
+     },
+     {
+      "name": "Grinchenko Biological Installation",
+      "type": "Settlement",
+      "distance_to_arrival": 6653.899025,
+      "has_large_pad": false,
+      "medium_pads": 0,
+      "small_pads": 1
+     },
+     {
+      "name": "Bruneau Chemical Silo",
+      "type": "Settlement",
+      "distance_to_arrival": 6680.85212,
+      "has_large_pad": true,
+      "medium_pads": 0,
+      "small_pads": 0
+     },
+     {
+      "name": "Xie Manufacturing Hub",
+      "type": "Settlement",
+      "distance_to_arrival": 6680.823499,
+      "has_large_pad": true,
+      "medium_pads": 0,
+      "small_pads": 0
+     },
+     {
+      "name": "Chadha Engineering Complex",
+      "type": "Settlement",
+      "distance_to_arrival": 6030.174965,
+      "has_large_pad": true,
+      "medium_pads": 0,
+      "small_pads": 0
+     },
+     {
+      "name": "Kosiy's Terminus",
+      "type": "Settlement",
+      "distance_to_arrival": 5942.290247,
+      "has_large_pad": false,
+      "medium_pads": 1,
+      "small_pads": 0
+     },
+     {
+      "name": "Flores Research Assembly",
+      "type": "Settlement",
+      "distance_to_arrival": 6704.419798,
+      "has_large_pad": true,
+      "medium_pads": 0,
+      "small_pads": 1
+     },
+     {
+      "name": "Rios Boarding Complex",
+      "type": "Settlement",
+      "distance_to_arrival": 5745.918784,
+      "has_large_pad": true,
+      "medium_pads": 0,
+      "small_pads": 2
+     },
+     {
+      "name": "Makubuya's Vista",
+      "type": "Settlement",
+      "distance_to_arrival": 96299.014703,
+      "has_large_pad": true,
+      "medium_pads": 0,
+      "small_pads": 2
+     },
+     {
+      "name": "Lenoir Vision",
+      "type": "Planetary Outpost",
+      "distance_to_arrival": 95842.919623,
+      "has_large_pad": true,
+      "medium_pads": 4,
+      "small_pads": 4
+     },
+     {
+      "name": "Deol Chemical Works",
+      "type": "Settlement",
+      "distance_to_arrival": 96640.435349,
+      "has_large_pad": false,
+      "medium_pads": 0,
+      "small_pads": 1
+     }
+    ]
+   }
+  ],
+  "search": {
+   "filters": {
+    "name": {
+     "value": [
+      "Keian Gu"
+     ]
+    }
+   },
+   "page": 0,
+   "size": 2,
+   "sort": []
+  },
+  "search_reference": "3CE97462-C644-11F1-B0AE-941D28544564",
+  "size": 2
+ }
+}

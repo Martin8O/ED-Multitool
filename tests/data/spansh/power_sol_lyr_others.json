@@ -1,0 +1,274 @@
+{
+ "request": {
+  "method": "POST",
+  "url": "https://spansh.co.uk/api/systems/search",
+  "params": [],
+  "form": null,
+  "json": {
+   "filters": {
+    "power": {
+     "value": [
+      "Li Yong-Rui"
+     ]
+    },
+    "controlling_power": {
+     "value": [
+      "A. Lavigny-Duval",
+      "Aisling Duval",
+      "Archon Delaine",
+      "Denton Patreus",
+      "Edmund Mahon",
+      "Felicia Winters",
+      "Jerome Archer",
+      "Nakato Kaine",
+      "Pranav Antal",
+      "Yuri Grom",
+      "Zemina Torval"
+     ]
+    },
+    "power_state": {
+     "value": [
+      "Exploited",
+      "Fortified",
+      "Stronghold"
+     ]
+    }
+   },
+   "sort": [
+    {
+     "distance": {
+      "direction": "asc"
+     }
+    }
+   ],
+   "reference_coords": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+   },
+   "size": 10,
+   "page": 0
+  }
+ },
+ "status": 200,
+ "body": {
+  "count": 3206,
+  "from": 0,
+  "results": [
+   {
+    "id64": 10477373803,
+    "name": "Sol",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "controlling_power": "Jerome Archer",
+    "power": [
+     "Aisling Duval",
+     "Edmund Mahon",
+     "Li Yong-Rui",
+     "Yuri Grom",
+     "Zemina Torval",
+     "Jerome Archer"
+    ],
+    "power_state": "Stronghold",
+    "power_state_control_progress": 0.417056,
+    "power_state_reinforcement": 144848,
+    "power_state_undermining": 142592,
+    "updated_at": "2026-10-14T17:27:45Z"
+   },
+   {
+    "id64": 1178708478315,
+    "name": "Alpha Centauri",
+    "x": 3.03125,
+    "y": -0.09375,
+    "z": 3.15625,
+    "controlling_power": "Aisling Duval",
+    "power": [
+     "Aisling Duval",
+     "Edmund Mahon",
+     "Li Yong-Rui",
+     "Yuri Grom",
+     "Zemina Torval",
+     "Jerome Archer"
+    ],
+    "power_state": "Stronghold",
+    "power_state_control_progress": 0.260872,
+    "power_state_reinforcement": 13114,
+    "power_state_undermining": 442,
+    "updated_at": "2026-10-14T15:20:29Z"
+   },
+   {
+    "id64": 18263140541865,
+    "name": "Barnard's Star",
+    "x": -3.03125,
+    "y": 1.375,
+    "z": 4.9375,
+    "controlling_power": "Jerome Archer",
+    "power": [
+     "Aisling Duval",
+     "Edmund Mahon",
+     "Li Yong-Rui",
+     "Yuri Grom",
+     "Zemina Torval",
+     "Jerome Archer"
+    ],
+    "power_state": "Stronghold",
+    "power_state_control_progress": 0.812309,
+    "power_state_reinforcement": 107686,
+    "power_state_undermining": 122177,
+    "updated_at": "2026-10-14T17:09:55Z"
+   },
+   {
+    "id64": 22960358574928,
+    "name": "Luhman 16",
+    "x": 6.3125,
+    "y": 0.59375,
+    "z": 1.71875,
+    "controlling_power": "Aisling Duval",
+    "power": [
+     "Aisling Duval",
+     "Edmund Mahon",
+     "Li Yong-Rui",
+     "Yuri Grom",
+     "Zemina Torval",
+     "Jerome Archer"
+    ],
+    "power_state": "Stronghold",
+    "power_state_control_progress": 0.263676,
+    "power_state_reinforcement": 11836,
+    "power_state_undermining": 2160,
+    "updated_at": "2026-10-14T17:14:41Z"
+   },
+   {
+    "id64": 58144730663760,
+    "name": "WISE 0855-0714",
+    "x": 6.53125,
+    "y": -2.15625,
+    "z": 2.03125,
+    "controlling_power": "Aisling Duval",
+    "power": [
+     "Aisling Duval",
+     "Denton Patreus",
+     "Edmund Mahon",
+     "Li Yong-Rui",
+     "Yuri Grom",
+     "Zemina Torval",
+     "Jerome Archer"
+    ],
+    "power_state": "Fortified",
+    "power_state_control_progress": 0.158251,
+    "power_state_reinforcement": 5095,
+    "power_state_undermining": 1432,
+    "updated_at": "2026-10-14T17:12:10Z"
+   },
+   {
+    "id64": 24860210308521,
+    "name": "Wolf 359",
+    "x": 3.875,
+    "y": 6.46875,
+    "z": -1.90625,
+    "controlling_power": "Jerome Archer",
+    "power": [
+     "Aisling Duval",
+     "Edmund Mahon",
+     "Li Yong-Rui",
+     "Yuri Grom",
+     "Zemina Torval",
+     "Jerome Archer"
+    ],
+    "power_state": "Stronghold",
+    "power_state_control_progress": 0.389331,
+    "power_state_reinforcement": 18189,
+    "power_state_undermining": 32658,
+    "updated_at": "2026-10-14T16:58:06Z"
+   },
+   {
+    "id64": 9467047519657,
+    "name": "Lalande 21185",
+    "x": 0.3125,
+    "y": 7.5625,
+    "z": -3.375,
+    "controlling_power": "Jerome Archer",
+    "power": [
+     "Aisling Duval",
+     "Edmund Mahon",
+     "Li Yong-Rui",
+     "Yuri Grom",
+     "Zemina Torval",
+     "Jerome Archer"
+    ],
+    "power_state": "Exploited",
+    "power_state_control_progress": 0.347021,
+    "power_state_reinforcement": 1074,
+    "power_state_undermining": 3816,
+    "updated_at": "2026-10-14T14:57:07Z"
+   },
+   {
+    "id64": 18263140476329,
+    "name": "UV Ceti",
+    "x": -0.1875,
+    "y": -8.3125,
+    "z": -2.125,
+    "controlling_power": "Jerome Archer",
+    "power": [
+     "Aisling Duval",
+     "Denton Patreus",
+     "Edmund Mahon",
+     "Li Yong-Rui",
+     "Yuri Grom",
+     "Zemina Torval",
+     "Jerome Archer"
+    ],
+    "power_state": "Exploited",
+    "power_state_control_progress": 0.348095,
+    "power_state_reinforcement": 1161,
+    "power_state_undermining": 3927,
+    "updated_at": "2026-10-14T16:40:13Z"
+   },
+   {
+    "id64": 7268024264105,
+    "name": "Ross 154",
+    "x": -1.9375,
+    "y": -1.84375,
+    "z": 9.3125,
+    "controlling_power": "Jerome Archer",
+    "power": [
+     "Aisling Duval",
+     "Edmund Mahon",
+     "Li Yong-Rui",
+     "Yuri Grom",
+     "Zemina Torval",
+     "Jerome Archer"
+    ],
+    "power_state": "Fortified",
+    "power_state_control_progress": 0.357011,
+    "power_state_reinforcement": 14709,
+    "power_state_undermining": 63452,
+    "updated_at": "2026-10-14T16:32:04Z"
+   },
+   {
+    "id64": 4374164146539,
+    "name": "Yin Sector CL-Y d127",
+    "x": 1.0625,
+    "y": 3.875,
+    "z": -9.0,
+    "controlling_power": "Jerome Archer",
+    "power": [
+     "Aisling Duval",
+     "Edmund Mahon",
+     "Li Yong-Rui",
+     "Yuri Grom",
+     "Zemina Torval",
+     "Jerome Archer"
+    ],
+    "power_state": "Exploited",
+    "power_state_control_progress": 0.243032,
+    "power_state_reinforcement": 70661,
+    "power_state_undermining": 199,
+    "updated_at": "2026-10-14T16:53:04Z"
+   }
+  ],
+  "search_reference": "F6B3FBC4-C7F7-11F1-972E-C4BDA2257D08",
+  "size": 10
+ }
+}

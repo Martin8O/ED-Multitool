@@ -1,0 +1,75 @@
+{
+ "request": {
+  "method": "GET",
+  "url": "https://spansh.co.uk/api/systems/field_values/system_names",
+  "params": [
+   [
+    "q",
+    "Col 285 Sector"
+   ]
+  ],
+  "form": null
+ },
+ "status": 200,
+ "body": {
+  "min_max": [
+   {
+    "id64": 525823134027,
+    "name": "Col 285 Sector VE-Z d15",
+    "x": -235.125,
+    "y": 66.90625,
+    "z": -280.65625
+   },
+   {
+    "id64": 525839911243,
+    "name": "Col 285 Sector WE-Z d15",
+    "x": -153.09375,
+    "y": 55.71875,
+    "z": -324.03125
+   },
+   {
+    "id64": 972516526411,
+    "name": "Col 285 Sector UJ-Z d28",
+    "x": -203.625,
+    "y": 140.40625,
+    "z": -282.59375
+   },
+   {
+    "id64": 972533254475,
+    "name": "Col 285 Sector BV-Y d28",
+    "x": -118.15625,
+    "y": -26.84375,
+    "z": -278.9375
+   },
+   {
+    "id64": 938207119691,
+    "name": "Col 285 Sector XJ-Z d27",
+    "x": 19.0625,
+    "y": 172.59375,
+    "z": -307.0625
+   }
+  ],
+  "values": [
+   "Col 285 Sector VE-Z d15",
+   "Col 285 Sector WE-Z d15",
+   "Col 285 Sector UJ-Z d28",
+   "Col 285 Sector BV-Y d28",
+   "Col 285 Sector XJ-Z d27",
+   "Col 285 Sector AF-Z d27",
+   "Col 285 Sector ZZ-Y d30",
+   "Col 285 Sector BA-Z d30",
+   "Col 285 Sector ZZ-Y d29",
+   "Col 285 Sector BA-Z d29",
+   "Col 285 Sector CA-Z d29",
+   "Col 285 Sector BA-Z d26",
+   "Col 285 Sector ZZ-Y d64",
+   "Col 285 Sector YE-Z d64",
+   "Col 285 Sector BA-Z d64",
+   "Col 285 Sector ZZ-Y d61",
+   "Col 285 Sector XE-Z d61",
+   "Col 285 Sector XZ-Y d66",
+   "Col 285 Sector XZ-Y d71",
+   "Col 285 Sector YE-Z d71"
+  ]
+ }
+}

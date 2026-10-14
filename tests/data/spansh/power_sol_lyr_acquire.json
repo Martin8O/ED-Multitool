@@ -1,0 +1,222 @@
+{
+ "request": {
+  "method": "POST",
+  "url": "https://spansh.co.uk/api/systems/search",
+  "params": [],
+  "form": null,
+  "json": {
+   "filters": {
+    "power": {
+     "value": [
+      "Li Yong-Rui"
+     ]
+    },
+    "power_state": {
+     "value": [
+      "Unoccupied"
+     ]
+    }
+   },
+   "sort": [
+    {
+     "distance": {
+      "direction": "asc"
+     }
+    }
+   ],
+   "reference_coords": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+   },
+   "size": 10,
+   "page": 0
+  }
+ },
+ "status": 200,
+ "body": {
+  "count": 8013,
+  "from": 0,
+  "results": [
+   {
+    "id64": 16063848850849,
+    "name": "Stein 2051",
+    "x": -9.46875,
+    "y": 2.4375,
+    "z": -15.375,
+    "power": [
+     "Aisling Duval",
+     "Edmund Mahon",
+     "Li Yong-Rui",
+     "Yuri Grom",
+     "Zemina Torval",
+     "Jerome Archer"
+    ],
+    "power_state": "Unoccupied",
+    "updated_at": "2026-10-14T17:01:58Z"
+   },
+   {
+    "id64": 18263140607401,
+    "name": "GL Virginis",
+    "x": 6.4375,
+    "y": 20.3125,
+    "z": 0.65625,
+    "power": [
+     "Aisling Duval",
+     "Edmund Mahon",
+     "Li Yong-Rui",
+     "Yuri Grom",
+     "Zemina Torval",
+     "Jerome Archer"
+    ],
+    "power_state": "Unoccupied",
+    "updated_at": "2026-10-13T22:07:10Z"
+   },
+   {
+    "id64": 8330189738706,
+    "name": "Terravor",
+    "x": 10.40625,
+    "y": -18.90625,
+    "z": 3.6875,
+    "power": [
+     "A. Lavigny-Duval",
+     "Aisling Duval",
+     "Denton Patreus",
+     "Li Yong-Rui",
+     "Yuri Grom",
+     "Zemina Torval",
+     "Jerome Archer"
+    ],
+    "power_state": "Unoccupied",
+    "updated_at": "2026-10-14T13:59:09Z"
+   },
+   {
+    "id64": 16064385721769,
+    "name": "LHS 337",
+    "x": 18.4375,
+    "y": 9.6875,
+    "z": 10.75,
+    "power": [
+     "Aisling Duval",
+     "Edmund Mahon",
+     "Felicia Winters",
+     "Li Yong-Rui",
+     "Yuri Grom",
+     "Zemina Torval",
+     "Jerome Archer"
+    ],
+    "power_state": "Unoccupied",
+    "updated_at": "2026-10-14T17:14:16Z"
+   },
+   {
+    "id64": 5367098526552,
+    "name": "WISE 2220-3628",
+    "x": -1.78125,
+    "y": -22.125,
+    "z": 14.28125,
+    "power": [
+     "A. Lavigny-Duval",
+     "Aisling Duval",
+     "Li Yong-Rui",
+     "Yuri Grom",
+     "Zemina Torval",
+     "Jerome Archer"
+    ],
+    "power_state": "Unoccupied",
+    "updated_at": "2026-10-14T10:55:29Z"
+   },
+   {
+    "id64": 7268292634025,
+    "name": "L 32-8",
+    "x": 24.0625,
+    "y": -13.0625,
+    "z": 7.25,
+    "power": [
+     "A. Lavigny-Duval",
+     "Aisling Duval",
+     "Denton Patreus",
+     "Edmund Mahon",
+     "Felicia Winters",
+     "Li Yong-Rui",
+     "Yuri Grom",
+     "Zemina Torval",
+     "Jerome Archer"
+    ],
+    "power_state": "Unoccupied",
+    "updated_at": "2026-10-13T17:27:22Z"
+   },
+   {
+    "id64": 7267755763105,
+    "name": "LHS 1326",
+    "x": -9.625,
+    "y": -21.90625,
+    "z": -16.625,
+    "power": [
+     "Aisling Duval",
+     "Li Yong-Rui",
+     "Yuri Grom",
+     "Zemina Torval",
+     "Jerome Archer"
+    ],
+    "power_state": "Unoccupied",
+    "updated_at": "2026-10-13T18:38:55Z"
+   },
+   {
+    "id64": 9467315889577,
+    "name": "L 32-9",
+    "x": 24.96875,
+    "y": -13.5625,
+    "z": 7.53125,
+    "power": [
+     "A. Lavigny-Duval",
+     "Aisling Duval",
+     "Denton Patreus",
+     "Edmund Mahon",
+     "Felicia Winters",
+     "Li Yong-Rui",
+     "Yuri Grom",
+     "Zemina Torval",
+     "Jerome Archer"
+    ],
+    "power_state": "Unoccupied",
+    "updated_at": "2026-10-13T14:04:15Z"
+   },
+   {
+    "id64": 9467047388577,
+    "name": "BD-17 588",
+    "x": 5.78125,
+    "y": -25.9375,
+    "z": -15.46875,
+    "power": [
+     "Aisling Duval",
+     "Denton Patreus",
+     "Li Yong-Rui",
+     "Yuri Grom",
+     "Zemina Torval",
+     "Jerome Archer"
+    ],
+    "power_state": "Unoccupied",
+    "updated_at": "2026-10-14T16:51:11Z"
+   },
+   {
+    "id64": 22661186987425,
+    "name": "LHS 183",
+    "x": 5.90625,
+    "y": -21.03125,
+    "z": -22.15625,
+    "power": [
+     "Aisling Duval",
+     "Denton Patreus",
+     "Li Yong-Rui",
+     "Yuri Grom",
+     "Zemina Torval",
+     "Jerome Archer"
+    ],
+    "power_state": "Unoccupied",
+    "updated_at": "2026-10-13T05:19:19Z"
+   }
+  ],
+  "search_reference": "F6FD9306-C7F7-11F1-9C39-8C5664B509D6",
+  "size": 10
+ }
+}

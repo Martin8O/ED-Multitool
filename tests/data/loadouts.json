@@ -1,0 +1,240 @@
+[
+ {
+  "event": "Loadout",
+  "Ship": "sidewinder",
+  "UnladenMass": 42.900002,
+  "FuelCapacity": {
+   "Main": 2.0,
+   "Reserve": 0.3
+  },
+  "CargoCapacity": 4,
+  "MaxJumpRange": 8.149506,
+  "Modules": [
+   {
+    "Slot": "FrameShiftDrive",
+    "Item": "int_hyperdrive_size2_class1"
+   }
+  ]
+ },
+ {
+  "event": "Loadout",
+  "Ship": "sidewinder",
+  "UnladenMass": 53.400002,
+  "FuelCapacity": {
+   "Main": 2.0,
+   "Reserve": 0.3
+  },
+  "CargoCapacity": 2,
+  "MaxJumpRange": 7.745967,
+  "Modules": [
+   {
+    "Slot": "FrameShiftDrive",
+    "Item": "int_hyperdrive_size2_class2"
+   }
+  ]
+ },
+ {
+  "event": "Loadout",
+  "Ship": "sidewinder",
+  "UnladenMass": 41.700001,
+  "FuelCapacity": {
+   "Main": 2.0,
+   "Reserve": 0.3
+  },
+  "CargoCapacity": 4,
+  "MaxJumpRange": 18.29631,
+  "Modules": [
+   {
+    "Slot": "FrameShiftDrive",
+    "Item": "int_hyperdrive_size2_class5"
+   }
+  ]
+ },
+ {
+  "event": "Loadout",
+  "Ship": "mediumtransport01",
+  "UnladenMass": 489.0,
+  "FuelCapacity": {
+   "Main": 32.0,
+   "Reserve": 0.75
+  },
+  "CargoCapacity": 0,
+  "MaxJumpRange": 16.610708,
+  "Modules": [
+   {
+    "Slot": "FrameShiftDrive",
+    "Item": "int_hyperdrive_overcharge_size5_class1"
+   }
+  ]
+ },
+ {
+  "event": "Loadout",
+  "Ship": "mediumtransport01",
+  "UnladenMass": 493.0,
+  "FuelCapacity": {
+   "Main": 40.0,
+   "Reserve": 0.75
+  },
+  "CargoCapacity": 24,
+  "MaxJumpRange": 16.476831,
+  "Modules": [
+   {
+    "Slot": "FrameShiftDrive",
+    "Item": "int_hyperdrive_overcharge_size5_class1"
+   }
+  ]
+ },
+ {
+  "event": "Loadout",
+  "Ship": "mediumtransport01",
+  "UnladenMass": 473.0,
+  "FuelCapacity": {
+   "Main": 40.0,
+   "Reserve": 0.75
+  },
+  "CargoCapacity": 24,
+  "MaxJumpRange": 17.168699,
+  "Modules": [
+   {
+    "Slot": "FrameShiftDrive",
+    "Item": "int_hyperdrive_overcharge_size5_class1"
+   }
+  ]
+ },
+ {
+  "event": "Loadout",
+  "Ship": "mediumtransport01",
+  "UnladenMass": 473.0,
+  "FuelCapacity": {
+   "Main": 40.0,
+   "Reserve": 0.75
+  },
+  "CargoCapacity": 8,
+  "MaxJumpRange": 17.168699,
+  "Modules": [
+   {
+    "Slot": "FrameShiftDrive",
+    "Item": "int_hyperdrive_overcharge_size5_class1"
+   }
+  ]
+ },
+ {
+  "event": "Loadout",
+  "Ship": "mediumtransport01",
+  "UnladenMass": 473.0,
+  "FuelCapacity": {
+   "Main": 56.0,
+   "Reserve": 0.75
+  },
+  "CargoCapacity": 0,
+  "MaxJumpRange": 17.168699,
+  "Modules": [
+   {
+    "Slot": "FrameShiftDrive",
+    "Item": "int_hyperdrive_overcharge_size5_class1"
+   }
+  ]
+ },
+ {
+  "event": "Loadout",
+  "Ship": "mediumtransport01",
+  "UnladenMass": 482.0,
+  "FuelCapacity": {
+   "Main": 56.0,
+   "Reserve": 0.75
+  },
+  "CargoCapacity": 0,
+  "MaxJumpRange": 16.850302,
+  "Modules": [
+   {
+    "Slot": "FrameShiftDrive",
+    "Item": "int_hyperdrive_overcharge_size5_class1"
+   }
+  ]
+ },
+ {
+  "event": "Loadout",
+  "Ship": "mediumtransport01",
+  "UnladenMass": 532.0,
+  "FuelCapacity": {
+   "Main": 56.0,
+   "Reserve": 0.75
+  },
+  "CargoCapacity": 0,
+  "MaxJumpRange": 15.276391,
+  "Modules": [
+   {
+    "Slot": "FrameShiftDrive",
+    "Item": "int_hyperdrive_overcharge_size5_class1"
+   }
+  ]
+ },
+ {
+  "event": "Loadout",
+  "Ship": "mediumtransport01",
+  "UnladenMass": 530.299988,
+  "FuelCapacity": {
+   "Main": 56.0,
+   "Reserve": 0.75
+  },
+  "CargoCapacity": 0,
+  "MaxJumpRange": 15.32506,
+  "Modules": [
+   {
+    "Slot": "FrameShiftDrive",
+    "Item": "int_hyperdrive_overcharge_size5_class1"
+   }
+  ]
+ },
+ {
+  "event": "Loadout",
+  "Ship": "mediumtransport01",
+  "UnladenMass": 584.799988,
+  "FuelCapacity": {
+   "Main": 48.0,
+   "Reserve": 0.75
+  },
+  "CargoCapacity": 8,
+  "MaxJumpRange": 22.974766,
+  "Modules": [
+   {
+    "Slot": "FrameShiftDrive",
+    "Item": "int_hyperdrive_overcharge_size5_class5"
+   }
+  ]
+ },
+ {
+  "event": "Loadout",
+  "Ship": "mediumtransport01",
+  "UnladenMass": 560.799988,
+  "FuelCapacity": {
+   "Main": 48.0,
+   "Reserve": 0.75
+  },
+  "CargoCapacity": 8,
+  "MaxJumpRange": 23.948961,
+  "Modules": [
+   {
+    "Slot": "FrameShiftDrive",
+    "Item": "int_hyperdrive_overcharge_size5_class5"
+   }
+  ]
+ },
+ {
+  "event": "Loadout",
+  "Ship": "mediumtransport01",
+  "UnladenMass": 572.799988,
+  "FuelCapacity": {
+   "Main": 32.0,
+   "Reserve": 0.75
+  },
+  "CargoCapacity": 8,
+  "MaxJumpRange": 23.45175,
+  "Modules": [
+   {
+    "Slot": "FrameShiftDrive",
+    "Item": "int_hyperdrive_overcharge_size5_class5"
+   }
+  ]
+ }
+]

@@ -1,0 +1,42 @@
+[project]
+name = "edmultitool"
+version = "0.37.0"
+description = "EDMC plugin: route scouting and nearest-X lookups for Elite Dangerous"
+requires-python = "==3.13.*"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "ruff>=0.14",
+    "mypy>=1.18",
+    "pytest>=8.4",
+    "requests>=2.34.2",
+    "types-requests>=2.33.0.20261006",
+]
+
+[tool.uv]
+package = false
+
+[tool.ruff]
+target-version = "py313"
+line-length = 110
+src = ["EDMultitool", "tests", "tools"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM", "RUF"]
+
+[tool.mypy]
+python_version = "3.13"
+strict = true
+mypy_path = "EDMultitool,tests"
+files = ["EDMultitool", "tests", "tools"]
+explicit_package_bases = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["EDMultitool"]
+addopts = "-q -p no:cacheprovider"
+
+[[tool.mypy.overrides]]
+module = ["myNotebook", "config"]
+ignore_missing_imports = true

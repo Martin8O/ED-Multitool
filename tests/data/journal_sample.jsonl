@@ -1,0 +1,24 @@
+{"timestamp": "2026-10-11T15:25:36Z", "event": "LoadGame", "FuelLevel": 32.0, "FuelCapacity": 32.0}
+{"timestamp": "2026-10-11T15:25:45Z", "event": "Location", "StarSystem": "LHS 292", "SystemAddress": 22661187052969, "StarPos": [10.9375, 9.71875, -1.75]}
+{"timestamp": "2026-10-11T15:25:45Z", "event": "Loadout", "Ship": "mediumtransport01", "UnladenMass": 572.799988, "FuelCapacity": {"Main": 32.0, "Reserve": 0.75}, "CargoCapacity": 8, "MaxJumpRange": 23.45175, "Modules": [{"Slot": "FrameShiftDrive", "Item": "int_hyperdrive_overcharge_size5_class5"}]}
+{"timestamp": "2026-10-11T15:25:48Z", "event": "Cargo", "Vessel": "Ship", "Count": 8}
+{"timestamp": "2026-10-11T15:28:17Z", "event": "FSDJump", "StarSystem": "Wolf 424", "SystemAddress": 27059233564073, "StarPos": [4.21875, 13.28125, 1.4375], "JumpDist": 8.246, "FuelUsed": 0.463502, "FuelLevel": 31.536499}
+{"timestamp": "2026-10-11T15:36:45Z", "event": "FuelScoop", "Scooped": 0.463493, "Total": 32.0}
+{"timestamp": "2026-10-11T15:40:57Z", "event": "Cargo", "Vessel": "Ship", "Count": 0}
+{"timestamp": "2026-10-11T15:43:28Z", "event": "FSDJump", "StarSystem": "LHS 292", "SystemAddress": 22661187052969, "StarPos": [10.9375, 9.71875, -1.75], "JumpDist": 8.246, "FuelUsed": 0.448817, "FuelLevel": 31.551184}
+{"timestamp": "2026-10-11T15:45:44Z", "event": "Cargo", "Vessel": "Ship", "Count": 3}
+{"timestamp": "2026-10-11T15:48:40Z", "event": "FSDJump", "StarSystem": "Wolf 424", "SystemAddress": 27059233564073, "StarPos": [4.21875, 13.28125, 1.4375], "JumpDist": 8.246, "FuelUsed": 0.454291, "FuelLevel": 31.54571}
+{"timestamp": "2026-10-11T15:56:25Z", "event": "Cargo", "Vessel": "Ship", "Count": 0}
+{"timestamp": "2026-10-11T16:00:28Z", "event": "FSDJump", "StarSystem": "AN Sextantis", "SystemAddress": 7268292765089, "StarPos": [17.71875, 16.84375, -7.8125], "JumpDist": 16.748, "FuelUsed": 2.546974, "FuelLevel": 29.453026}
+{"timestamp": "2026-10-11T16:02:12Z", "event": "FuelScoop", "Scooped": 2.542455, "Total": 31.995451}
+{"timestamp": "2026-10-11T16:02:40Z", "event": "FSDJump", "StarSystem": "Blatrimpe", "SystemAddress": 7505623126738, "StarPos": [29.125, 11.3125, -15.875], "JumpDist": 15.023, "FuelUsed": 1.942088, "FuelLevel": 30.053362}
+{"timestamp": "2026-10-11T16:19:40Z", "event": "Cargo", "Vessel": "SRV", "Count": 0}
+{"timestamp": "2026-10-11T16:46:19Z", "event": "Loadout", "Ship": "mediumtransport01", "UnladenMass": 572.799988, "FuelCapacity": {"Main": 32.0, "Reserve": 0.75}, "CargoCapacity": 8, "MaxJumpRange": 23.45175, "Modules": [{"Slot": "FrameShiftDrive", "Item": "int_hyperdrive_overcharge_size5_class5"}]}
+{"timestamp": "2026-10-11T16:47:50Z", "event": "Loadout", "Ship": "mediumtransport01", "UnladenMass": 572.799988, "FuelCapacity": {"Main": 32.0, "Reserve": 0.75}, "CargoCapacity": 8, "MaxJumpRange": 23.45175, "Modules": [{"Slot": "FrameShiftDrive", "Item": "int_hyperdrive_overcharge_size5_class5"}]}
+{"timestamp": "2026-10-11T16:53:56Z", "event": "FSDJump", "StarSystem": "Fousang", "SystemAddress": 11666607646113, "StarPos": [44.125, -0.3125, -12.78125], "JumpDist": 19.228, "FuelUsed": 3.544067, "FuelLevel": 26.509295}
+{"timestamp": "2026-10-11T16:55:56Z", "event": "FuelScoop", "Scooped": 3.029553, "Total": 29.538839}
+{"timestamp": "2026-10-11T16:56:20Z", "event": "FSDJump", "StarSystem": "Puppis Sector RD-T b3-4", "SystemAddress": 9467852760489, "StarPos": [55.25, -14.96875, -3.59375], "JumpDist": 20.567, "FuelUsed": 4.129483, "FuelLevel": 25.409357}
+{"timestamp": "2026-10-11T16:56:39Z", "event": "FuelScoop", "Scooped": 1.710061, "Total": 26.369419}
+{"timestamp": "2026-10-11T16:57:06Z", "event": "FSDJump", "StarSystem": "Puppis Sector JC-M a7-1", "SystemAddress": 22965726890832, "StarPos": [60.125, -27.625, 0.46875], "JumpDist": 14.158, "FuelUsed": 1.641949, "FuelLevel": 24.72747}
+{"timestamp": "2026-10-11T16:58:12Z", "event": "FuelScoop", "Scooped": 2.754369, "Total": 27.481812}
+{"timestamp": "2026-10-11T16:58:34Z", "event": "FSDJump", "StarSystem": "CPD-60 604", "SystemAddress": 2484395297131, "StarPos": [69.25, -34.9375, -0.65625], "JumpDist": 11.748, "FuelUsed": 1.037037, "FuelLevel": 26.444775}

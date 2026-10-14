@@ -1,0 +1,69 @@
+{
+ "request": {
+  "method": "POST",
+  "url": "https://spansh.co.uk/api/trade/route",
+  "params": [],
+  "form": [
+   [
+    "max_hops",
+    "1"
+   ],
+   [
+    "max_hop_distance",
+    "30"
+   ],
+   [
+    "system",
+    "Sol"
+   ],
+   [
+    "station",
+    "Nonexistent Port"
+   ],
+   [
+    "starting_capital",
+    "50000000"
+   ],
+   [
+    "max_cargo",
+    "400"
+   ],
+   [
+    "max_system_distance",
+    "5000"
+   ],
+   [
+    "max_price_age",
+    "86400"
+   ],
+   [
+    "requires_large_pad",
+    "1"
+   ],
+   [
+    "allow_prohibited",
+    "0"
+   ],
+   [
+    "allow_planetary",
+    "1"
+   ],
+   [
+    "allow_player_owned",
+    "0"
+   ],
+   [
+    "unique",
+    "0"
+   ],
+   [
+    "permit",
+    "0"
+   ]
+  ]
+ },
+ "status": 400,
+ "body": {
+  "error": "Could not find station"
+ }
+}

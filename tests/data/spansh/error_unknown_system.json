@@ -1,0 +1,53 @@
+{
+ "request": {
+  "method": "POST",
+  "url": "https://spansh.co.uk/api/riches/route",
+  "params": [],
+  "form": [
+   [
+    "from",
+    "Nowhere Xyzzy Qq"
+   ],
+   [
+    "to",
+    "Colonia"
+   ],
+   [
+    "range",
+    "22.00"
+   ],
+   [
+    "radius",
+    "25"
+   ],
+   [
+    "max_results",
+    "10"
+   ],
+   [
+    "max_distance",
+    "50000"
+   ],
+   [
+    "min_value",
+    "1000000"
+   ],
+   [
+    "loop",
+    "0"
+   ],
+   [
+    "avoid_thargoids",
+    "1"
+   ],
+   [
+    "use_mapping_value",
+    "1"
+   ]
+  ]
+ },
+ "status": 400,
+ "body": {
+  "error": "Could not find starting system"
+ }
+}

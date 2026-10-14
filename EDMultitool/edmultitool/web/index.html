@@ -1,0 +1,1177 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ED Multitool</title>
+  <link rel="icon" type="image/png" sizes="48x48" href="favicon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+  <link rel="stylesheet" href="style.css">
+  <script src="theme.js"></script>
+  <script src="badges.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <!-- the tab icons, drawn once; each tab shows one with <use> -->
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <symbol id="ic-route" viewBox="0 0 24 24" fill="currentColor"><path d="M7.7 19 H14.6 A3.6 3.6 0 0 0 14.6 11.8 H9.4 A3.6 3.6 0 0 1 9.4 4.6 H16.3" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"/><circle cx="5" cy="19" r="2.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"/><circle cx="19" cy="4.6" r="2.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"/></symbol>
+    <symbol id="ic-trade" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 L21 6.6 L12 11.2 L3 6.6 Z"/><path d="M3 8.4 L11.1 12.6 V22 L3 17.8 Z"/><path d="M12.9 12.6 L21 8.4 V17.8 L12.9 22 Z"/></symbol>
+    <symbol id="ic-services" viewBox="0 0 24 24" fill="currentColor"><mask id="m-svc" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24"><rect width="24" height="24" fill="#fff"/><g transform="rotate(45 12 12)" fill="#000" stroke="#000" stroke-width="2.4" stroke-linejoin="round"><path d="M11.35 2.4 H12.65 L13 3.6 V12.2 H11 V3.6 Z"/><rect x="9.9" y="12.6" width="4.2" height="9" rx="1.8"/></g></mask><g mask="url(#m-svc)"><mask id="m-jaw" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24"><rect width="24" height="24" fill="#fff"/><rect x="10.7" y="-1" width="2.6" height="6" fill="#000"/></mask><g transform="rotate(-45 12 12)"><path fill-rule="evenodd" d="M12 1 A4.2 4.2 0 0 1 13.2 9.2 V17.9 A2.7 2.7 0 1 1 10.8 17.9 V9.2 A4.2 4.2 0 0 1 12 1 Z M12 20.3 m-1.1 0 a1.1 1.1 0 1 0 2.2 0 a1.1 1.1 0 1 0 -2.2 0 Z" mask="url(#m-jaw)"/></g></g><g transform="rotate(45 12 12)"><path d="M11.35 2.4 H12.65 L13 3.6 V12.2 H11 V3.6 Z"/><rect x="9.9" y="12.6" width="4.2" height="9" rx="1.8"/></g></symbol>
+    <symbol id="ic-powerplay" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M12 1.8 L20.5 5 V11.2 C20.5 16.6 16.9 20.3 12 22.2 C7.1 20.3 3.5 16.6 3.5 11.2 V5 Z M12.00,6.40 L13.23,9.90 L16.95,9.99 L14.00,12.25 L15.06,15.81 L12.00,13.70 L8.94,15.81 L10.00,12.25 L7.05,9.99 L10.77,9.90 Z"/></symbol>
+    <symbol id="ic-gear" viewBox="0 0 24 24" fill="currentColor"><mask id="m-can" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24"><rect width="24" height="24" fill="#fff"/><g fill="none" stroke="#000" stroke-width="1.05" stroke-linejoin="round" stroke-linecap="round"><path d="M3.79 12.19 L6.81 13.91 L8.20 16.20 L8.20 20.00 L6.81 20.71 L3.79 18.99 L2.40 16.70 L2.40 12.90 Z M4.55 14.32 L6.05 15.18 L6.75 16.32 L6.75 18.23 L6.05 18.58 L4.55 17.72 L3.85 16.58 L3.85 14.67 Z M4.71 11.57 L6.10 10.87 L9.12 12.58 L10.51 14.87 L10.51 18.68 L9.12 19.38 M13.96 6.27 L15.35 5.56 L18.37 7.28 L19.76 9.57 L19.76 13.37 L18.37 14.08 M6.81 13.91 L20.41 6.11 M8.20 16.20 L21.80 8.40 M8.29 11.33 L16.18 6.81"/></g></mask><path mask="url(#m-can)" d="M2.40 12.90 L16.00 5.10 L17.39 4.39 L20.41 6.11 L21.80 8.40 L21.80 12.20 L8.20 20.00 L6.81 20.71 L3.79 18.99 L2.40 16.70 Z"/></symbol>
+    <symbol id="ic-cmdr" viewBox="0 0 24 24" fill="currentColor"><path d="M3 12.6 L12 17 L21 12.6 V16.2 L12 20.6 L3 16.2 Z"/><path d="M3 7.6 L12 12 L21 7.6 V11.2 L12 15.6 L3 11.2 Z"/><path d="M12.00,1.40 L12.97,4.07 L15.80,4.16 L13.57,5.91 L14.35,8.64 L12.00,7.05 L9.65,8.64 L10.43,5.91 L8.20,4.16 L11.03,4.07 Z"/></symbol>
+    <symbol id="ic-stats" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="13" width="4.4" height="8.5" rx="1"/><rect x="9.8" y="7.5" width="4.4" height="14" rx="1"/><rect x="16.6" y="2.5" width="4.4" height="19" rx="1"/></symbol>
+    <symbol id="ic-earnings" viewBox="0 0 24 24" fill="currentColor"><mask id="m-cr" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24"><rect width="24" height="24" fill="#fff"/><circle cx="16.4" cy="13.6" r="8.4" fill="#000"/></mask><g mask="url(#m-cr)"><path d="M1.5 17.6 A6.0 1.9 0 0 0 13.5 17.6 V20.200000000000003 A6.0 1.9 0 0 1 1.5 20.200000000000003 Z"/><path d="M1.5 13.4 A6.0 1.9 0 0 0 13.5 13.4 V16.0 A6.0 1.9 0 0 1 1.5 16.0 Z"/><path d="M1.5 9.2 A6.0 1.9 0 0 0 13.5 9.2 V11.799999999999999 A6.0 1.9 0 0 1 1.5 11.799999999999999 Z"/><path d="M1.5 6.3 A6 1.9 0 0 1 13.5 6.3 V7.9 A6 1.9 0 0 1 1.5 7.9 Z"/></g><mask id="m-crt" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24"><rect width="24" height="24" fill="#fff"/><g fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round"><circle cx="16.4" cy="13.6" r="5.5" stroke-width="1"/><path d="M15.2 11.6 A2.1 2.1 0 1 0 15.2 15.6" stroke-width="1.5"/><path d="M16.6 15.8 V11.4 H17.9 A1.2 1.2 0 0 1 17.9 13.8 H16.6 M17.9 13.8 L19.2 15.8" stroke-width="1.5"/></g></mask><circle cx="16.4" cy="13.6" r="7" mask="url(#m-crt)"/></symbol>
+    <symbol id="ic-missions" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M6 4 H8.2 V5.6 A1.4 1.4 0 0 0 9.6 7 H14.4 A1.4 1.4 0 0 0 15.8 5.6 V4 H18 A2 2 0 0 1 20 6 V20 A2 2 0 0 1 18 22 H6 A2 2 0 0 1 4 20 V6 A2 2 0 0 1 6 4 Z M7.6 11.6 L9 10.2 L10.6 11.8 L13.8 8.6 L15.2 10 L10.6 14.6 Z M7.6 16.4 H16.4 V18.4 H7.6 Z"/><rect x="9.4" y="1.8" width="5.2" height="4" rx="1.1"/></symbol>
+    <symbol id="ic-jet" viewBox="7 9 482 482" fill="currentColor"><path fill-rule="evenodd" d="M 475.5 10.4 C 459.4 15.7, 445.7 26.0, 409.5 60 C 400.5 68.4, 383.2 83.9, 365 99.9 C 340.1 121.8, 314.0 146.4, 279.1 181 C 265.4 194.5, 260.1 198.0, 253.3 197.9 C 252.3 197.9, 242.7 190.9, 232 182.4 C 209.0 164.1, 207 162.2, 207 159.6 C 207 158.2, 206.4 157.9, 205.1 158.2 C 203.8 158.6, 200.3 156.4, 194.1 151.4 C 189.2 147.4, 184.1 143.5, 182.9 142.6 C 180.8 141.1, 180.7 140.9, 182.3 138.5 C 184.9 134.5, 184.2 133.6, 180.5 135.9 L 177.0 138.1 171.2 133.0 C 168.0 130.1, 163.6 126.6, 161.2 125.1 C 156.9 122.4, 156.0 120.3, 158.1 118.2 C 160.2 116.1, 157.9 115.4, 154.8 117.3 C 148.7 120.7, 150.9 117.8, 164.4 104.9 C 177.1 92.6, 183.7 85.1, 181.2 86.1 C 180.6 86.3, 173.8 92.5, 166.0 100 C 158.2 107.4, 151.2 113.8, 150.5 114.2 C 149.3 114.8, 140.6 108.7, 129.1 99.1 C 124.9 95.6, 124.1 94.2, 123.2 89.7 L 122.1 84.5 130.9 75.5 C 139.4 66.7, 153.4 49.7, 155.8 45.3 C 157.4 42.3, 157.2 38.4, 155.5 37.0 C 150.4 32.8, 135.7 44.1, 96.0 82.7 C 63.9 114.1, 57.8 120.8, 47.2 136.8 C 36.3 153.2, 38.4 153.9, 58.8 140.5 L 69.8 133.3 79.3 148.4 C 84.5 156.7, 95.8 174.9, 104.5 189 C 113.1 203.0, 124.6 221.4, 129.9 230 C 135.2 238.5, 139.9 246.1, 140.2 247 C 140.6 247.8, 143.7 252.7, 147.0 258 C 156.3 272.2, 164 285.6, 164 287.2 C 164 288.0, 158.2 295.2, 151.2 303.1 C 132.6 324.0, 119.5 339.3, 111 350.3 C 106.8 355.5, 103.0 359.9, 102.4 359.9 C 100.6 360.0, 41.3 330.3, 35.9 326.5 C 33.1 324.6, 30.4 323, 29.9 323 C 27.9 323, 7 341.7, 7 343.5 C 7 344.2, 10.5 349.2, 14.8 354.6 C 54.3 404.5, 61.0 413.5, 60.9 416.9 C 60.9 420.2, 77.9 437, 81.3 437 C 82.6 437, 87.2 439.6, 91.5 442.8 C 98.9 448.2, 142.2 481.8, 149.9 488.1 C 154.8 492.1, 154.9 492.0, 163.5 482.2 C 176.0 467.8, 176.1 471.7, 162.1 443.1 C 150.3 418.7, 143.0 403.4, 140.4 397.3 L 139.0 394.2 147.2 387.8 C 154.8 381.9, 173.0 366.5, 182.5 357.8 C 184.7 355.8, 188.0 352.9, 190 351.3 C 191.9 349.8, 195.8 346.2, 198.8 343.5 C 201.7 340.7, 205.8 337.4, 208.0 336.1 L 212.0 333.7 223.7 341.0 C 230.2 345.0, 239.3 350.6, 244 353.5 C 248.6 356.3, 257.2 361.6, 263 365.2 C 268.7 368.7, 284.3 378.3, 297.5 386.4 C 328.5 405.6, 348.8 418.2, 357 423.3 C 360.5 425.5, 363.6 427.4, 363.7 427.5 C 363.9 427.6, 360.7 432.8, 356.6 439.1 C 347.2 453.6, 346.9 454.2, 348.0 456.0 C 348.8 457.2, 349.2 457.2, 351.1 456.1 C 352.2 455.4, 354.9 453.9, 356.8 452.7 C 369.5 445.6, 378.7 437.4, 415.2 400.6 C 435.9 379.6, 452.9 362.0, 452.9 361.5 C 452.9 360.9, 454.8 357.5, 457 354 C 462.4 345.1, 462.1 341, 455.9 341 C 451.7 341, 440.2 349.9, 423.8 365.7 C 413.7 375.4, 412.8 375.9, 405.9 373.9 C 403.0 373.2, 400.6 370.8, 393.8 362.2 C 381.2 346.4, 381.4 348.8, 392.6 337.3 C 406.3 323.2, 417.3 311.0, 416.8 310.4 C 416.2 309.9, 385.8 340.3, 383.3 343.8 C 382.2 345.5, 381.4 345.8, 380.6 345.0 C 379.9 344.3, 379.9 343.6, 380.8 342.8 C 382.7 340.8, 382.1 339.7, 379.4 340.2 C 377.2 340.6, 375.9 339.5, 369.1 331.2 C 361.5 321.8, 361.1 320.8, 362.5 316.0 L 363.3 313.5 360.5 315.4 C 357.6 317.2, 357.6 317.2, 355.9 314.8 C 354.9 313.5, 351.0 308.6, 347.1 304 C 342.7 298.7, 340.0 294.5, 340.0 293.1 C 340.0 291.4, 339.5 290.9, 338.5 291.3 C 337.5 291.7, 331.2 284.6, 318.4 268.8 L 299.7 245.8 300.9 241.6 C 304.1 231.0, 306.7 227.4, 319.8 215.6 C 333.1 203.6, 351.8 184.7, 365.4 169.4 C 369.8 164.5, 377.0 156.6, 381.4 152 C 388.0 145.0, 403.5 127.3, 416.9 111.5 C 418.3 109.9, 426.5 101.1, 435.0 92.0 C 466.1 59.1, 469.7 55.0, 475.1 46.8 C 489.4 25.4, 492.0 14.6, 483.9 10.4 C 480.6 8.7, 480.6 8.7, 475.5 10.4"/></symbol>
+    <symbol id="ic-theme-light" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="3"/><path d="M8 1.2v1.6M8 13.2v1.6M1.2 8h1.6M13.2 8h1.6M3.2 3.2l1.1 1.1M11.7 11.7l1.1 1.1M3.2 12.8l1.1-1.1M11.7 4.3l1.1-1.1"/></symbol>
+    <symbol id="ic-theme-dark" viewBox="0 0 16 16" fill="currentColor"><path d="M10.6 1.6A6.6 6.6 0 1 0 14.4 10 5.4 5.4 0 0 1 10.6 1.6Z"/></symbol>
+  </svg>
+  <div class="hero">
+  <header class="bar">
+    <div class="brand-box">
+      <img class="brand" src="emblem.png" alt="" width="52" height="52">
+      <div>
+        <h1><span class="t-ed">ED</span> <span class="t-mt">Multitool</span></h1>
+        <p class="t-sub">Elite Dangerous</p>
+      </div>
+    </div>
+    <div class="bar-tools">
+      <p id="conn" class="conn" data-state="connecting" role="status" aria-live="polite">connecting…</p>
+      <button id="theme" type="button" class="tool icon" data-shown="dark" aria-label="Night look: press for day"
+        title="Night look: press for day"><svg width="18" height="18" aria-hidden="true"><use
+        href="#ic-theme-dark"/></svg></button>
+      <button id="about-open" type="button" class="tool icon about-open" aria-haspopup="dialog" aria-label="About ED Multitool"
+        title="About ED Multitool">i</button>
+    </div>
+  </header>
+
+  <ul id="notices" class="notices" role="status" hidden></ul>
+
+  <p id="update" class="update" role="status" hidden>
+    <a id="update-link" href="#" target="_blank" rel="noopener noreferrer"></a>
+    <button id="update-hide" type="button" class="update-hide" aria-label="Hide this until the next version">×</button>
+  </p>
+
+  <section class="now" aria-label="Where you are">
+    <div class="now-item">
+      <span class="now-label">System</span>
+      <p id="scout" class="big">—</p>
+    </div>
+    <div class="now-item">
+      <span class="now-label">Ship</span>
+      <p id="ship" class="mid">—</p>
+    </div>
+    <div class="now-item">
+      <span class="now-label">Jump range, ly <button type="button" class="info" data-info="i-range" aria-describedby="i-range" aria-label="About the jump ranges">i</button></span>
+      <p class="mid ranges">
+        <span title="current fuel &amp; cargo">now <strong id="range-now">—</strong></span> ·
+        <span title="current cargo, full tanks">full tank <strong id="range-full">—</strong></span> ·
+        <span title="empty hold, one jump of fuel">max <strong id="range-best">—</strong></span></p>
+      <div id="i-range" class="info-text" hidden>
+        <p>How far your ship jumps, worked out from its modules and engineering the way the game does.</p>
+        <ul>
+          <li><strong>now</strong>: with the fuel and cargo aboard at this moment.</li>
+          <li><strong>full tank</strong>: tanks full, with the cargo you carry now.</li>
+          <li><strong>max</strong>: an empty hold and only the fuel for one jump, the farthest single jump the ship can
+            make.</li>
+        </ul>
+        <p class="info-foot"><strong>now</strong> and <strong>full tank</strong> count what you carry; <strong>max</strong>
+          is the same best case as the game's own figure. Routes are planned with full tank (your routing range) unless
+          you pick another in EDMC's settings.</p>
+      </div>
+    </div>
+    <div class="now-item">
+      <span class="now-label">Credits</span>
+      <p id="credits" class="mid">—</p>
+    </div>
+    <div id="warnings-item" class="now-item" hidden>
+      <span class="now-label">Warnings</span>
+      <ul id="warnings" class="warnings" aria-live="polite" hidden></ul>
+    </div>
+  </section>
+  </div>
+
+  <nav class="tabs" role="tablist" aria-label="Tools">
+    <button id="tab-route" type="button" role="tab" aria-controls="panel-route" aria-selected="true"><svg class="tab-ic" aria-hidden="true" focusable="false"><use href="#ic-route"/></svg>Route</button>
+    <button id="tab-trade" type="button" role="tab" aria-controls="panel-trade" aria-selected="false" tabindex="-1"><svg class="tab-ic" aria-hidden="true" focusable="false"><use href="#ic-trade"/></svg>Trade</button>
+    <button id="tab-services" type="button" role="tab" aria-controls="panel-services" aria-selected="false" tabindex="-1"><svg class="tab-ic" aria-hidden="true" focusable="false"><use href="#ic-services"/></svg>Services</button>
+    <button id="tab-powerplay" type="button" role="tab" aria-controls="panel-powerplay" aria-selected="false" tabindex="-1"><svg class="tab-ic" aria-hidden="true" focusable="false"><use href="#ic-powerplay"/></svg>Powerplay</button>
+    <button id="tab-gear" type="button" role="tab" aria-controls="panel-gear" aria-selected="false" tabindex="-1"><svg class="tab-ic" aria-hidden="true" focusable="false"><use href="#ic-gear"/></svg>Gear</button>
+    <button id="tab-commander" type="button" role="tab" aria-controls="panel-commander" aria-selected="false" tabindex="-1" title="Commander"><svg class="tab-ic" aria-hidden="true" focusable="false"><use href="#ic-cmdr"/></svg>CMDR</button>
+    <button id="tab-stats" type="button" role="tab" aria-controls="panel-stats" aria-selected="false" tabindex="-1" title="The game's own lifetime statistics"><svg class="tab-ic" aria-hidden="true" focusable="false"><use href="#ic-stats"/></svg>Stats</button>
+    <button id="tab-earnings" type="button" role="tab" aria-controls="panel-earnings" aria-selected="false" tabindex="-1"><svg class="tab-ic" aria-hidden="true" focusable="false"><use href="#ic-earnings"/></svg>Earnings</button>
+    <button id="tab-missions" type="button" role="tab" aria-controls="panel-missions" aria-selected="false" tabindex="-1"><svg class="tab-ic" aria-hidden="true" focusable="false"><use href="#ic-missions"/></svg>Missions</button>
+  </nav>
+
+  <main>
+  <div id="panel-route" class="grid tab-panel" role="tabpanel" aria-labelledby="tab-route">
+    <section class="card wide accent" aria-labelledby="h-route">
+      <h2 id="h-route">Routes are planned with <button type="button" class="info" data-info="i-plan" aria-describedby="i-plan" aria-label="About this card">i</button></h2>
+      <div class="ship-row">
+        <p id="routing" class="big">—</p>
+        <label class="field pick" title="Ranges in the list: full tanks, empty hold">Plan routes with
+          <select id="plan-ship" disabled>
+            <option value="">The ship I'm in</option>
+          </select>
+        </label>
+      </div>
+      <p id="plan-note" class="hint" hidden></p>
+      <ul id="route-warnings" class="warnings" aria-label="Warnings" hidden></ul>
+      <div id="i-plan" class="info-text" hidden>
+        <p>The jump range behind every route, every <strong>Jumps ≥</strong> figure and every jump count in ED
+          Multitool.</p>
+        <ul>
+          <li><strong>The ship I'm in</strong> follows you when you swap ships.</li>
+          <li>Pick another ship you own to plan for it before you fly it. Its range in the list is with full tanks and an
+            empty hold.</li>
+        </ul>
+        <p class="info-foot">The range basis and the safety margin (in brackets) are set in EDMC's settings for ED
+          Multitool.</p>
+      </div>
+    </section>
+
+    <section id="here" class="card wide here" aria-labelledby="h-here">
+      <div class="here-title">
+        <h2 id="h-here">This system <span id="here-name" class="here-name"></span> <button type="button" class="info" data-info="i-here" aria-describedby="i-here" aria-label="About this card">i</button></h2>
+        <label class="flash-pick" title="Flash this window when you arrive where one body is worth at least this much">
+          <input id="flash-on" type="checkbox" checked> Flash over
+          <input id="flash-over" type="number" min="1" max="1000" step="1" value="30" inputmode="numeric"
+                 aria-label="Flash over, million Cr"> M Cr
+        </label>
+      </div>
+      <p id="here-head" class="here-head">—</p>
+      <p id="here-facts" class="facts"></p>
+      <p id="here-status" class="hint" role="status" aria-live="polite" hidden></p>
+      <div id="here-wrap" class="table-wrap" hidden>
+        <table class="here-table">
+          <thead>
+            <tr><th scope="col">Body</th><th scope="col" class="n">ls</th><th scope="col" class="n">Map</th>
+              <th scope="col">Exobiology</th></tr>
+          </thead>
+          <tbody id="here-rows"></tbody>
+        </table>
+      </div>
+      <div id="i-here" class="info-text" hidden>
+        <p>What the system you are in is worth, shown as you arrive: the bodies Spansh knows plus what your own scans
+          find.</p>
+        <ul>
+          <li>Counted with your route-scout minimums; bodies you have mapped or analysed are left out.</li>
+          <li><strong>Map</strong>: the value of mapping a body with probes, the scan included.</li>
+          <li><strong>Flash over</strong>: the window flashes when one body is worth at least that much.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card wide" aria-labelledby="h-scout">
+      <h2 id="h-scout">Scout a route <button type="button" class="info" data-info="i-scout" aria-describedby="i-scout" aria-label="About this card">i</button></h2>
+      <p class="presets" role="group" aria-label="Presets">
+        <span class="presets-label">Presets</span>
+        <button type="button" data-preset="elw" title="FSS/DSS only: Earth-like, water and ammonia worlds and terraformables, mapping ≥ 1M Cr, 10 stops within 25 ly of the line">ELW hunt</button>
+        <button type="button" data-preset="bio" title="Exobiology only: species ≥ 2M Cr, a body's species together ≥ 10M Cr, 10 stops within 25 ly of the line">Bio rich</button>
+        <button type="button" data-preset="quick" title="FSS/DSS and exobiology: 5 stops each, within 10 ly of the line, bodies within 5,000 ls, 1M Cr minimums">Quick trip</button>
+      </p>
+      <form id="scout-form" class="scout" autocomplete="off" novalidate>
+        <div class="row ends">
+          <div class="ends-main">
+          <label class="field">From
+            <span class="combo">
+              <input id="f-from" name="from_system" maxlength="100" placeholder="current system"
+                     role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="s-from">
+              <ul id="s-from" class="suggest" role="listbox" hidden></ul>
+            </span>
+          </label>
+          <span class="arrow" aria-hidden="true">→</span>
+          <label class="field">To
+            <span class="combo">
+              <input id="f-to" name="to_system" maxlength="100" placeholder="destination system" required
+                     role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="s-to">
+              <ul id="s-to" class="suggest" role="listbox" hidden></ul>
+            </span>
+          </label>
+          </div>
+          <fieldset id="fs-plan" class="plan-inline">
+            <legend>Plan</legend>
+            <span class="plan-choices">
+              <label class="check"><input type="radio" name="plan" value="route"> Route only</label>
+              <label class="check"><input type="radio" name="plan" value="riches"> Route + FSS/DSS</label>
+              <label class="check"><input type="radio" name="plan" value="bio"> Route + exobiology</label>
+              <label class="check"><input type="radio" name="plan" value="both"> Route + both</label>
+            </span>
+          </fieldset>
+        </div>
+
+        <fieldset id="fs-plotter" class="row">
+          <legend>Route</legend>
+          <label class="check"><input type="radio" name="plotter" value="exact"> Normal (every jump, fuel stops)</label>
+          <label class="check"><input type="radio" name="plotter" value="neutron"> With neutron boosts</label>
+        </fieldset>
+
+        <div class="cols">
+        <fieldset id="fs-search" class="row">
+          <legend>Search</legend>
+          <div class="fields">
+          <label class="field num">Within <input id="f-radius" inputmode="decimal"> <span class="unit">ly of the line</span></label>
+          <label class="field num">Bodies within <input id="f-maxdist" inputmode="numeric"> <span class="unit">ls of arrival</span></label>
+          <label class="field num">Stops per search <input id="f-stops" inputmode="numeric"></label>
+          <label class="field num">Planets <select id="f-planets">
+            <option value="any">any type</option>
+            <option value="prime">ELW, WW, AW, terraformable</option>
+          </select></label>
+          <label class="field num" title="A stop where every body is yours already is swapped for another one only if that adds at most this many ly to the trip. 0 = never swap.">Swap a done stop if detour ≤ <input id="f-detour" inputmode="decimal"> <span class="unit">ly, 0 = never</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset id="fs-minimums" class="row">
+          <legend>Minimum values (Cr, 0 = off; 1.5M and 500k work)</legend>
+          <div class="fields">
+          <label class="field num">Scan per body <input id="f-min-scan" inputmode="numeric"></label>
+          <label class="field num">Mapping per body <input id="f-min-mapping" inputmode="numeric"></label>
+          <label class="field num">Bio per species <input id="f-min-species" inputmode="numeric"></label>
+          <label class="field num">Bio per body <input id="f-min-bio-body" inputmode="numeric"></label>
+          </div>
+        </fieldset>
+        </div>
+        <div class="actions">
+          <span class="buttons">
+            <button id="b-scout" type="submit">Scout</button>
+            <button id="b-cancel" type="button" disabled>Cancel</button>
+          </span>
+          <p id="scout-status" class="status" role="status" aria-live="polite" data-status="idle"></p>
+        </div>
+      </form>
+
+      <p id="game-offer" class="game-offer" role="status" hidden>
+        <span id="game-offer-text"></span>
+        <button id="b-take-game" type="button">Follow it</button>
+      </p>
+      <div id="i-scout" class="info-text" hidden>
+        <p>Plans a route from where you are (or from <strong>From</strong>) to a destination.</p>
+        <ul>
+          <li><strong>Route only</strong> plots the jumps.</li>
+          <li>The other plans also look for stops worth scanning (FSS / DSS), stops with exobiology, or both, in systems
+            within the set distance of the straight line.</li>
+          <li><strong>Minimum values</strong> leave out bodies worth less; 0 switches a minimum off.</li>
+          <li>A stop where every body is already yours is swapped for another when the detour is small enough.</li>
+        </ul>
+        <p class="info-foot">Data: Spansh.</p>
+      </div>
+    </section>
+
+    <section id="route" class="card wide route" aria-labelledby="h-trip" hidden>
+      <h2 id="h-trip">Route <button type="button" class="info" data-info="i-trip" aria-describedby="i-trip" aria-label="About this card">i</button></h2>
+        <div class="route-top">
+          <div id="route-head" class="route-head"></div>
+          <span id="route-view" class="route-view">
+            <label>Order <select id="v-order">
+              <option value="route">along the route</option>
+              <option value="value">most valuable first</option>
+            </select></label>
+            <label>Show <select id="v-show">
+              <option value="all">all stops</option>
+              <option value="open">stops with value left</option>
+              <option value="map">stops with FSS/DSS value</option>
+              <option value="bio">stops with bio value</option>
+            </select></label>
+          </span>
+          <span class="legend-wrap">
+            <span class="legend-btn" tabindex="0" aria-describedby="legend">Colour key ⓘ</span>
+            <span id="legend" class="legend" role="tooltip">
+              <span class="legend-title">Value</span>
+              <span class="v-low">low</span><span class="v-mid">fair</span><span class="v-high">good</span><span class="v-top">top</span>
+              <span class="legend-title">Distance</span>
+              <span class="c-near">near</span><span class="c-ok">fair</span><span class="c-far">far</span><span class="c-vfar">very far</span>
+            </span>
+          </span>
+        </div>
+        <div id="follow" class="follow" hidden>
+          <div class="follow-next">
+            <span class="follow-label">Next</span>
+            <strong id="follow-name" class="follow-name"></strong>
+            <button id="b-copy" type="button" class="copy-icon" title="Copy the next system's name to the clipboard"
+                    aria-label="Copy the next system's name"></button>
+            <span id="follow-wealth" class="wealth"></span>
+            <span class="follow-buttons">
+              <button id="b-back" type="button" title="Make the previous point the next one again">Back</button>
+              <button id="b-skip" type="button" title="Leave this point out and go on to the one after">Skip</button>
+            </span>
+          </div>
+          <p id="follow-progress" class="follow-progress facts" role="status" aria-live="polite"></p>
+        </div>
+        <p id="replan" class="replan" role="status" hidden>
+          <span id="replan-text"></span>
+          <button id="b-replan" type="button">Re-plan with the new range</button>
+        </p>
+        <p id="view-note" class="hint view-note" hidden></p>
+        <div id="tour-wrap" class="table-wrap">
+          <table id="route-table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">System / body</th>
+                <th scope="col" class="n">Leg ly</th>
+                <th scope="col" class="n">Jumps ≥</th>
+                <th scope="col" class="n">Arrival ls</th>
+                <th scope="col" class="n h-scan">Scan Cr</th>
+                <th scope="col" class="n h-scan">Mapping Cr</th>
+                <th scope="col" class="h-worth h-body">Body $</th>
+                <th scope="col" class="h-bio">Exobiology</th>
+                <th scope="col" class="h-worth">Stop $</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+        <div id="plot-wrap" class="table-wrap plot-wrap" hidden>
+          <table id="plot-table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">System</th>
+                <th scope="col" class="n">Jump ly</th>
+                <th scope="col">Note</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+        <div id="i-trip" class="info-text" hidden>
+          <div id="plot-hint" hidden></div>
+          <div id="tour-hint">
+            <ul>
+              <li><strong>$</strong>: what a stop is worth (its best body): up to 5M, 10M, 20M, 50M Cr, or more.</li>
+              <li><span class="best-key"></span> the most valuable system on the route;
+                <span class="best-key body"></span> the most valuable body (it can be in another system).</li>
+              <li><strong>Jumps ≥</strong>: the fewest jumps a straight leg can take.</li>
+              <li>The route moves on by itself when you arrive in any later stop.</li>
+            </ul>
+            <p class="info-foot">Data: Spansh. Values are its estimates for bodies already discovered; exobiology values are
+              base prices, without the first-logged bonus.</p>
+          </div>
+        </div>
+    </section>
+
+  </div>
+
+  <div id="panel-gear" class="grid tab-panel" role="tabpanel" aria-labelledby="tab-gear" hidden>
+    <section id="gear" class="card wide gear" aria-labelledby="h-gear">
+      <div class="gear-title">
+        <h2 id="h-gear">Gear from the forum <button type="button" class="info" data-info="i-gear" aria-describedby="i-gear" aria-label="About this card">i</button></h2>
+        <a id="gear-thread" class="button-link"
+           href="https://forums.frontier.co.uk/threads/the-great-pre-upgraded-gear-sharing-is-caring-thread.576352/latest"
+           target="_blank" rel="noopener noreferrer"
+           title="Open the newest posts of the forum's pre-upgraded gear sharing thread in your browser">Open the thread ↗</a>
+      </div>
+      <form id="gear-form" class="gear-form" autocomplete="off" novalidate>
+        <label class="field gear-paste">Paste a post from the forum's pre-upgraded gear sharing thread
+          <textarea id="g-text" rows="6" maxlength="5000" spellcheck="false"
+                    placeholder="Shivis - Reiter Gateway&#10;G3 Dominator - Night Vision&#10;G2 Karma P-15 - Stability"></textarea>
+        </label>
+        <div class="actions">
+          <span class="buttons">
+            <button id="b-gear" type="submit">Decode</button>
+            <button id="b-gear-clear" type="button">Clear</button>
+          </span>
+          <p id="gear-status" class="status" role="status" aria-live="polite" data-status="idle"></p>
+        </div>
+      </form>
+      <form id="gear-fields" class="gear-fields" autocomplete="off" novalidate hidden>
+        <p class="hint">Could not decode it all: type or correct the place and the gear, then look them up.</p>
+        <div class="gear-field-row">
+          <label class="field">System <input id="g-system" maxlength="200" placeholder="e.g. Shivis"></label>
+          <label class="field">Station / planet <input id="g-station" maxlength="200" placeholder="e.g. Reiter Gateway"></label>
+          <label class="field gear-field-items">Gear, one per line
+            <textarea id="g-gear" rows="3" maxlength="2000" spellcheck="false" placeholder="G3 Maverick - Night Vision"></textarea>
+          </label>
+        </div>
+        <div class="actions">
+          <span class="buttons"><button id="b-gear-fields" type="submit">Look up</button></span>
+        </div>
+      </form>
+      <div id="gear-result" class="gear-result"></div>
+      <div id="i-gear" class="info-text" hidden>
+        <p>Paste a forum post that offers pre-upgraded suits or weapons: ED Multitool reads the place and the gear, finds
+          the station and rates each offer.</p>
+        <ul>
+          <li><strong>★</strong>: how players rate the offer, from its grade, the item and what sits in each modification
+            slot (mods can never be removed). Point at a rating for the reasons.</li>
+          <li><strong>Distance</strong>: straight from where you are now.</li>
+          <li><strong>Jumps</strong>: the fewest from where you were when they were counted, with full tanks and the ship you
+            plan routes with (your own ship with its cargo; a ship picked on the Route tab with an empty hold).</li>
+        </ul>
+        <p class="info-foot">Data: Spansh.</p>
+      </div>
+    </section>
+  </div>
+
+  <div id="panel-trade" class="grid tab-panel" role="tabpanel" aria-labelledby="tab-trade" data-view="trade" hidden>
+    <div class="view-pick" role="group" aria-label="Trade tools">
+      <button id="tv-trade" type="button" aria-pressed="true" title="What to buy at a station and where to sell it">Best trade</button>
+      <button id="tv-commodity" type="button" aria-pressed="false" title="The nearest stations buying or selling one commodity">Commodity</button>
+      <button id="tv-sell" type="button" aria-pressed="false" title="Where what you carry sells best: mined goods and any other cargo">Sell cargo</button>
+    </div>
+    <section id="trade" class="card wide trade" aria-labelledby="h-trade">
+      <h2 id="h-trade">Best trade <button type="button" class="info" data-info="i-trade" aria-describedby="i-trade" aria-label="About this card">i</button></h2>
+      <form id="trade-form" class="market-form trade-form" autocomplete="off" novalidate>
+        <div class="fields">
+          <label class="field t-place" title="Where you buy: the trade starts at this station">Buy in system
+            <span class="combo">
+              <input id="t-system" maxlength="100" placeholder="e.g. Sol" required
+                     role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="s-t-system">
+              <ul id="s-t-system" class="suggest" role="listbox" hidden></ul>
+            </span>
+          </label>
+          <label class="field t-place" title="The stations with a market in that system, nearest to the star first">at station
+            <select id="t-station" required disabled><option value="">pick a system first</option></select></label>
+          <label class="field num" title="Tonnes to fill; left empty = your ship's whole hold">Cargo
+            <input id="t-cargo" inputmode="numeric"> <span class="unit">t</span></label>
+          <label class="field num" title="Credits to spend on the load; left empty = your whole balance">Credits
+            <input id="t-capital" inputmode="numeric"> <span class="unit">Cr</span></label>
+          <label class="field num" title="The farthest the station you sell at may be, in a straight line">Sell within
+            <input id="t-hop" inputmode="decimal" value="30"> <span class="unit">ly</span></label>
+          <label class="field num" title="Stations farther than this from their star are left out">Arrival up to
+            <input id="t-arrival" inputmode="numeric" value="5000"> <span class="unit">ls</span></label>
+          <label class="field num" title="The landing pad your ship needs (Spansh only tells large pads from the rest)">Pad
+            <select id="t-pad">
+              <option value="S">small</option>
+              <option value="M">medium</option>
+              <option value="L">large</option>
+            </select></label>
+          <label class="field num" title="Market data older than this is left out: prices move">Data age up to
+            <select id="t-age">
+              <option value="0.25">6 hours</option>
+              <option value="1" selected>1 day</option>
+              <option value="2">2 days</option>
+              <option value="3">3 days</option>
+              <option value="7">7 days</option>
+            </select></label>
+          <span class="market-checks">
+            <label class="check" title="Fleet carriers: their owners set the prices, and they move"><input id="t-carriers" type="checkbox"> Fleet carriers</label>
+            <label class="check" title="Planetary ports and surface settlements: landing there takes longer"><input id="t-planetary" type="checkbox" checked> Planetary stations</label>
+          </span>
+        </div>
+        <div class="actions">
+          <span class="buttons"><button id="b-trade" type="submit">Find trade</button></span>
+          <p id="trade-status" class="status" role="status" aria-live="polite" data-status="idle"
+            data-idle="Nothing searched yet: press Find trade for the best trade from this station."></p>
+        </div>
+      </form>
+      <div id="trade-result" class="trade-result" hidden>
+        <dl class="trade-legs">
+          <div class="leg"><dt>Buy at</dt><dd id="t-from"></dd></div>
+          <div class="leg"><dt>Sell at</dt><dd id="t-to"></dd></div>
+        </dl>
+        <div class="table-wrap">
+          <table id="trade-table">
+            <thead>
+              <tr>
+                <th scope="col">Commodity</th>
+                <th scope="col" class="n">Load t</th>
+                <th scope="col" class="n">Buy Cr / t</th>
+                <th scope="col" class="n">Sell Cr / t</th>
+                <th scope="col" class="n">Profit Cr / t</th>
+                <th scope="col" class="n">Profit Cr</th>
+                <th scope="col" class="n">Stock t</th>
+                <th scope="col" class="n">Demand t</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+        <p id="t-total" class="trade-total"></p>
+      </div>
+      <div id="i-trade" class="info-text" hidden>
+        <p>The best trade from where you buy; the station you last docked at is filled in.</p>
+        <ul>
+          <li>The hold is filled as far as your credits and the station's stock allow; a second commodity may be
+            added.</li>
+          <li><strong>Jumps ≥</strong>: the fewest a straight leg can take with the load aboard and full tanks, less your
+            safety margin.</li>
+          <li>Only a large pad is known for sure: with a small or medium ship, a surface settlement may still lack your
+            pad.</li>
+        </ul>
+        <p class="info-foot">Data: Spansh's trade router.</p>
+      </div>
+    </section>
+    <section id="market" class="card wide market" aria-labelledby="h-market">
+      <h2 id="h-market">Commodity <button type="button" class="info" data-info="i-market" aria-describedby="i-market" aria-label="About this card">i</button></h2>
+      <form id="market-form" class="market-form" autocomplete="off" novalidate>
+        <div class="fields">
+          <label class="field market-name">Commodity
+            <span class="combo">
+              <input id="m-commodity" maxlength="60" placeholder="e.g. Tritium" required
+                     role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="s-commodity">
+              <ul id="s-commodity" class="suggest" role="listbox" hidden></ul>
+            </span>
+          </label>
+          <fieldset class="market-side">
+            <legend>I want to</legend>
+            <label class="check"><input type="radio" name="side" value="buy" checked> Buy</label>
+            <label class="check"><input type="radio" name="side" value="sell"> Sell</label>
+          </fieldset>
+          <label class="field num" title="Least stock (buy) or demand (sell) a station must have">At least
+            <input id="m-qty" inputmode="numeric" value="10"> <span class="unit">t</span></label>
+          <label class="field num" title="The landing pad your ship needs: stations without one this size are left out">Pad
+            <select id="m-pad">
+              <option value="S">small</option>
+              <option value="M">medium</option>
+              <option value="L">large</option>
+            </select></label>
+          <label class="field num" title="Market data older than this is left out">Data age up to
+            <select id="m-age">
+              <option value="0.25">6 hours</option>
+              <option value="1">1 day</option>
+              <option value="2">2 days</option>
+              <option value="3" selected>3 days</option>
+              <option value="7">7 days</option>
+            </select></label>
+          <span class="market-checks">
+            <label class="check" title="Fleet carriers: their owners set the prices, often far from the market's"><input id="m-carriers" type="checkbox"> Fleet carriers</label>
+            <label class="check" title="Leave out stations whose faction holds you Hostile, another power's Stronghold Carrier and carriers closed to visitors"><input id="m-barred" type="checkbox" checked> Hide stations that will not let me dock</label>
+          </span>
+        </div>
+        <div class="actions">
+          <span class="buttons"><button id="b-market" type="submit">Search</button></span>
+          <p id="market-status" class="status" role="status" aria-live="polite" data-status="idle"
+            data-idle="Nothing searched yet: name a commodity and press Search."></p>
+        </div>
+      </form>
+      <div id="market-wrap" class="table-wrap" hidden>
+        <table id="market-table">
+          <thead>
+            <tr>
+              <th scope="col" class="c">Data age</th>
+              <th scope="col">System / station</th>
+              <th scope="col" class="n">ly</th>
+              <th scope="col" class="n">Jumps ≥</th>
+              <th scope="col" class="c">Pad</th>
+              <th scope="col" class="n">Arrival ls</th>
+              <th scope="col" class="n">Cr / t</th>
+              <th scope="col" id="m-amount-head" class="n">Stock t</th>
+              <th scope="col">Faction</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <div id="i-market" class="info-text" hidden>
+        <p>The nearest stations that sell you (<strong>Buy</strong>) or buy from you (<strong>Sell</strong>) one
+          commodity, with at least that much stock or demand.</p>
+        <ul>
+          <li><strong>Distance</strong>: straight from where you are now. <strong>Jumps ≥</strong>: the fewest a straight
+            leg can take at your routing range.</li>
+          <li><strong>Data age</strong>: <span class="age-key"><span class="age a1">≤ 1 h</span>
+            <span class="age a2">≤ 6 h</span> <span class="age a3">≤ 1 day</span> <span class="age a4">≤ 2 days</span>
+            <span class="age a5">older</span></span></li>
+          <li>Your standing with each faction comes from your journals.</li>
+        </ul>
+        <p class="info-foot">Data: Spansh; Ardent when Spansh fails (Ardent leaves out the system you are in and knows no
+          factions).</p>
+      </div>
+    </section>
+    <section id="sell" class="card wide sell" aria-labelledby="h-sell">
+      <h2 id="h-sell">Sell cargo <button type="button" class="info" data-info="i-sell" aria-describedby="i-sell" aria-label="About this card">i</button></h2>
+      <div class="hold-box">
+        <div id="sell-hold" class="sell-hold"></div>
+        <p id="sell-refined" class="sell-refined" hidden></p>
+        <p id="sell-rough" class="sell-rough" role="note" hidden>EDMC was started after the game: until your hold
+          next changes (mine, buy, sell or collect anything), ED Multitool knows only the tonnes per commodity, so
+          mission cargo and stolen goods are counted as your own.</p>
+      </div>
+      <form id="sell-form" class="market-form" autocomplete="off" novalidate>
+        <div class="fields">
+          <label class="field num" title="The farthest a station may be, in a straight line from where you are">Sell within
+            <input id="sell-ly" inputmode="decimal" value="50"> <span class="unit">ly</span></label>
+          <label class="field num" title="The landing pad your ship needs: stations without one this size are left out">Pad
+            <select id="sell-pad">
+              <option value="S">small</option>
+              <option value="M">medium</option>
+              <option value="L" selected>large</option>
+            </select></label>
+          <label class="field num" title="Market data older than this is left out: prices move">Data age up to
+            <select id="sell-age">
+              <option value="0.25">6 hours</option>
+              <option value="1">1 day</option>
+              <option value="2">2 days</option>
+              <option value="3" selected>3 days</option>
+              <option value="7">7 days</option>
+            </select></label>
+          <span class="market-checks">
+            <label class="check" title="Fleet carriers: their owners set the prices, often far from the market's"><input id="sell-carriers" type="checkbox"> Fleet carriers</label>
+            <label class="check" title="Leave out stations whose faction holds you Hostile, another power's Stronghold Carrier and carriers closed to visitors"><input id="sell-barred" type="checkbox" checked> Hide stations that will not let me dock</label>
+          </span>
+        </div>
+        <div class="actions">
+          <span class="buttons"><button id="b-sell" type="submit">Find buyers</button></span>
+          <p id="sell-status" class="status" role="status" aria-live="polite" data-status="idle"></p>
+        </div>
+      </form>
+      <div id="sell-best" class="trade-result sell-best" hidden>
+        <dl class="trade-legs">
+          <div class="leg"><dt id="sell-best-label">Sell it all at</dt><dd id="sell-best-at"></dd></div>
+        </dl>
+        <div class="table-wrap">
+          <table id="sell-best-table">
+            <thead>
+              <tr>
+                <th scope="col">Commodity</th>
+                <th scope="col" class="n">Load t</th>
+                <th scope="col" class="n">Cr / t</th>
+                <th scope="col" class="n">Cr</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+        <p id="sell-total" class="trade-total"></p>
+        <p id="sell-richer" class="sell-richer" hidden></p>
+      </div>
+      <div id="sell-wrap" class="table-wrap" hidden>
+        <table id="sell-table">
+          <thead>
+            <tr>
+              <th scope="col">Commodity</th>
+              <th scope="col" class="c">Data age</th>
+              <th scope="col">System / station</th>
+              <th scope="col" class="n">ly</th>
+              <th scope="col" class="n">Jumps ≥</th>
+              <th scope="col" class="c">Pad</th>
+              <th scope="col" class="n">Arrival ls</th>
+              <th scope="col" class="n">Cr / t</th>
+              <th scope="col" class="n">Demand t</th>
+              <th scope="col" class="n">Your load Cr</th>
+              <th scope="col">Faction</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <div id="i-sell" class="info-text" hidden>
+        <p>What you carry, and where it sells best.</p>
+        <ul>
+          <li><strong>Each commodity</strong>: the best-paying stations within reach that buy all of it (demand at least
+            your tonnes).</li>
+          <li><strong>One stop</strong>: the best-paying station that buys the whole load or, when none does, the one that
+            pays most for part of it. A station that pays more for part of the load is named below it, so you can weigh one
+            stop against two.</li>
+          <li><strong>Mined</strong>: refined this session; the rate counts from your first tonne.</li>
+          <li>Mission cargo, stolen goods (only a black market buys them) and limpets are not searched.</li>
+          <li>Prices can drop a little when you sell a big load into a small demand.</li>
+        </ul>
+        <p class="info-warn"><strong>Start EDMC before the game.</strong> Started later, it knows your hold only as tonnes
+          per commodity until the hold next changes: mission cargo and stolen goods then count as your own (the card says
+          so while it lasts).</p>
+        <p class="info-foot">Data: Spansh, best price first. Distance is straight from where you are now; Jumps ≥ is the
+          fewest a straight leg can take at your routing range.</p>
+      </div>
+    </section>
+  </div>
+  <div id="panel-services" class="grid tab-panel" role="tabpanel" aria-labelledby="tab-services" hidden>
+    <section id="services" class="card wide services" aria-labelledby="h-services">
+      <div class="svc-head">
+        <h2 id="h-services">Nearest service <button type="button" class="info" data-info="i-services" aria-describedby="i-services" aria-label="About this card">i</button></h2>
+        <span class="svc-switch" role="group" aria-label="Show">
+          <button id="svc-stations" type="button" aria-pressed="true" title="Stations with the services you tick">Stations</button>
+          <button id="svc-engineers" type="button" aria-pressed="false" title="The nearest ship or on-foot engineers (built in: no online search)">Engineers</button>
+        </span>
+      </div>
+      <form id="svc-form" class="svc-form svc-only" autocomplete="off" novalidate>
+        <div class="svc-row" role="group" aria-label="Places">
+          <span class="sub-head">Places</span>
+          <label class="check" title="Fleet carriers: often closed to visitors, and they move"><input id="svc-carriers" type="checkbox"> Fleet carriers</label>
+          <label class="check" title="Odyssey's surface settlements"><input id="svc-settlements" type="checkbox" checked> Surface settlements</label>
+          <label class="check" title="Leave out stations whose faction holds you Hostile, another power's Stronghold Carrier and carriers closed to visitors"><input id="svc-barred" type="checkbox" checked> Hide stations that will not let me dock</label>
+          <label class="field num" title="The landing pad your ship needs: stations without one this size are left out">Pad
+            <select id="svc-pad">
+              <option value="S">small</option>
+              <option value="M">medium</option>
+              <option value="L">large</option>
+            </select></label>
+        </div>
+        <div id="svc-has" class="svc-groups" role="group" aria-label="The station must have"
+          title="Only stations with every service ticked; none ticked = any station your ship can land at">
+          <div class="svc-group">
+            <p class="sub-head">Engineering</p>
+            <label class="check svc-main" title="Trades materials; which kind follows the station's main economy"><input type="checkbox" data-has="Material Trader"> Material Trader</label>
+            <label id="svc-trader-field" class="field num svc-kind" title="Which materials the trader trades" hidden>Kind
+              <select id="svc-trader-kind">
+                <option value="">any</option>
+                <option value="Raw">Raw</option>
+                <option value="Manufactured">Manufactured</option>
+                <option value="Encoded">Encoded</option>
+              </select></label>
+            <label class="check svc-main" title="Unlocks special modules for materials"><input type="checkbox" data-has="Technology Broker"> Technology Broker</label>
+            <label id="svc-broker-field" class="field num svc-kind" title="Human or Guardian technology" hidden>Kind
+              <select id="svc-broker-kind">
+                <option value="">any</option>
+                <option value="Human">Human</option>
+                <option value="Guardian">Guardian</option>
+              </select></label>
+          </div>
+          <div class="svc-group">
+            <p class="sub-head">Ship</p>
+            <label class="check"><input type="checkbox" data-has="Refuel"> Refuel</label>
+            <label class="check"><input type="checkbox" data-has="Repair"> Repair</label>
+            <label class="check" title="Rearm: ammunition and limpets"><input type="checkbox" data-has="Restock"> Restock</label>
+            <label class="check"><input type="checkbox" data-has="Outfitting"> Outfitting</label>
+            <label class="check"><input type="checkbox" data-has="Shipyard"> Shipyard</label>
+          </div>
+          <div class="svc-group">
+            <p class="sub-head">Trade and law</p>
+            <label class="check svc-main" title="Pay off fines and bounties"><input type="checkbox" data-has="Interstellar Factors Contact"> Interstellar Factors</label>
+            <label class="check"><input type="checkbox" data-has="Market"> Market</label>
+            <label class="check"><input type="checkbox" data-has="Black Market"> Black Market</label>
+            <label class="check" title="Hand in occupied escape pods, black boxes and other salvage"><input type="checkbox" data-has="Search and Rescue"> Search and Rescue</label>
+          </div>
+          <div class="svc-group">
+            <p class="sub-head">Data and on foot</p>
+            <label class="check" title="Sell exploration data"><input type="checkbox" data-has="Universal Cartographics"> Universal Cartographics</label>
+            <label class="check" title="Sell exobiology data"><input type="checkbox" data-has="Vista Genomics"> Vista Genomics</label>
+            <label class="check" title="Odyssey suits and personal weapons"><input type="checkbox" data-has="Pioneer Supplies"> Pioneer Supplies</label>
+          </div>
+        </div>
+        <div class="svc-row">
+          <button id="svc-find" type="submit">Find nearest</button>
+        </div>
+        <p id="svc-status" class="status" role="status" aria-live="polite" data-status="idle"
+          data-idle="Nothing searched yet: tick what the station must have (or nothing, for any station) and press Find nearest."></p>
+      </form>
+      <div id="svc-wrap" class="table-wrap svc-only" hidden>
+        <table id="svc-table">
+          <thead>
+            <tr>
+              <th scope="col">System / station</th>
+              <th scope="col" class="n">ly</th>
+              <th scope="col" class="n">Jumps ≥</th>
+              <th scope="col" class="c">Pad</th>
+              <th scope="col" class="n">Arrival ls</th>
+              <th id="svc-kind-col" scope="col" class="c" hidden>Kind</th>
+              <th scope="col">Faction</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <div id="i-services" class="info-text" hidden>
+        <p>The 10 nearest places your ship can land at with every service you tick (none ticked: any of them),
+          within a system nearest the arrival star first, with your standing with each station's faction.
+          <strong>Places</strong> decides what counts: fleet carriers, surface settlements, and whether stations that
+          would refuse you docking are hidden. Players' visits keep a station's services up to date, so a quiet
+          station's list can be out of date. Data: Spansh.</p>
+        <p>A material trader's materials and a broker's kind follow the station's main economy; pick a
+          <strong>Kind</strong> to get only those:</p>
+        <ul>
+          <li>Extraction or Refinery: raw · Industrial: manufactured · High Tech or Military: encoded.</li>
+          <li>High Tech: Guardian broker · Industrial: human broker.</li>
+        </ul>
+        <p><strong>Engineers</strong> (the switch at the top): built in, 25 ship and 13 on-foot engineers. An engineer
+          works for you only once you have unlocked them in the game; on-foot engineers improve suits and personal
+          weapons.</p>
+      </div>
+      <div id="engineers" class="engineers" role="region" aria-label="Nearest engineer">
+      <form id="eng-form" class="market-form" autocomplete="off">
+        <div class="fields">
+          <fieldset class="market-side">
+            <legend>Engineers for</legend>
+            <label class="check"><input type="radio" name="eng-kind" value="ship" checked> Ship</label>
+            <label class="check"><input type="radio" name="eng-kind" value="foot"> On foot</label>
+            <label class="check"><input type="radio" name="eng-kind" value="all"> All</label>
+          </fieldset>
+          <label class="field" title="Only ship engineers who improve this module, highest grade first among equals">Improves
+            <select id="eng-module"><option value="">any module</option></select></label>
+          <label class="field num" title="The lowest grade the engineer must reach for that module">Grade at least
+            <select id="eng-grade">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5" selected>5</option>
+            </select></label>
+          <label class="check" title="Show every engineer that matches, not only the nearest 10"><input id="eng-all" type="checkbox"> Show all</label>
+        </div>
+        <p id="eng-status" class="status" role="status" aria-live="polite" data-status="idle"></p>
+      </form>
+      <div class="table-wrap">
+        <table id="eng-table">
+          <thead>
+            <tr>
+              <th scope="col">Engineer</th>
+              <th scope="col">System / base</th>
+              <th scope="col" class="n">ly</th>
+              <th scope="col" class="n">Jumps ≥</th>
+              <th scope="col">Improves (highest grade)</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      </div>
+    </section>
+  </div>
+  <div id="panel-powerplay" class="grid tab-panel" role="tabpanel" aria-labelledby="tab-powerplay" hidden>
+    <section id="powerplay" class="card wide powerplay" aria-labelledby="h-powerplay">
+      <h2 id="h-powerplay">Nearest Powerplay system <button type="button" class="info" data-info="i-powerplay" aria-describedby="i-powerplay" aria-label="About this card">i</button></h2>
+      <form id="pp-form" class="market-form" autocomplete="off" novalidate>
+        <div class="fields">
+          <label class="field" title="The power you are pledged to is picked first">Power
+            <select id="pp-power"></select></label>
+          <fieldset class="market-side">
+            <legend>Systems</legend>
+            <label class="check" title="Systems the power controls: Exploited, Fortified or Stronghold. Your merits reinforce them"><input type="radio" name="pp-mode" value="held" checked> It holds</label>
+            <label class="check" title="Systems another power controls where this power is present too. Your merits undermine them"><input type="radio" name="pp-mode" value="others"> Others hold</label>
+            <label class="check" title="Unoccupied systems in reach of this power. Your merits help it acquire them"><input type="radio" name="pp-mode" value="acquire"> It can acquire</label>
+          </fieldset>
+          <label class="field num" title="Only systems in this power state">State
+            <select id="pp-state"><option value="">any</option></select></label>
+        </div>
+        <div class="actions">
+          <span class="buttons"><button id="b-pp" type="submit">Search</button></span>
+          <p id="pp-status" class="status" role="status" aria-live="polite" data-status="idle"
+            data-idle="Nothing searched yet: pick a power and press Search."></p>
+        </div>
+      </form>
+      <div id="pp-wrap" class="table-wrap" hidden>
+        <table id="pp-table">
+          <thead>
+            <tr>
+              <th scope="col" class="c">Data age</th>
+              <th scope="col">System</th>
+              <th scope="col" class="n">ly</th>
+              <th scope="col" class="n">Jumps ≥</th>
+              <th scope="col" class="c">State</th>
+              <th scope="col" class="c" title="What your merits do here for the power you are pledged to">Your merits</th>
+              <th scope="col" class="n" title="Control progress within the state: past 100 % it rises a state at the cycle's end, below 0 % it falls">Control</th>
+              <th scope="col" class="n" title="Merits earned reinforcing the controlling power this cycle">Reinforced</th>
+              <th scope="col" class="n" title="Merits earned against the controlling power this cycle">Undermined</th>
+              <th scope="col" title="The controlling power, and how many other powers are present besides the one searched (hover for their names)">Held by · other powers</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <div id="i-powerplay" class="info-text" hidden>
+        <p>The 10 systems nearest you that match, the system you are in included.</p>
+        <ul>
+          <li><strong>It holds</strong>: the power's own systems. <strong>Others hold</strong>: another power's
+            systems where it is present too. <strong>It can acquire</strong>: Unoccupied systems in its reach.</li>
+          <li><strong>Distance</strong>: straight from where you are now. <strong>Jumps ≥</strong>: the fewest a straight
+            leg can take at your routing range.</li>
+          <li><strong>Unoccupied</strong> systems have no control progress: powers are acquiring them.</li>
+        </ul>
+        <p>Your merits, for the power you are pledged to:</p>
+        <ul class="info-keys">
+          <li><span class="pp-effect e-reinforce">▲ Reinforce</span> its own system</li>
+          <li><span class="pp-effect e-undermine">▼ Undermine</span> another power's system</li>
+          <li><span class="pp-effect e-acquire">✚ Acquire</span> an Unoccupied system it is present in</li>
+          <li><span class="pp-effect e-out-of-reach">– Out of reach</span> an Unoccupied system without it</li>
+        </ul>
+        <p class="info-foot">Data: Spansh.</p>
+      </div>
+    </section>
+  </div>
+  <div id="panel-commander" class="grid tab-panel" role="tabpanel" aria-labelledby="tab-commander" hidden>
+    <section id="cr-rank" class="card wide" aria-labelledby="h-ranks">
+      <h2 id="h-ranks">Ranks <button type="button" class="info" data-info="i-ranks" aria-describedby="i-ranks" aria-label="About this card">i</button></h2>
+      <ul id="cr-ranks" class="rk-list"></ul>
+      <div id="i-ranks" class="info-text" hidden>
+        <p>Percent to the next rank, as at your last login or promotion.</p>
+        <p>Point at a rank for its whole ladder: every rank, what moves you up, what each rank opens, and yours
+          marked.</p>
+        <p class="info-foot">The emblems grow with the rank: wings, crests, chevrons, a wreath at Elite and a star for each
+          Elite&nbsp;I–V.</p>
+      </div>
+    </section>
+    <section id="cr-standing" class="card" aria-labelledby="h-standing">
+      <h2 id="h-standing">Superpower reputation <button type="button" class="info" data-info="i-standing" aria-describedby="i-standing" aria-label="About this card">i</button></h2>
+      <ul id="cr-standings" class="cr-list"></ul>
+      <div id="i-standing" class="info-text" hidden>
+        <p>How each superpower sees you, from −100 to +100, as at your last login.</p>
+        <ul class="info-keys">
+          <li><strong>Hostile</strong> below −90</li>
+          <li><strong>Unfriendly</strong> from −90</li>
+          <li><strong>Neutral</strong> from −35</li>
+          <li><strong>Cordial</strong> from +4</li>
+          <li><strong>Friendly</strong> from +35</li>
+          <li><strong>Allied</strong> from +90</li>
+        </ul>
+        <p class="info-foot">Not the same as the navy rank: reputation rises with missions for that superpower's
+          factions.</p>
+      </div>
+    </section>
+    <section id="cr-power" class="card span2" aria-labelledby="h-pledge">
+      <h2 id="h-pledge">Powerplay <button type="button" class="info" data-info="i-pledge" aria-describedby="i-pledge" aria-label="About this card">i</button></h2>
+      <dl id="cr-pledge" class="cr-facts"></dl>
+      <p id="cr-hold" class="status" role="status" aria-live="polite" data-status="idle"></p>
+      <ol id="cr-powers" class="cr-powers" aria-label="Systems each power holds" hidden></ol>
+      <div id="i-pledge" class="info-text" hidden>
+        <p>The power you are pledged to, your merits and your rank.</p>
+        <ul>
+          <li><strong>Rank</strong>: the game's own, 0 until you have done your power's introductory missions. Merits to the
+            next rank follow the community's published table.</li>
+          <li>A Powerplay week begins on Thursday at 07:00 UTC.</li>
+          <li>Below: how many systems each power holds (Spansh), yours highlighted.</li>
+        </ul>
+      </div>
+    </section>
+    <section id="cr-history" class="card wide" aria-labelledby="h-history">
+      <h2 id="h-history">Over time <button type="button" class="info" data-info="i-history" aria-describedby="i-history" aria-label="About this card">i</button></h2>
+      <p id="cr-since" class="hint"></p>
+      <div class="cr-charts">
+        <figure class="cr-chart">
+          <figcaption>Superpower reputation</figcaption>
+          <div id="cr-chart-standing"></div>
+        </figure>
+        <figure class="cr-chart">
+          <figcaption>Navy ranks</figcaption>
+          <div id="cr-chart-navy"></div>
+        </figure>
+        <figure class="cr-chart">
+          <figcaption>Powerplay merits per week</figcaption>
+          <div id="cr-chart-weeks"></div>
+        </figure>
+      </div>
+      <div id="i-history" class="info-text" hidden>
+        <p>Your record over time, from your journals.</p>
+        <ul>
+          <li><strong>Superpower reputation</strong> and <strong>navy ranks</strong> as the game wrote them at each login
+            or promotion: one point per day, the last of the day.</li>
+          <li><strong>Powerplay merits</strong> you earned each week.</li>
+        </ul>
+        <p class="info-foot">Point at a chart for its values.</p>
+      </div>
+    </section>
+    <section id="cr-factions" class="card wide" aria-labelledby="h-factions">
+      <h2 id="h-factions">Minor factions <button type="button" class="info" data-info="i-factions" aria-describedby="i-factions" aria-label="About this card">i</button></h2>
+      <p id="cr-fac-warn" class="status" data-status="error" role="status" aria-live="polite" hidden></p>
+      <p id="cr-fac-sum" class="hint"></p>
+      <div id="cr-fac-wrap" class="table-wrap" hidden>
+        <table id="cr-fac-table">
+          <thead>
+            <tr>
+              <th scope="col">Faction</th>
+              <th scope="col">Standing</th>
+              <th scope="col" class="n" title="Missions you completed for it">Missions</th>
+              <th scope="col" title="What it was going through when you last met it">State</th>
+              <th scope="col" title="The last system you met it in, and when">Last met</th>
+              <th scope="col" title="The nearest system you have seen it in, and how many systems that is in all">Nearest</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div id="i-factions" class="info-text" hidden>
+        <p>Every minor faction you have a standing with, best first.</p>
+        <p>The game writes your standing to its journal only when you arrive in a system where the faction is present,
+          or log in there. Selling data, handing in a mission or anything else that changes it writes no number (a
+          mission shows only "+" signs). So a station can already show you Allied while this card still shows the value
+          from your last arrival: it catches up the next time you arrive or log in where the faction is.</p>
+        <ul>
+          <li><strong>Standing</strong>: the game's word and number, −100 to +100, with the same steps as the
+            superpowers. Better standing brings more missions that pay more; a faction that holds you
+            <strong>Hostile</strong> refuses you at its stations and its ships may attack. The EDMC panel warns you
+            when you arrive where one is.</li>
+          <li><strong>State</strong>: war, boom, election… what the faction was going through when you last met it.</li>
+          <li><strong>Nearest</strong>: from the systems you have seen it in yourself, not from any online source.
+            Copy the name for the galaxy map.</li>
+        </ul>
+        <p class="info-foot">Factions you met but have done nothing for (standing exactly 0) are only counted.</p>
+      </div>
+    </section>
+  </div>
+
+  <div id="panel-stats" class="grid tab-panel" role="tabpanel" aria-labelledby="tab-stats" hidden>
+    <section id="st-head" class="card wide" aria-labelledby="h-st-head">
+      <h2 id="h-st-head">Lifetime totals <button type="button" class="info" data-info="i-st-head" aria-describedby="i-st-head" aria-label="About the lifetime totals">i</button></h2>
+      <p id="st-since" class="hint"></p>
+      <ul id="st-lines" class="st-lines"></ul>
+      <p id="st-empty" class="hint" hidden></p>
+      <div id="i-st-head" class="info-text" hidden>
+        <p>The game's own statistics, as it wrote them at your last login (it writes them only then): the same numbers
+          Inara and other sites show, read from your journals. Nothing is asked online.</p>
+        <p>Each line shows:</p>
+        <ul>
+          <li>the total now;</li>
+          <li>what it grew by since the newest login at least a week earlier;</li>
+          <li>a small chart of the total at every login (point at it for the value that day).</li>
+        </ul>
+      </div>
+    </section>
+    <section id="st-money" class="card wide" aria-labelledby="h-st-money">
+      <h2 id="h-st-money">Earned and spent, all time <button type="button" class="info" data-info="i-st-money" aria-describedby="i-st-money" aria-label="About earned and spent">i</button></h2>
+      <div class="st-bars-pair">
+        <figure class="st-bars-fig">
+          <figcaption>Earned by activity</figcaption>
+          <ol id="st-profits" class="st-bars"></ol>
+        </figure>
+        <figure class="st-bars-fig">
+          <figcaption>Spent by kind</figcaption>
+          <ol id="st-spending" class="st-bars spent"></ol>
+        </figure>
+      </div>
+      <div id="i-st-money" class="info-text" hidden>
+        <p>Every credit the game has counted since the commander was created, by activity.</p>
+        <ul>
+          <li><strong>Earned</strong>: selling exploration and organic data, trade and mining, bounties, bonds…</li>
+          <li><strong>Spent</strong>: outfitting, ships, rebuys, repairs and the rest.</li>
+          <li><strong>Share</strong>: the part of the bar's total.</li>
+        </ul>
+        <p class="info-foot">The game does not split out missions.</p>
+      </div>
+    </section>
+    <section id="st-deaths" class="card wide" aria-labelledby="h-st-deaths">
+      <h2 id="h-st-deaths">Deaths <button type="button" class="info" data-info="i-st-deaths" aria-describedby="i-st-deaths" aria-label="About deaths">i</button></h2>
+      <p id="st-deaths-sum" class="facts"></p>
+      <ol id="st-deaths-list" class="st-deaths"></ol>
+      <div id="i-st-deaths" class="info-text" hidden>
+        <p>The game's statistics count no deaths (only what rebuys cost in total), so each death is read from your
+          journals one by one, newest first.</p>
+        <ul>
+          <li><strong>Who killed you</strong>: a pilot with their ship and combat rank, every member of a wing, or a
+            station's or settlement's defences. A death the game names no killer for (a crash, a self-destruct…) shows as
+            such.</li>
+          <li><strong>What coming back cost</strong>: the rebuy, free, or bankrupt.</li>
+        </ul>
+      </div>
+    </section>
+    <div id="st-cards" class="st-cards"></div>
+    <div id="i-st-card" class="info-text" hidden>
+      <p>The game's lifetime totals for this activity at your last login; figures still at 0 are left out.</p>
+      <ul>
+        <li><strong>+</strong>: grown since the newest login at least a week earlier.</li>
+        <li><em>Lines in italics</em> are worked out from the game's totals (a sum, an average, a rate), not written by
+          the game; mission rewards are not in them.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="panel-earnings" class="grid tab-panel" role="tabpanel" aria-labelledby="tab-earnings" hidden>
+    <section id="ea-money" class="card wide" aria-labelledby="h-money">
+      <h2 id="h-money">Earned and spent <button type="button" class="info" data-info="i-money" aria-describedby="i-money" aria-label="About this card">i</button></h2>
+      <p id="ea-session" class="facts"></p>
+      <div class="table-wrap">
+        <table class="ea-table">
+          <thead>
+            <tr><th scope="col">Cr</th><th scope="col" class="n">This session</th><th scope="col" class="n">Today</th>
+              <th id="ea-week" scope="col" class="n">This week</th></tr>
+          </thead>
+          <tbody id="ea-earned"></tbody>
+          <tbody id="ea-spent"></tbody>
+          <tbody id="ea-net"></tbody>
+        </table>
+      </div>
+      <div id="i-money" class="info-text" hidden>
+        <p>What you earned and spent, from your journals.</p>
+        <ul>
+          <li><strong>Trade profit</strong>: what you sold for minus what you paid (mined or found cargo counts in full).
+            Bought cargo is not spending until it is sold.</li>
+          <li><strong>This session</strong> runs from the game's start; <strong>today</strong> from midnight;
+            <strong>this week</strong> from Monday, both by this computer's clock.</li>
+        </ul>
+      </div>
+    </section>
+    <section id="ea-history" class="card wide" aria-labelledby="h-balance">
+      <h2 id="h-balance">Balance over time <button type="button" class="info" data-info="i-balance" aria-describedby="i-balance" aria-label="About this card">i</button></h2>
+      <div id="ea-balance" class="ea-balance"></div>
+      <div id="i-balance" class="info-text" hidden>
+        <p>Your credits over time: exact at every login, worked out between logins from every credit earned, spent or paid
+          for cargo. The live balance ends the line.</p>
+        <p class="info-foot">Point at the line for the balance on that day.</p>
+      </div>
+    </section>
+    <section id="ea-carried" class="card wide" aria-labelledby="h-carried">
+      <h2 id="h-carried">Still carried, not sold <button type="button" class="info" data-info="i-carried" aria-describedby="i-carried" aria-label="About this card">i</button></h2>
+      <p id="ea-lose" class="ea-lose">Lost if you die before you sell it.</p>
+      <dl id="ea-unsold" class="cr-facts"></dl>
+      <ul id="ea-species" class="ea-species"></ul>
+      <p id="ea-died" class="hint" hidden></p>
+      <div id="i-carried" class="info-text" hidden>
+        <p>What you carry and have not sold yet.</p>
+        <ul>
+          <li><strong>Cartographic data</strong>: every star and planet you scanned since you last sold that system, valued
+            with the first-discovery, first-mapped and probe bonuses your scans show. An estimate.</li>
+          <li><strong>Exobiology</strong>: species analysed since your last sale at Vista Genomics, at their base value
+            (a first-logged bonus is not counted).</li>
+        </ul>
+      </div>
+    </section>
+  </div>
+
+  <div id="panel-missions" class="grid tab-panel" role="tabpanel" aria-labelledby="tab-missions" hidden>
+    <section id="missions" class="card wide missions" aria-labelledby="h-missions">
+      <h2 id="h-missions">Open missions <button type="button" class="info" data-info="i-missions" aria-describedby="i-missions" aria-label="About this card">i</button></h2>
+      <form id="mi-form" class="market-form" autocomplete="off">
+        <div class="fields">
+          <fieldset class="market-side">
+            <legend>Sort by</legend>
+            <label class="check"><input type="radio" name="mi-sort" value="time" checked> Time left</label>
+            <label class="check"><input type="radio" name="mi-sort" value="distance"> Distance</label>
+          </fieldset>
+        </div>
+        <p id="mi-status" class="status" role="status" aria-live="polite" data-status="idle"></p>
+      </form>
+      <div id="mi-wrap" class="table-wrap" hidden>
+        <table id="mi-table">
+          <thead>
+            <tr>
+              <th scope="col">Mission</th>
+              <th scope="col">Go to</th>
+              <th scope="col" class="n">Reward</th>
+              <th scope="col" class="n">Time left</th>
+              <th scope="col" class="n">ly</th>
+              <th scope="col" class="n">Jumps ≥</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <div id="i-missions" class="info-text" hidden>
+        <p>Your open missions, from your journals: the list the game gives at login, then every mission you take, finish,
+          fail or abandon.</p>
+        <ul>
+          <li><strong>Time left</strong> turns red under 2 hours; a mission that ran out leaves the list.</li>
+          <li><strong>Jumps ≥</strong>: the fewest jumps at your routing range.</li>
+        </ul>
+        <p class="info-foot">Where the systems are comes from Spansh.</p>
+      </div>
+    </section>
+  </div>
+  </main>
+
+  <footer class="foot">
+    <span id="updated">no data yet</span>
+    <label class="update-pick" title="Ask GitHub about once a day whether a newer version is out; nothing is downloaded or installed">
+      <input id="update-check" type="checkbox" checked> Tell me about new versions
+    </label>
+    <span class="disclaimer">Unofficial fan-made tool · not affiliated with or endorsed by Frontier Developments ·
+      Elite Dangerous © Frontier Developments plc</span>
+    <span id="version"></span>
+  </footer>
+
+  <dialog id="about" class="about" aria-labelledby="about-title">
+    <div class="about-card card">
+      <button id="about-close" type="button" class="about-close" aria-label="Close">×</button>
+      <h2 id="about-title">About ED Multitool</h2>
+      <p class="about-lead">A companion for Elite Dangerous that runs inside EDMC: where you are and how far your
+        ship jumps; routes with the best scan and exobiology stops; the nearest market, engineer, service or
+        Powerplay system; trade and cargo sales; missions, earnings and your commander's record.</p>
+      <dl class="about-facts">
+        <dt>Version</dt>
+        <dd><span id="about-version">—</span> · <a href="https://github.com/Martin8O/ED-Multitool/blob/main/CHANGELOG.md"
+          target="_blank" rel="noopener noreferrer">what's new</a></dd>
+        <dt>Data</dt>
+        <dd><a href="https://spansh.co.uk" target="_blank" rel="noopener noreferrer">Spansh</a> for the galaxy,
+          routes, markets, stations and Powerplay; <a href="https://ardent-insight.com" target="_blank"
+          rel="noopener noreferrer">Ardent Insight</a> as the market backup; your own journal files, read
+          only.</dd>
+        <dt>Thanks</dt>
+        <dd>Spansh and Ardent Insight for running their services for the community;
+          <a href="https://github.com/EDCD/EDMarketConnector" target="_blank" rel="noopener noreferrer">EDMarketConnector</a>
+          and the <a href="https://github.com/EDCD" target="_blank" rel="noopener noreferrer">EDCD</a> community for
+          the plugin home and the game data.</dd>
+        <dt>Source</dt>
+        <dd>Code on <a href="https://github.com/Martin8O/ED-Multitool" target="_blank"
+          rel="noopener noreferrer">GitHub</a>, free under the MIT licence.</dd>
+      </dl>
+      <p class="about-legal">Unofficial fan-made tool, not affiliated with or endorsed by Frontier Developments.
+        Elite Dangerous © Frontier Developments plc.</p>
+      <p class="about-author"><span class="sub-head">Author</span>
+        <span class="about-by">Martin Svoboda – <a href="https://svobodamartin.dev" target="_blank"
+          rel="noopener noreferrer">svobodamartin.dev</a> <svg class="about-jet" width="16" height="16"
+          aria-hidden="true"><use href="#ic-jet"/></svg></span>
+        <span class="about-ideas">Ideas and bug reports are welcome as
+          <a href="https://github.com/Martin8O/ED-Multitool/issues" target="_blank"
+          rel="noopener noreferrer">GitHub issues</a>.</span></p>
+    </div>
+  </dialog>
+</body>
+</html>

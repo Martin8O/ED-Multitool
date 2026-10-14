@@ -1,0 +1,54 @@
+{
+ "request": {
+  "method": "POST",
+  "url": "https://spansh.co.uk/api/riches/route",
+  "params": [],
+  "form": [
+   [
+    "from",
+    "Sol"
+   ],
+   [
+    "to",
+    "Colonia"
+   ],
+   [
+    "range",
+    "22.00"
+   ],
+   [
+    "radius",
+    "25"
+   ],
+   [
+    "max_results",
+    "5"
+   ],
+   [
+    "max_distance",
+    "50000"
+   ],
+   [
+    "min_value",
+    "1000000"
+   ],
+   [
+    "loop",
+    "0"
+   ],
+   [
+    "avoid_thargoids",
+    "1"
+   ],
+   [
+    "use_mapping_value",
+    "1"
+   ]
+  ]
+ },
+ "status": 202,
+ "body": {
+  "job": "BFE50B80-C5C5-11F1-A65B-A8A27184C77F",
+  "status": "queued"
+ }
+}

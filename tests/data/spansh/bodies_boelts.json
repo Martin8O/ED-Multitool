@@ -1,0 +1,562 @@
+{
+ "request": {
+  "method": "POST",
+  "url": "https://spansh.co.uk/api/bodies/search",
+  "params": [],
+  "form": null,
+  "json": {
+   "filters": {
+    "system_id64": {
+     "value": 180665307059
+    }
+   },
+   "size": 100,
+   "page": 0
+  }
+ },
+ "status": 200,
+ "body": {
+  "count": 39,
+  "from": 0,
+  "reference": {
+   "id64": 10477373803,
+   "name": "Sol",
+   "x": 0.0,
+   "y": 0.0,
+   "z": 0.0
+  },
+  "results": [
+   {
+    "body_id": 4,
+    "name": "Boelts KT-Q d5-5 C",
+    "type": "Star",
+    "subtype": "K (Yellow-Orange) Star",
+    "distance_to_arrival": 370832.764739,
+    "estimated_scan_value": 1214,
+    "estimated_mapping_value": 4601,
+    "solar_masses": 0.785156
+   },
+   {
+    "body_id": 14,
+    "name": "Boelts KT-Q d5-5 A 7 a",
+    "type": "Planet",
+    "subtype": "Rocky body",
+    "distance_to_arrival": 1539.214015,
+    "estimated_scan_value": 132154,
+    "estimated_mapping_value": 480159,
+    "terraforming_state": "Terraformable",
+    "is_landable": false,
+    "earth_masses": 0.203246
+   },
+   {
+    "body_id": 43,
+    "name": "Boelts KT-Q d5-5 C 2 b",
+    "type": "Planet",
+    "subtype": "Rocky body",
+    "distance_to_arrival": 369889.56931,
+    "estimated_scan_value": 500,
+    "estimated_mapping_value": 2221,
+    "terraforming_state": "Not terraformable",
+    "is_landable": true,
+    "earth_masses": 0.000324
+   },
+   {
+    "body_id": 2,
+    "name": "Boelts KT-Q d5-5 A",
+    "type": "Star",
+    "subtype": "F (White) Star",
+    "distance_to_arrival": 0.0,
+    "estimated_scan_value": 1229,
+    "estimated_mapping_value": 4651,
+    "solar_masses": 1.644531
+   },
+   {
+    "body_id": 5,
+    "name": "Boelts KT-Q d5-5 A 1",
+    "type": "Planet",
+    "subtype": "High metal content world",
+    "distance_to_arrival": 321.915818,
+    "estimated_scan_value": 16067,
+    "estimated_mapping_value": 58376,
+    "terraforming_state": "Not terraformable",
+    "is_landable": true,
+    "earth_masses": 2.230057,
+    "signals": [
+     {
+      "count": 3,
+      "name": "Geological"
+     }
+    ]
+   },
+   {
+    "body_id": 21,
+    "name": "Boelts KT-Q d5-5 B 1",
+    "type": "Planet",
+    "subtype": "High metal content world",
+    "distance_to_arrival": 32414.972082,
+    "estimated_scan_value": 179629,
+    "estimated_mapping_value": 652651,
+    "terraforming_state": "Terraformable",
+    "is_landable": false,
+    "earth_masses": 1.684073
+   },
+   {
+    "body_id": 24,
+    "name": "Boelts KT-Q d5-5 B 3 a",
+    "type": "Planet",
+    "subtype": "Rocky body",
+    "distance_to_arrival": 32203.869331,
+    "estimated_scan_value": 500,
+    "estimated_mapping_value": 2221,
+    "terraforming_state": "Not terraformable",
+    "is_landable": true,
+    "earth_masses": 0.050473
+   },
+   {
+    "body_id": 25,
+    "name": "Boelts KT-Q d5-5 B 4",
+    "type": "Planet",
+    "subtype": "High metal content world",
+    "distance_to_arrival": 32530.062676,
+    "estimated_scan_value": 14431,
+    "estimated_mapping_value": 52432,
+    "terraforming_state": "Not terraformable",
+    "is_landable": false,
+    "earth_masses": 0.511392
+   },
+   {
+    "body_id": 28,
+    "name": "Boelts KT-Q d5-5 B 6 a",
+    "type": "Planet",
+    "subtype": "Icy body",
+    "distance_to_arrival": 36230.626132,
+    "estimated_scan_value": 500,
+    "estimated_mapping_value": 2221,
+    "terraforming_state": "Not terraformable",
+    "is_landable": false,
+    "earth_masses": 0.145712
+   },
+   {
+    "body_id": 36,
+    "name": "Boelts KT-Q d5-5 C 1",
+    "type": "Planet",
+    "subtype": "Class II gas giant",
+    "distance_to_arrival": 369854.161076,
+    "estimated_scan_value": 28347,
+    "estimated_mapping_value": 102993,
+    "terraforming_state": "Not terraformable",
+    "is_landable": false,
+    "earth_masses": 468.989655
+   },
+   {
+    "body_id": 39,
+    "name": "Boelts KT-Q d5-5 C 1 b",
+    "type": "Planet",
+    "subtype": "Rocky body",
+    "distance_to_arrival": 369855.442023,
+    "estimated_scan_value": 500,
+    "estimated_mapping_value": 2221,
+    "terraforming_state": "Not terraformable",
+    "is_landable": true,
+    "earth_masses": 0.008278,
+    "signals": [
+     {
+      "count": 4,
+      "name": "Biological"
+     }
+    ],
+    "genuses": [
+     {
+      "name": "Bacterial"
+     },
+     {
+      "name": "Conchas"
+     },
+     {
+      "name": "Tussocks"
+     },
+     {
+      "name": "Fungoids"
+     }
+    ]
+   },
+   {
+    "body_id": 51,
+    "name": "Boelts KT-Q d5-5 C 3 c a",
+    "type": "Planet",
+    "subtype": "Icy body",
+    "distance_to_arrival": 371940.332879,
+    "estimated_scan_value": 500,
+    "estimated_mapping_value": 2221,
+    "terraforming_state": "Not terraformable",
+    "is_landable": true,
+    "earth_masses": 0.00032,
+    "signals": [
+     {
+      "count": 2,
+      "name": "Geological"
+     }
+    ]
+   },
+   {
+    "body_id": 53,
+    "name": "Boelts KT-Q d5-5 C 4",
+    "type": "Planet",
+    "subtype": "Gas giant with ammonia-based life",
+    "distance_to_arrival": 369407.260256,
+    "estimated_scan_value": 598,
+    "estimated_mapping_value": 2548,
+    "terraforming_state": "Not terraformable",
+    "is_landable": false,
+    "earth_masses": 16.894781
+   },
+   {
+    "body_id": 56,
+    "name": "Boelts KT-Q d5-5 C 4 a",
+    "type": "Planet",
+    "subtype": "Icy body",
+    "distance_to_arrival": 369406.485466,
+    "estimated_scan_value": 500,
+    "estimated_mapping_value": 2221,
+    "terraforming_state": "Not terraformable",
+    "is_landable": true,
+    "earth_masses": 0.000256
+   },
+   {
+    "body_id": 57,
+    "name": "Boelts KT-Q d5-5 C 4 b",
+    "type": "Planet",
+    "subtype": "Icy body",
+    "distance_to_arrival": 369403.57134,
+    "estimated_scan_value": 500,
+    "estimated_mapping_value": 2221,
+    "terraforming_state": "Not terraformable",
+    "is_landable": true,
+    "earth_masses": 0.000421
+   },
+   {
+    "body_id": 6,
+    "name": "Boelts KT-Q d5-5 A 2",
+    "type": "Planet",
+    "subtype": "High metal content world",
+    "distance_to_arrival": 427.124037,
+    "estimated_scan_value": 15483,
+    "estimated_mapping_value": 56253,
+    "terraforming_state": "Not terraformable",
+    "is_landable": false,
+    "earth_masses": 1.382912
+   },
+   {
+    "body_id": 13,
+    "name": "Boelts KT-Q d5-5 A 7",
+    "type": "Planet",
+    "subtype": "High metal content world",
+    "distance_to_arrival": 1542.006884,
+    "estimated_scan_value": 185790,
+    "estimated_mapping_value": 675036,
+    "terraforming_state": "Terraformable",
+    "is_landable": false,
+    "earth_masses": 2.578239
+   },
+   {
+    "body_id": 18,
+    "name": "Boelts KT-Q d5-5 A 10",
+    "type": "Planet",
+    "subtype": "High metal content world",
+    "distance_to_arrival": 3975.863839,
+    "estimated_scan_value": 16344,
+    "estimated_mapping_value": 59382,
+    "terraforming_state": "Not terraformable",
+    "is_landable": false,
+    "earth_masses": 2.754657
+   },
+   {
+    "body_id": 40,
+    "name": "Boelts KT-Q d5-5 C 2",
+    "type": "Planet",
+    "subtype": "Gas giant with ammonia-based life",
+    "distance_to_arrival": 369888.383538,
+    "estimated_scan_value": 640,
+    "estimated_mapping_value": 2688,
+    "terraforming_state": "Not terraformable",
+    "is_landable": false,
+    "earth_masses": 32.421673
+   },
+   {
+    "body_id": 8,
+    "name": "Boelts KT-Q d5-5 A 3",
+    "type": "Planet",
+    "subtype": "High metal content world",
+    "distance_to_arrival": 602.579978,
+    "estimated_scan_value": 15930,
+    "estimated_mapping_value": 57878,
+    "terraforming_state": "Not terraformable",
+    "is_landable": false,
+    "earth_masses": 2.000924
+   },
+   {
+    "body_id": 11,
+    "name": "Boelts KT-Q d5-5 A 5",
+    "type": "Planet",
+    "subtype": "High metal content world",
+    "distance_to_arrival": 1177.854995,
+    "estimated_scan_value": 191807,
+    "estimated_mapping_value": 696898,
+    "terraforming_state": "Terraformable",
+    "is_landable": false,
+    "earth_masses": 3.783505
+   },
+   {
+    "body_id": 19,
+    "name": "Boelts KT-Q d5-5 A 10 a",
+    "type": "Planet",
+    "subtype": "Rocky body",
+    "distance_to_arrival": 3985.396146,
+    "estimated_scan_value": 500,
+    "estimated_mapping_value": 2221,
+    "terraforming_state": "Not terraformable",
+    "is_landable": true,
+    "earth_masses": 0.191823,
+    "signals": [
+     {
+      "count": 1,
+      "name": "Biological"
+     }
+    ],
+    "genuses": [
+     {
+      "name": "Bacterial"
+     }
+    ]
+   },
+   {
+    "body_id": 20,
+    "name": "Boelts KT-Q d5-5 A 11",
+    "type": "Planet",
+    "subtype": "High metal content world",
+    "distance_to_arrival": 5563.828852,
+    "estimated_scan_value": 15538,
+    "estimated_mapping_value": 56454,
+    "terraforming_state": "Not terraformable",
+    "is_landable": false,
+    "earth_masses": 1.449907
+   },
+   {
+    "body_id": 22,
+    "name": "Boelts KT-Q d5-5 B 2",
+    "type": "Planet",
+    "subtype": "High metal content world",
+    "distance_to_arrival": 32435.862498,
+    "estimated_scan_value": 171823,
+    "estimated_mapping_value": 624289,
+    "terraforming_state": "Terraformable",
+    "is_landable": true,
+    "earth_masses": 0.926552,
+    "signals": [
+     {
+      "count": 3,
+      "name": "Geological"
+     }
+    ]
+   },
+   {
+    "body_id": 23,
+    "name": "Boelts KT-Q d5-5 B 3",
+    "type": "Planet",
+    "subtype": "Earth-like world",
+    "distance_to_arrival": 32202.724345,
+    "estimated_scan_value": 276191,
+    "estimated_mapping_value": 1003493,
+    "terraforming_state": "Not terraformable",
+    "is_landable": false,
+    "earth_masses": 0.686172
+   },
+   {
+    "body_id": 26,
+    "name": "Boelts KT-Q d5-5 B 5",
+    "type": "Planet",
+    "subtype": "High metal content world",
+    "distance_to_arrival": 32513.002547,
+    "estimated_scan_value": 15619,
+    "estimated_mapping_value": 56748,
+    "terraforming_state": "Not terraformable",
+    "is_landable": false,
+    "earth_masses": 1.551549
+   },
+   {
+    "body_id": 27,
+    "name": "Boelts KT-Q d5-5 B 6",
+    "type": "Planet",
+    "subtype": "Icy body",
+    "distance_to_arrival": 36215.068531,
+    "estimated_scan_value": 516,
+    "estimated_mapping_value": 2274,
+    "terraforming_state": "Not terraformable",
+    "is_landable": false,
+    "earth_masses": 3.345425
+   },
+   {
+    "body_id": 38,
+    "name": "Boelts KT-Q d5-5 C 1 a",
+    "type": "Planet",
+    "subtype": "Rocky body",
+    "distance_to_arrival": 369855.08327,
+    "estimated_scan_value": 500,
+    "estimated_mapping_value": 2221,
+    "terraforming_state": "Not terraformable",
+    "is_landable": true,
+    "earth_masses": 0.003573,
+    "signals": [
+     {
+      "count": 3,
+      "name": "Geological"
+     }
+    ]
+   },
+   {
+    "body_id": 42,
+    "name": "Boelts KT-Q d5-5 C 2 a",
+    "type": "Planet",
+    "subtype": "Rocky body",
+    "distance_to_arrival": 369887.871515,
+    "estimated_scan_value": 500,
+    "estimated_mapping_value": 2221,
+    "terraforming_state": "Not terraformable",
+    "is_landable": false,
+    "earth_masses": 0.000324
+   },
+   {
+    "body_id": 48,
+    "name": "Boelts KT-Q d5-5 C 3 a",
+    "type": "Planet",
+    "subtype": "Icy body",
+    "distance_to_arrival": 371941.581248,
+    "estimated_scan_value": 500,
+    "estimated_mapping_value": 2221,
+    "terraforming_state": "Not terraformable",
+    "is_landable": true,
+    "earth_masses": 0.006026,
+    "signals": [
+     {
+      "count": 2,
+      "name": "Geological"
+     }
+    ]
+   },
+   {
+    "body_id": 49,
+    "name": "Boelts KT-Q d5-5 C 3 b",
+    "type": "Planet",
+    "subtype": "Icy body",
+    "distance_to_arrival": 371941.603967,
+    "estimated_scan_value": 500,
+    "estimated_mapping_value": 2221,
+    "terraforming_state": "Not terraformable",
+    "is_landable": true,
+    "earth_masses": 0.002614,
+    "signals": [
+     {
+      "count": 2,
+      "name": "Geological"
+     }
+    ]
+   },
+   {
+    "body_id": 3,
+    "name": "Boelts KT-Q d5-5 B",
+    "type": "Star",
+    "subtype": "K (Yellow-Orange) Star",
+    "distance_to_arrival": 32741.669834,
+    "estimated_scan_value": 1212,
+    "estimated_mapping_value": 4594,
+    "solar_masses": 0.707031
+   },
+   {
+    "body_id": 9,
+    "name": "Boelts KT-Q d5-5 A 4",
+    "type": "Planet",
+    "subtype": "High metal content world",
+    "distance_to_arrival": 601.961519,
+    "estimated_scan_value": 15782,
+    "estimated_mapping_value": 57340,
+    "terraforming_state": "Not terraformable",
+    "is_landable": false,
+    "earth_masses": 1.775454
+   },
+   {
+    "body_id": 12,
+    "name": "Boelts KT-Q d5-5 A 6",
+    "type": "Planet",
+    "subtype": "High metal content world",
+    "distance_to_arrival": 1181.753528,
+    "estimated_scan_value": 174917,
+    "estimated_mapping_value": 635531,
+    "terraforming_state": "Terraformable",
+    "is_landable": false,
+    "earth_masses": 1.184248
+   },
+   {
+    "body_id": 16,
+    "name": "Boelts KT-Q d5-5 A 8",
+    "type": "Planet",
+    "subtype": "Earth-like world",
+    "distance_to_arrival": 2271.126424,
+    "estimated_scan_value": 294518,
+    "estimated_mapping_value": 1070081,
+    "terraforming_state": "Not terraformable",
+    "is_landable": false,
+    "earth_masses": 1.656742
+   },
+   {
+    "body_id": 17,
+    "name": "Boelts KT-Q d5-5 A 9",
+    "type": "Planet",
+    "subtype": "High metal content world",
+    "distance_to_arrival": 2262.204784,
+    "estimated_scan_value": 15489,
+    "estimated_mapping_value": 56275,
+    "terraforming_state": "Not terraformable",
+    "is_landable": false,
+    "earth_masses": 1.390332
+   },
+   {
+    "body_id": 44,
+    "name": "Boelts KT-Q d5-5 C 3",
+    "type": "Planet",
+    "subtype": "Class I gas giant",
+    "distance_to_arrival": 371944.147433,
+    "estimated_scan_value": 4287,
+    "estimated_mapping_value": 15575,
+    "terraforming_state": "Not terraformable",
+    "is_landable": false,
+    "earth_masses": 174.675583
+   },
+   {
+    "body_id": 50,
+    "name": "Boelts KT-Q d5-5 C 3 c",
+    "type": "Planet",
+    "subtype": "Icy body",
+    "distance_to_arrival": 371940.339801,
+    "estimated_scan_value": 500,
+    "estimated_mapping_value": 2221,
+    "terraforming_state": "Not terraformable",
+    "is_landable": true,
+    "earth_masses": 0.005546
+   },
+   {
+    "body_id": 52,
+    "name": "Boelts KT-Q d5-5 C 3 d",
+    "type": "Planet",
+    "subtype": "Icy body",
+    "distance_to_arrival": 371938.314467,
+    "estimated_scan_value": 500,
+    "estimated_mapping_value": 2221,
+    "terraforming_state": "Not terraformable",
+    "is_landable": true,
+    "earth_masses": 0.011689
+   }
+  ],
+  "search_reference": "BB6CF2A2-C70F-11F1-90CB-DE7B35A14D95",
+  "size": 100
+ }
+}

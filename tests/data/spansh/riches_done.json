@@ -1,0 +1,230 @@
+{
+ "request": {
+  "method": "GET",
+  "url": "https://spansh.co.uk/api/results/BFE50B80-C5C5-11F1-A65B-A8A27184C77F",
+  "params": [],
+  "form": null
+ },
+ "status": 200,
+ "body": {
+  "created_at": "2026-10-11T22:47:34",
+  "job": "BFE50B80-C5C5-11F1-A65B-A8A27184C77F",
+  "parameters": {
+   "avoid_thargoids": 1,
+   "destination": "Colonia",
+   "loop": "0",
+   "max_distance": "50000",
+   "max_results": "5",
+   "min_value": "1000000",
+   "radius": "25",
+   "range": "22.00",
+   "source": "Sol",
+   "use_mapping_value": "1"
+  },
+  "result": [
+   {
+    "bodies": [],
+    "id64": "10477373803",
+    "jumps": 1,
+    "name": "Sol",
+    "x": 0,
+    "y": 0,
+    "z": 0
+   },
+   {
+    "bodies": [
+     {
+      "distance_to_arrival": 1224.48262,
+      "estimated_mapping_value": 1098999,
+      "estimated_scan_value": 302477,
+      "id": 360295297747636075,
+      "id64": "360295297747636075",
+      "is_terraformable": false,
+      "landmark_value": null,
+      "name": "Blua Eaec QK-E d12-213 7",
+      "subtype": "Earth-like world",
+      "type": "Planet"
+     },
+     {
+      "distance_to_arrival": 1661.561104,
+      "estimated_mapping_value": 1107021,
+      "estimated_scan_value": 304685,
+      "id": 432352891785564011,
+      "id64": "432352891785564011",
+      "is_terraformable": true,
+      "landmark_value": null,
+      "name": "Blua Eaec QK-E d12-213 9",
+      "subtype": "Water world",
+      "type": "Planet"
+     }
+    ],
+    "id64": "7327557996395",
+    "jumps": 862,
+    "name": "Blua Eaec QK-E d12-213",
+    "x": -7393.875,
+    "y": -699.8125,
+    "z": 15365.875
+   },
+   {
+    "bodies": [
+     {
+      "distance_to_arrival": 1159.588401,
+      "estimated_mapping_value": 1086003,
+      "estimated_scan_value": 298900,
+      "id": 360367143742443587,
+      "id64": "360367143742443587",
+      "is_terraformable": true,
+      "landmark_value": null,
+      "name": "Eoch Flyuae BB-N d7-2304 9",
+      "subtype": "Water world",
+      "type": "Planet"
+     },
+     {
+      "distance_to_arrival": 1593.328912,
+      "estimated_mapping_value": 1118179,
+      "estimated_scan_value": 307756,
+      "id": 396395940761407555,
+      "id64": "396395940761407555",
+      "is_terraformable": true,
+      "landmark_value": null,
+      "name": "Eoch Flyuae BB-N d7-2304 10",
+      "subtype": "Water world",
+      "type": "Planet"
+     }
+    ],
+    "id64": "79173552803907",
+    "jumps": 121,
+    "name": "Eoch Flyuae BB-N d7-2304",
+    "x": -8421.34375,
+    "y": -824.75,
+    "z": 17516.8125
+   },
+   {
+    "bodies": [
+     {
+      "distance_to_arrival": 2074.201795,
+      "estimated_mapping_value": 1107424,
+      "estimated_scan_value": 304796,
+      "id": 396351822823788635,
+      "id64": "396351822823788635",
+      "is_terraformable": true,
+      "landmark_value": null,
+      "name": "Eoch Flyuae LT-H d10-1020 AB 1",
+      "subtype": "Water world",
+      "type": "Planet"
+     },
+     {
+      "distance_to_arrival": 48381.177312,
+      "estimated_mapping_value": 1097549,
+      "estimated_scan_value": 302078,
+      "id": 540467010899644507,
+      "id64": "540467010899644507",
+      "is_terraformable": false,
+      "landmark_value": null,
+      "name": "Eoch Flyuae LT-H d10-1020 C 3",
+      "subtype": "Earth-like world",
+      "type": "Planet"
+     },
+     {
+      "distance_to_arrival": 49694.146717,
+      "estimated_mapping_value": 1133864,
+      "estimated_scan_value": 312073,
+      "id": 576495807918608475,
+      "id64": "576495807918608475",
+      "is_terraformable": true,
+      "landmark_value": null,
+      "name": "Eoch Flyuae LT-H d10-1020 C 4",
+      "subtype": "Water world",
+      "type": "Planet"
+     }
+    ],
+    "id64": "35055615184987",
+    "jumps": 17,
+    "name": "Eoch Flyuae LT-H d10-1020",
+    "x": -8566.5,
+    "y": -804.75,
+    "z": 17809.78125
+   },
+   {
+    "bodies": [
+     {
+      "distance_to_arrival": 644.263137,
+      "estimated_mapping_value": 1086812,
+      "estimated_scan_value": 299123,
+      "id": 468443055028785275,
+      "id64": "468443055028785275",
+      "is_terraformable": true,
+      "landmark_value": null,
+      "name": "Eoch Flyuae CN-A d14-1999 A 5",
+      "subtype": "Water world",
+      "type": "Planet"
+     },
+     {
+      "distance_to_arrival": 890.917869,
+      "estimated_mapping_value": 1127320,
+      "estimated_scan_value": 310272,
+      "id": 540500649066713211,
+      "id64": "540500649066713211",
+      "is_terraformable": true,
+      "landmark_value": null,
+      "name": "Eoch Flyuae CN-A d14-1999 A 7",
+      "subtype": "Water world",
+      "type": "Planet"
+     }
+    ],
+    "id64": "68693782253691",
+    "jumps": 14,
+    "name": "Eoch Flyuae CN-A d14-1999",
+    "x": -8675.59375,
+    "y": -840.9375,
+    "z": 18057.09375
+   },
+   {
+    "bodies": [
+     {
+      "distance_to_arrival": 1531.270044,
+      "estimated_mapping_value": 1147689,
+      "estimated_scan_value": 315878,
+      "id": 144119938234011907,
+      "id64": "144119938234011907",
+      "is_terraformable": true,
+      "landmark_value": null,
+      "name": "Eol Prou BZ-A d138 A 2",
+      "subtype": "Water world",
+      "type": "Planet"
+     },
+     {
+      "distance_to_arrival": 38752.9426,
+      "estimated_mapping_value": 1076392,
+      "estimated_scan_value": 296255,
+      "id": 396321517366759683,
+      "id64": "396321517366759683",
+      "is_terraformable": true,
+      "landmark_value": null,
+      "name": "Eol Prou BZ-A d138 B 3",
+      "subtype": "Water world",
+      "type": "Planet"
+     }
+    ],
+    "id64": "4750158156035",
+    "jumps": 79,
+    "name": "Eol Prou BZ-A d138",
+    "x": -9369.6875,
+    "y": -894,
+    "z": 19455.9375
+   },
+   {
+    "bodies": [],
+    "id64": "3238296097059",
+    "jumps": 20,
+    "name": "Colonia",
+    "x": -9530.5,
+    "y": -910.28125,
+    "z": 19808.125
+   }
+  ],
+  "state": "completed",
+  "status": "ok",
+  "updated_at": "2026-10-11T22:47:34"
+ }
+}

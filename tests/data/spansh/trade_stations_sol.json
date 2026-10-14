@@ -1,0 +1,630 @@
+{
+ "request": {
+  "method": "POST",
+  "url": "https://spansh.co.uk/api/systems/search",
+  "params": [],
+  "form": null,
+  "json": {
+   "filters": {
+    "name": {
+     "value": [
+      "Sol"
+     ]
+    }
+   },
+   "sort": [],
+   "size": 4,
+   "page": 0
+  }
+ },
+ "status": 200,
+ "body": {
+  "count": 1,
+  "from": 0,
+  "reference": {
+   "id64": 10477373803,
+   "name": "Sol",
+   "x": 0.0,
+   "y": 0.0,
+   "z": 0.0
+  },
+  "results": [
+   {
+    "id64": 10477373803,
+    "name": "Sol",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "stations": [
+     {
+      "name": "Daedalus",
+      "type": "Orbis Starport",
+      "distance_to_arrival": 228.755041,
+      "has_large_pad": true,
+      "medium_pads": 13,
+      "small_pads": 10,
+      "has_market": true
+     },
+     {
+      "name": "Galileo",
+      "type": "Ocellus Starport",
+      "distance_to_arrival": 503.38403,
+      "has_large_pad": true,
+      "medium_pads": 13,
+      "small_pads": 9,
+      "has_market": true
+     },
+     {
+      "name": "Abraham Lincoln",
+      "type": "Orbis Starport",
+      "distance_to_arrival": 504.748694,
+      "has_large_pad": true,
+      "medium_pads": 9,
+      "small_pads": 8,
+      "has_market": true
+     },
+     {
+      "name": "M.Gorbachev",
+      "type": "Orbis Starport",
+      "distance_to_arrival": 504.54888,
+      "has_large_pad": true,
+      "medium_pads": 13,
+      "small_pads": 8,
+      "has_market": true
+     },
+     {
+      "name": "Li Qing Jao",
+      "type": "Orbis Starport",
+      "distance_to_arrival": 504.538115,
+      "has_large_pad": true,
+      "medium_pads": 11,
+      "small_pads": 6,
+      "has_market": true
+     },
+     {
+      "name": "Mars High",
+      "type": "Orbis Starport",
+      "distance_to_arrival": 819.022575,
+      "has_large_pad": true,
+      "medium_pads": 12,
+      "small_pads": 6,
+      "has_market": true
+     },
+     {
+      "name": "Columbus",
+      "type": "Ocellus Starport",
+      "distance_to_arrival": 2614.460809,
+      "has_large_pad": true,
+      "medium_pads": 12,
+      "small_pads": 7,
+      "has_market": true
+     },
+     {
+      "name": "Titan City",
+      "type": "Orbis Starport",
+      "distance_to_arrival": 4721.644483,
+      "has_large_pad": true,
+      "medium_pads": 13,
+      "small_pads": 7,
+      "has_market": true
+     },
+     {
+      "name": "Rescue Ship - Li Qing Jao",
+      "type": "Mega ship",
+      "distance_to_arrival": 496.966721,
+      "has_large_pad": false,
+      "has_market": true
+     },
+     {
+      "name": "Burnell Station",
+      "type": "Outpost",
+      "distance_to_arrival": 363.08021,
+      "has_large_pad": false,
+      "medium_pads": 1,
+      "small_pads": 4,
+      "has_market": true
+     },
+     {
+      "name": "Walz Depot",
+      "type": "Planetary Outpost",
+      "distance_to_arrival": 230.444934,
+      "has_large_pad": true,
+      "medium_pads": 2,
+      "small_pads": 4,
+      "has_market": true
+     },
+     {
+      "name": "Ehrlich City",
+      "type": "Planetary Port",
+      "distance_to_arrival": 229.747692,
+      "has_large_pad": true,
+      "medium_pads": 8,
+      "small_pads": 8,
+      "has_market": true
+     },
+     {
+      "name": "Furukawa Enterprise",
+      "type": "Planetary Outpost",
+      "distance_to_arrival": 232.382846,
+      "has_large_pad": true,
+      "medium_pads": 2,
+      "small_pads": 4,
+      "has_market": true
+     },
+     {
+      "name": "Haberlandt Survey",
+      "type": "Planetary Outpost",
+      "distance_to_arrival": 2613.507086,
+      "has_large_pad": true,
+      "medium_pads": 4,
+      "small_pads": 4,
+      "has_market": true
+     },
+     {
+      "name": "Illy Enterprise",
+      "distance_to_arrival": 2616.499677,
+      "has_large_pad": false
+     },
+     {
+      "name": "Fung's Claim",
+      "distance_to_arrival": 2616.499677,
+      "has_large_pad": false
+     },
+     {
+      "name": "Chargaff Reach",
+      "distance_to_arrival": 2616.499677,
+      "has_large_pad": false
+     },
+     {
+      "name": "Majoro Entertainment Complex",
+      "type": "Settlement",
+      "distance_to_arrival": 2614.404445,
+      "has_large_pad": true,
+      "medium_pads": 0,
+      "small_pads": 2,
+      "has_market": true
+     },
+     {
+      "name": "Durrance Camp",
+      "type": "Planetary Outpost",
+      "distance_to_arrival": 2612.942341,
+      "has_large_pad": true,
+      "medium_pads": 4,
+      "small_pads": 4,
+      "has_market": true
+     },
+     {
+      "name": "Kvitka Dredging Enterprise",
+      "type": "Settlement",
+      "distance_to_arrival": 2615.857443,
+      "has_large_pad": false,
+      "medium_pads": 1,
+      "small_pads": 0,
+      "has_market": true
+     },
+     {
+      "name": "Grebby Prospecting",
+      "type": "Settlement",
+      "distance_to_arrival": 2614.604475,
+      "has_large_pad": true,
+      "medium_pads": 0,
+      "small_pads": 1,
+      "has_market": true
+     },
+     {
+      "name": "Bruno's Encampment",
+      "type": "Settlement",
+      "distance_to_arrival": 2619.161329,
+      "has_large_pad": false,
+      "medium_pads": 1,
+      "small_pads": 0,
+      "has_market": true
+     },
+     {
+      "name": "Malins's Camp",
+      "type": "Settlement",
+      "distance_to_arrival": 2619.007776,
+      "has_large_pad": false,
+      "medium_pads": 1,
+      "small_pads": 0,
+      "has_market": true
+     },
+     {
+      "name": "Schottky Reformatory",
+      "type": "Planetary Outpost",
+      "distance_to_arrival": 2621.136959,
+      "has_large_pad": true,
+      "medium_pads": 2,
+      "small_pads": 4,
+      "has_market": true
+     },
+     {
+      "name": "Daimler Camp",
+      "distance_to_arrival": 2609.617239,
+      "has_large_pad": false
+     },
+     {
+      "name": "Hidalgo's Slumber",
+      "type": "Settlement",
+      "distance_to_arrival": 2615.99148,
+      "has_large_pad": true,
+      "medium_pads": 0,
+      "small_pads": 2,
+      "has_market": true
+     },
+     {
+      "name": "Alasa Industries",
+      "type": "Settlement",
+      "distance_to_arrival": 2618.002682,
+      "has_large_pad": true,
+      "medium_pads": 0,
+      "small_pads": 0,
+      "has_market": true
+     },
+     {
+      "name": "Fraser Industrial Moulding",
+      "type": "Settlement",
+      "distance_to_arrival": 2614.340236,
+      "has_large_pad": true,
+      "medium_pads": 0,
+      "small_pads": 0,
+      "has_market": true
+     },
+     {
+      "name": "Bourne Mining Installation",
+      "type": "Settlement",
+      "distance_to_arrival": 2620.517272,
+      "has_large_pad": false,
+      "medium_pads": 1,
+      "small_pads": 0,
+      "has_market": true
+     },
+     {
+      "name": "Vadamootoo Mining Base",
+      "type": "Settlement",
+      "distance_to_arrival": 2621.31108,
+      "has_large_pad": true,
+      "medium_pads": 0,
+      "small_pads": 0,
+      "has_market": true
+     },
+     {
+      "name": "Dewsnap Prospecting Station",
+      "type": "Settlement",
+      "distance_to_arrival": 2609.62713,
+      "has_large_pad": true,
+      "medium_pads": 0,
+      "small_pads": 0,
+      "has_market": true
+     },
+     {
+      "name": "Ikeda Tourist Zone",
+      "type": "Settlement",
+      "distance_to_arrival": 4719.432611,
+      "has_large_pad": true,
+      "medium_pads": 0,
+      "small_pads": 2,
+      "has_market": true
+     },
+     {
+      "name": "Kvitka's Origin",
+      "type": "Settlement",
+      "distance_to_arrival": 4718.638561,
+      "has_large_pad": true,
+      "medium_pads": 0,
+      "small_pads": 2,
+      "has_market": true
+     },
+     {
+      "name": "Ndiaye Hospitality Complex",
+      "type": "Settlement",
+      "distance_to_arrival": 4717.336964,
+      "has_large_pad": false,
+      "medium_pads": 1,
+      "small_pads": 0,
+      "has_market": true
+     },
+     {
+      "name": "Bibeau's Wandering",
+      "type": "Settlement",
+      "distance_to_arrival": 4723.875865,
+      "has_large_pad": true,
+      "medium_pads": 0,
+      "small_pads": 2,
+      "has_market": true
+     },
+     {
+      "name": "Dekker's Yard",
+      "type": "Planetary Outpost",
+      "distance_to_arrival": 4710.578118,
+      "has_large_pad": true,
+      "medium_pads": 3,
+      "small_pads": 2,
+      "has_market": true
+     },
+     {
+      "name": "Mendy Excavation Site",
+      "type": "Settlement",
+      "distance_to_arrival": 4712.207859,
+      "has_large_pad": false,
+      "medium_pads": 1,
+      "small_pads": 0,
+      "has_market": true
+     },
+     {
+      "name": "Mathibeli Excavation Station",
+      "type": "Settlement",
+      "distance_to_arrival": 4710.575388,
+      "has_large_pad": true,
+      "medium_pads": 0,
+      "small_pads": 0,
+      "has_market": true
+     },
+     {
+      "name": "Aithal Garrison",
+      "type": "Settlement",
+      "distance_to_arrival": 4710.416109,
+      "has_large_pad": true,
+      "medium_pads": 0,
+      "small_pads": 2,
+      "has_market": true
+     },
+     {
+      "name": "Banyard Command Outpost",
+      "type": "Settlement",
+      "distance_to_arrival": 4711.136476,
+      "has_large_pad": true,
+      "medium_pads": 0,
+      "small_pads": 2,
+      "has_market": true
+     },
+     {
+      "name": "Lamar's Prospect",
+      "type": "Settlement",
+      "distance_to_arrival": 9142.64081,
+      "has_large_pad": false,
+      "medium_pads": 0,
+      "small_pads": 1,
+      "has_market": true
+     },
+     {
+      "name": "Deshpande Mining Exchange",
+      "type": "Settlement",
+      "distance_to_arrival": 9142.501373,
+      "has_large_pad": false,
+      "medium_pads": 0,
+      "small_pads": 1,
+      "has_market": true
+     },
+     {
+      "name": "Abimbola Metallurgic Reserve",
+      "type": "Settlement",
+      "distance_to_arrival": 9143.173237,
+      "has_large_pad": true,
+      "medium_pads": 0,
+      "small_pads": 0,
+      "has_market": true
+     },
+     {
+      "name": "Hirano Mineralogic Territory",
+      "type": "Settlement",
+      "distance_to_arrival": 9143.359644,
+      "has_large_pad": false,
+      "medium_pads": 1,
+      "small_pads": 0,
+      "has_market": true
+     },
+     {
+      "name": "Pavlenko's Reception",
+      "type": "Settlement",
+      "distance_to_arrival": 9142.425875,
+      "has_large_pad": true,
+      "medium_pads": 0,
+      "small_pads": 2,
+      "has_market": true
+     },
+     {
+      "name": "Avery Manufacturing Hub",
+      "type": "Settlement",
+      "distance_to_arrival": 9143.586627,
+      "has_large_pad": true,
+      "medium_pads": 0,
+      "small_pads": 0,
+      "has_market": true
+     },
+     {
+      "name": "Correa Entertainment Complex",
+      "type": "Settlement",
+      "distance_to_arrival": 9143.094905,
+      "has_large_pad": true,
+      "medium_pads": 0,
+      "small_pads": 2,
+      "has_market": true
+     },
+     {
+      "name": "Oshpak's House",
+      "type": "Settlement",
+      "distance_to_arrival": 9144.190808,
+      "has_large_pad": false,
+      "medium_pads": 1,
+      "small_pads": 0,
+      "has_market": true
+     },
+     {
+      "name": "Navarrete's Prospect",
+      "type": "Settlement",
+      "distance_to_arrival": 9143.322703,
+      "has_large_pad": true,
+      "medium_pads": 0,
+      "small_pads": 1,
+      "has_market": true
+     },
+     {
+      "name": "Amos Mining Hub",
+      "type": "Settlement",
+      "distance_to_arrival": 9143.865242,
+      "has_large_pad": true,
+      "medium_pads": 0,
+      "small_pads": 0,
+      "has_market": true
+     },
+     {
+      "name": "Shen Extraction Rigs",
+      "type": "Settlement",
+      "distance_to_arrival": 9145.112009,
+      "has_large_pad": true,
+      "medium_pads": 0,
+      "small_pads": 1,
+      "has_market": true
+     },
+     {
+      "name": "Indongo Bay",
+      "type": "Settlement",
+      "distance_to_arrival": 9141.939817,
+      "has_large_pad": true,
+      "medium_pads": 0,
+      "small_pads": 2,
+      "has_market": true
+     },
+     {
+      "name": "Sakurai Tourism Complex",
+      "type": "Settlement",
+      "distance_to_arrival": 16035.088282,
+      "has_large_pad": true,
+      "medium_pads": 0,
+      "small_pads": 2,
+      "has_market": true
+     },
+     {
+      "name": "Tsarenko Prospecting Exchange",
+      "type": "Settlement",
+      "distance_to_arrival": 16033.858513,
+      "has_large_pad": false,
+      "medium_pads": 1,
+      "small_pads": 0,
+      "has_market": true
+     },
+     {
+      "name": "Walachnia's Gate",
+      "type": "Settlement",
+      "distance_to_arrival": 16035.071902,
+      "has_large_pad": true,
+      "medium_pads": 0,
+      "small_pads": 2,
+      "has_market": true
+     },
+     {
+      "name": "Uutoni Extraction Platform",
+      "type": "Settlement",
+      "distance_to_arrival": 16028.782573,
+      "has_large_pad": false,
+      "medium_pads": 0,
+      "small_pads": 1,
+      "has_market": true
+     },
+     {
+      "name": "Beauchene's Horizon",
+      "type": "Settlement",
+      "distance_to_arrival": 18845.924625,
+      "has_large_pad": true,
+      "medium_pads": 0,
+      "small_pads": 2,
+      "has_market": true
+     },
+     {
+      "name": "Ji's Slumber",
+      "type": "Settlement",
+      "distance_to_arrival": 18615.183713,
+      "has_large_pad": true,
+      "medium_pads": 0,
+      "small_pads": 2,
+      "has_market": true
+     },
+     {
+      "name": "Avery Excavation Hub",
+      "type": "Settlement",
+      "distance_to_arrival": 18614.829434,
+      "has_large_pad": false,
+      "medium_pads": 1,
+      "small_pads": 0,
+      "has_market": true
+     },
+     {
+      "name": "Seidel's Globe",
+      "type": "Settlement",
+      "distance_to_arrival": 18614.712214,
+      "has_large_pad": true,
+      "medium_pads": 0,
+      "small_pads": 2,
+      "has_market": true
+     },
+     {
+      "name": "Fincham Drilling Hub",
+      "type": "Settlement",
+      "distance_to_arrival": 18614.924595,
+      "has_large_pad": false,
+      "medium_pads": 1,
+      "small_pads": 0,
+      "has_market": true
+     },
+     {
+      "name": "Yamashita Excavation Territory",
+      "type": "Settlement",
+      "distance_to_arrival": 18615.124714,
+      "has_large_pad": false,
+      "medium_pads": 0,
+      "small_pads": 1,
+      "has_market": true
+     },
+     {
+      "name": "Florianz Mining Prospect",
+      "type": "Settlement",
+      "distance_to_arrival": 18615.011603,
+      "has_large_pad": true,
+      "medium_pads": 0,
+      "small_pads": 0,
+      "has_market": true
+     },
+     {
+      "name": "Awolowo Mineralogic Base",
+      "type": "Settlement",
+      "distance_to_arrival": 18614.640608,
+      "has_large_pad": true,
+      "medium_pads": 0,
+      "small_pads": 1,
+      "has_market": true
+     },
+     {
+      "name": "Hao's Steal",
+      "type": "Settlement",
+      "distance_to_arrival": 25201.14032,
+      "has_large_pad": false,
+      "medium_pads": 1,
+      "small_pads": 0,
+      "has_market": true
+     },
+     {
+      "name": "Ponomarenko's Drilling",
+      "type": "Settlement",
+      "distance_to_arrival": 21085.937894,
+      "has_large_pad": true,
+      "medium_pads": 0,
+      "small_pads": 1,
+      "has_market": true
+     },
+     {
+      "name": "Adebisi Hospitality Zone",
+      "type": "Settlement",
+      "distance_to_arrival": 25376.097348,
+      "has_large_pad": true,
+      "medium_pads": 0,
+      "small_pads": 2,
+      "has_market": true
+     }
+    ]
+   }
+  ],
+  "search_reference": "0AF44962-C759-11F1-9239-F850B2C4473A",
+  "size": 4
+ }
+}

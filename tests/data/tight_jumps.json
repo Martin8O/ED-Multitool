@@ -1,0 +1,68 @@
+[
+ {
+  "JumpDist": 13.928,
+  "fsd_item": "int_hyperdrive_overcharge_size5_class1",
+  "UnladenMass": 530.299988,
+  "FuelCapacity": {
+   "Main": 56.0,
+   "Reserve": 0.75
+  },
+  "cargo": 0,
+  "fuel_main_before": 55.379261
+ },
+ {
+  "JumpDist": 13.871,
+  "fsd_item": "int_hyperdrive_overcharge_size5_class1",
+  "UnladenMass": 530.299988,
+  "FuelCapacity": {
+   "Main": 56.0,
+   "Reserve": 0.75
+  },
+  "cargo": 0,
+  "fuel_main_before": 55.999998
+ },
+ {
+  "JumpDist": 15.428,
+  "fsd_item": "int_hyperdrive_overcharge_size5_class1",
+  "UnladenMass": 473.0,
+  "FuelCapacity": {
+   "Main": 56.0,
+   "Reserve": 0.75
+  },
+  "cargo": 0,
+  "fuel_main_before": 53.836661
+ },
+ {
+  "JumpDist": 13.805,
+  "fsd_item": "int_hyperdrive_overcharge_size5_class1",
+  "UnladenMass": 530.299988,
+  "FuelCapacity": {
+   "Main": 56.0,
+   "Reserve": 0.75
+  },
+  "cargo": 0,
+  "fuel_main_before": 56.0
+ },
+ {
+  "JumpDist": 13.805,
+  "fsd_item": "int_hyperdrive_overcharge_size5_class1",
+  "UnladenMass": 530.299988,
+  "FuelCapacity": {
+   "Main": 56.0,
+   "Reserve": 0.75
+  },
+  "cargo": 0,
+  "fuel_main_before": 56.0
+ },
+ {
+  "JumpDist": 15.875,
+  "fsd_item": "int_hyperdrive_overcharge_size5_class1",
+  "UnladenMass": 473.0,
+  "FuelCapacity": {
+   "Main": 40.0,
+   "Reserve": 0.75
+  },
+  "cargo": 0,
+  "fuel_main_before": 37.227087
+ }
+]

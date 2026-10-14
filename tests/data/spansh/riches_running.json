@@ -1,0 +1,29 @@
+{
+ "request": {
+  "method": "GET",
+  "url": "https://spansh.co.uk/api/results/2FE7D490-C5C5-11F1-9EC3-CBCB7FA36E23",
+  "params": [],
+  "form": null
+ },
+ "status": 202,
+ "body": {
+  "created_at": "2026-10-11T22:43:32",
+  "job": "2FE7D490-C5C5-11F1-9EC3-CBCB7FA36E23",
+  "parameters": {
+   "avoid_thargoids": 1,
+   "destination": "Colonia",
+   "loop": "0",
+   "max_distance": "50000",
+   "max_results": "5",
+   "min_value": "100000",
+   "radius": "25",
+   "range": "40",
+   "source": "Sol",
+   "use_mapping_value": "1"
+  },
+  "state": "started",
+  "status": "queued",
+  "updated_at": "2026-10-11T22:43:32"
+ },
+ "note": "recorded by the A5 probe (2026-10-12): Spansh's reply while a job is still running"
+}

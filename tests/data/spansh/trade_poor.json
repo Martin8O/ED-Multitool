@@ -1,0 +1,76 @@
+{
+ "request": {
+  "method": "GET",
+  "url": "https://spansh.co.uk/api/results/DCA599A8-C758-11F1-9239-F850B2C4473A",
+  "params": [],
+  "form": null
+ },
+ "status": 200,
+ "body": {
+  "created_at": "2026-10-13T22:53:09",
+  "job": "DCA599A8-C758-11F1-9239-F850B2C4473A",
+  "parameters": {
+   "allow_planetary": 1,
+   "max_cargo": "400",
+   "max_hop_distance": "30",
+   "max_hops": "1",
+   "max_price_age": "259200",
+   "max_system_distance": "5000",
+   "requires_large_pad": 1,
+   "starting_capital": "20000",
+   "starting_station_id": 45534
+  },
+  "result": [
+   {
+    "commodities": [
+     {
+      "amount": 183,
+      "destination_commodity": {
+       "buy_price": 0,
+       "demand": 3756,
+       "sell_price": 754,
+       "supply": 0
+      },
+      "name": "Biowaste",
+      "profit": 645,
+      "source_commodity": {
+       "buy_price": 109,
+       "demand": 1,
+       "sell_price": 65,
+       "supply": 78658
+      },
+      "total_profit": 118035
+     }
+    ],
+    "cumulative_profit": 118035,
+    "destination": {
+     "distance_to_arrival": 6,
+     "market_id": 4245314563,
+     "market_updated_at": 1791880780,
+     "station": "Starbase Pratchett",
+     "system": "LP 71-165",
+     "system_id64": 27058965128617,
+     "x": -20.90625,
+     "y": 11.09375,
+     "z": -2.21875
+    },
+    "distance": 23.7711049319862,
+    "source": {
+     "distance_to_arrival": 504,
+     "market_id": 128016896,
+     "market_updated_at": 1791930171,
+     "station": "Abraham Lincoln",
+     "system": "Sol",
+     "system_id64": 10477373803,
+     "x": 0,
+     "y": 0,
+     "z": 0
+    },
+    "total_profit": 118035
+   }
+  ],
+  "state": "completed",
+  "status": "ok",
+  "updated_at": "2026-10-13T22:53:46"
+ }
+}

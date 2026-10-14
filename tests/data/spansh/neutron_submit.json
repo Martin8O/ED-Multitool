@@ -1,0 +1,102 @@
+{
+ "request": {
+  "method": "POST",
+  "url": "https://spansh.co.uk/api/generic/route",
+  "params": [],
+  "form": [
+   [
+    "source",
+    "10477373803"
+   ],
+   [
+    "destination",
+    "8216113749"
+   ],
+   [
+    "is_supercharged",
+    "0"
+   ],
+   [
+    "use_supercharge",
+    "1"
+   ],
+   [
+    "use_injections",
+    "0"
+   ],
+   [
+    "use_injections_when_required",
+    "0"
+   ],
+   [
+    "exclude_secondary",
+    "0"
+   ],
+   [
+    "refuel_every_scoopable",
+    "0"
+   ],
+   [
+    "fuel_power",
+    "2.45"
+   ],
+   [
+    "fuel_multiplier",
+    "0.013"
+   ],
+   [
+    "optimal_mass",
+    "1175"
+   ],
+   [
+    "base_mass",
+    "573.549988"
+   ],
+   [
+    "tank_size",
+    "32"
+   ],
+   [
+    "internal_tank_size",
+    "0.75"
+   ],
+   [
+    "reserve_size",
+    "0"
+   ],
+   [
+    "max_fuel_per_jump",
+    "5.2"
+   ],
+   [
+    "range_boost",
+    "0"
+   ],
+   [
+    "max_time",
+    "60"
+   ],
+   [
+    "cargo",
+    "8"
+   ],
+   [
+    "algorithm",
+    "optimistic"
+   ],
+   [
+    "supercharge_multiplier",
+    "4"
+   ],
+   [
+    "injection_multiplier",
+    "2"
+   ]
+  ]
+ },
+ "status": 202,
+ "body": {
+  "job": "DAC1A97C-C610-11F1-B2BC-8A573116DD06",
+  "status": "queued"
+ }
+}

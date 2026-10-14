@@ -1,0 +1,500 @@
+{
+ "request": {
+  "method": "POST",
+  "url": "https://spansh.co.uk/api/bodies/search",
+  "params": [],
+  "form": null,
+  "json": {
+   "filters": {
+    "system_id64": {
+     "value": 642232231025
+    }
+   },
+   "size": 100,
+   "page": 0
+  }
+ },
+ "status": 200,
+ "body": {
+  "count": 21,
+  "from": 0,
+  "reference": {
+   "id64": 10477373803,
+   "name": "Sol",
+   "x": 0.0,
+   "y": 0.0,
+   "z": 0.0
+  },
+  "results": [
+   {
+    "body_id": 19,
+    "name": "Plaa Eurk QM-C b13-0 B 1",
+    "type": "Planet",
+    "subtype": "High metal content world",
+    "distance_to_arrival": 1559.794747,
+    "estimated_scan_value": 11456,
+    "estimated_mapping_value": 41622,
+    "terraforming_state": "Not terraformable",
+    "is_landable": true,
+    "earth_masses": 0.003905,
+    "signals": [
+     {
+      "count": 18,
+      "name": "Planetary Mining Location"
+     }
+    ]
+   },
+   {
+    "body_id": 30,
+    "name": "Plaa Eurk QM-C b13-0 AB 1 a",
+    "type": "Planet",
+    "subtype": "Icy body",
+    "distance_to_arrival": 5688.818398,
+    "estimated_scan_value": 500,
+    "estimated_mapping_value": 2221,
+    "terraforming_state": "Not terraformable",
+    "is_landable": true,
+    "earth_masses": 0.000585
+   },
+   {
+    "body_id": 32,
+    "name": "Plaa Eurk QM-C b13-0 AB 3",
+    "type": "Planet",
+    "subtype": "Icy body",
+    "distance_to_arrival": 12563.430909,
+    "estimated_scan_value": 531,
+    "estimated_mapping_value": 2324,
+    "terraforming_state": "Not terraformable",
+    "is_landable": false,
+    "earth_masses": 4.683465
+   },
+   {
+    "body_id": 8,
+    "name": "Plaa Eurk QM-C b13-0 A 1",
+    "type": "Planet",
+    "subtype": "High metal content world",
+    "distance_to_arrival": 29.453277,
+    "estimated_scan_value": 11318,
+    "estimated_mapping_value": 41121,
+    "terraforming_state": "Not terraformable",
+    "is_landable": true,
+    "earth_masses": 0.002624
+   },
+   {
+    "body_id": 11,
+    "name": "Plaa Eurk QM-C b13-0 A 4",
+    "type": "Planet",
+    "subtype": "High metal content world",
+    "distance_to_arrival": 168.172737,
+    "estimated_scan_value": 11729,
+    "estimated_mapping_value": 42614,
+    "terraforming_state": "Not terraformable",
+    "is_landable": true,
+    "earth_masses": 0.007907
+   },
+   {
+    "body_id": 13,
+    "name": "Plaa Eurk QM-C b13-0 A 5",
+    "type": "Planet",
+    "subtype": "High metal content world",
+    "distance_to_arrival": 219.784084,
+    "estimated_scan_value": 11332,
+    "estimated_mapping_value": 41172,
+    "terraforming_state": "Not terraformable",
+    "is_landable": true,
+    "earth_masses": 0.002734
+   },
+   {
+    "body_id": 14,
+    "name": "Plaa Eurk QM-C b13-0 A 6",
+    "type": "Planet",
+    "subtype": "High metal content world",
+    "distance_to_arrival": 219.661581,
+    "estimated_scan_value": 11325,
+    "estimated_mapping_value": 41146,
+    "terraforming_state": "Not terraformable",
+    "is_landable": true,
+    "earth_masses": 0.00268
+   },
+   {
+    "body_id": 23,
+    "name": "Plaa Eurk QM-C b13-0 B 4",
+    "type": "Planet",
+    "subtype": "High metal content world",
+    "distance_to_arrival": 2051.962683,
+    "estimated_scan_value": 12004,
+    "estimated_mapping_value": 43614,
+    "terraforming_state": "Not terraformable",
+    "is_landable": true,
+    "earth_masses": 0.014726
+   },
+   {
+    "body_id": 26,
+    "name": "Plaa Eurk QM-C b13-0 B 6 a",
+    "type": "Planet",
+    "subtype": "Rocky body",
+    "distance_to_arrival": 1625.448483,
+    "estimated_scan_value": 500,
+    "estimated_mapping_value": 2221,
+    "terraforming_state": "Not terraformable",
+    "is_landable": true,
+    "earth_masses": 0.000318,
+    "signals": [
+     {
+      "count": 16,
+      "name": "Planetary Mining Location"
+     },
+     {
+      "count": 7,
+      "name": "Biological"
+     }
+    ],
+    "genuses": [
+     {
+      "name": "Bacterial"
+     },
+     {
+      "name": "Fungoids"
+     },
+     {
+      "name": "Tussocks"
+     },
+     {
+      "name": "Tubus"
+     },
+     {
+      "name": "Shrubs"
+     },
+     {
+      "name": "Stratum"
+     },
+     {
+      "name": "Cactoids"
+     }
+    ],
+    "landmarks": [
+     {
+      "id": 2450404,
+      "subtype": "Tussock Cultro",
+      "type": "Tussock",
+      "value": 1766600,
+      "variant": "Emerald"
+     },
+     {
+      "id": 2390101,
+      "subtype": "Fungoida Setisis",
+      "type": "Fungoida",
+      "value": 1670100,
+      "variant": "Lime"
+     },
+     {
+      "id": 2320607,
+      "subtype": "Bacterium Alcyoneum",
+      "type": "Bacterium",
+      "value": 1658500,
+      "variant": "Teal"
+     },
+     {
+      "id": 2330207,
+      "subtype": "Cactoida Lapis",
+      "type": "Cactoida",
+      "value": 2483600,
+      "variant": "Amethyst"
+     },
+     {
+      "id": 2330207,
+      "subtype": "Cactoida Lapis",
+      "type": "Cactoida",
+      "value": 2483600,
+      "variant": "Amethyst"
+     },
+     {
+      "id": 2440105,
+      "subtype": "Frutexa Flabellum",
+      "type": "Frutexa",
+      "value": 1808900,
+      "variant": "Grey"
+     },
+     {
+      "id": 2420303,
+      "subtype": "Stratum Laminamus",
+      "type": "Stratum",
+      "value": 2788300,
+      "variant": "Green"
+     },
+     {
+      "id": 2430407,
+      "subtype": "Tubus Rosarium",
+      "type": "Tubus",
+      "value": 2637500,
+      "variant": "Teal"
+     },
+     {
+      "id": 2430407,
+      "subtype": "Tubus Rosarium",
+      "type": "Tubus",
+      "value": 2637500,
+      "variant": "Teal"
+     }
+    ]
+   },
+   {
+    "body_id": 31,
+    "name": "Plaa Eurk QM-C b13-0 AB 2",
+    "type": "Planet",
+    "subtype": "Icy body",
+    "distance_to_arrival": 5462.242866,
+    "estimated_scan_value": 500,
+    "estimated_mapping_value": 2221,
+    "terraforming_state": "Not terraformable",
+    "is_landable": true,
+    "earth_masses": 0.050455
+   },
+   {
+    "body_id": 21,
+    "name": "Plaa Eurk QM-C b13-0 B 3",
+    "type": "Planet",
+    "subtype": "High metal content world",
+    "distance_to_arrival": 1588.902877,
+    "estimated_scan_value": 11684,
+    "estimated_mapping_value": 42451,
+    "terraforming_state": "Not terraformable",
+    "is_landable": true,
+    "earth_masses": 0.007083,
+    "signals": [
+     {
+      "count": 14,
+      "name": "Planetary Mining Location"
+     }
+    ]
+   },
+   {
+    "body_id": 28,
+    "name": "Plaa Eurk QM-C b13-0 B 7 a",
+    "type": "Planet",
+    "subtype": "Rocky body",
+    "distance_to_arrival": 1629.84166,
+    "estimated_scan_value": 500,
+    "estimated_mapping_value": 2221,
+    "terraforming_state": "Not terraformable",
+    "is_landable": true,
+    "earth_masses": 0.000824,
+    "signals": [
+     {
+      "count": 4,
+      "name": "Planetary Mining Location"
+     }
+    ]
+   },
+   {
+    "body_id": 29,
+    "name": "Plaa Eurk QM-C b13-0 AB 1",
+    "type": "Planet",
+    "subtype": "Icy body",
+    "distance_to_arrival": 5692.451507,
+    "estimated_scan_value": 500,
+    "estimated_mapping_value": 2221,
+    "terraforming_state": "Not terraformable",
+    "is_landable": true,
+    "earth_masses": 0.076188
+   },
+   {
+    "body_id": 20,
+    "name": "Plaa Eurk QM-C b13-0 B 2",
+    "type": "Planet",
+    "subtype": "High metal content world",
+    "distance_to_arrival": 1573.465065,
+    "estimated_scan_value": 11713,
+    "estimated_mapping_value": 42556,
+    "terraforming_state": "Not terraformable",
+    "is_landable": true,
+    "earth_masses": 0.007611,
+    "signals": [
+     {
+      "count": 9,
+      "name": "Planetary Mining Location"
+     }
+    ]
+   },
+   {
+    "body_id": 24,
+    "name": "Plaa Eurk QM-C b13-0 B 5",
+    "type": "Planet",
+    "subtype": "High metal content world",
+    "distance_to_arrival": 2051.967371,
+    "estimated_scan_value": 11853,
+    "estimated_mapping_value": 43064,
+    "terraforming_state": "Not terraformable",
+    "is_landable": true,
+    "earth_masses": 0.010564
+   },
+   {
+    "body_id": 25,
+    "name": "Plaa Eurk QM-C b13-0 B 6",
+    "type": "Planet",
+    "subtype": "High metal content world",
+    "distance_to_arrival": 1625.414655,
+    "estimated_scan_value": 12028,
+    "estimated_mapping_value": 43701,
+    "terraforming_state": "Not terraformable",
+    "is_landable": true,
+    "earth_masses": 0.015521,
+    "signals": [
+     {
+      "count": 12,
+      "name": "Planetary Mining Location"
+     },
+     {
+      "count": 6,
+      "name": "Biological"
+     }
+    ],
+    "genuses": [
+     {
+      "name": "Cactoids"
+     },
+     {
+      "name": "Bacterial"
+     },
+     {
+      "name": "Fungoids"
+     },
+     {
+      "name": "Stratum"
+     },
+     {
+      "name": "Shrubs"
+     },
+     {
+      "name": "Tussocks"
+     }
+    ],
+    "landmarks": [
+     {
+      "id": 2450404,
+      "subtype": "Tussock Cultro",
+      "type": "Tussock",
+      "value": 1766600,
+      "variant": "Emerald"
+     },
+     {
+      "id": 2420703,
+      "subtype": "Stratum Tectonicas",
+      "type": "Stratum",
+      "value": 19010800,
+      "variant": "Green"
+     },
+     {
+      "id": 2440305,
+      "subtype": "Frutexa Metallicum",
+      "type": "Frutexa",
+      "value": 1632500,
+      "variant": "Grey"
+     },
+     {
+      "id": 2440305,
+      "subtype": "Frutexa Metallicum",
+      "type": "Frutexa",
+      "value": 1632500,
+      "variant": "Grey"
+     },
+     {
+      "id": 2390103,
+      "subtype": "Fungoida Setisis",
+      "type": "Fungoida",
+      "value": 1670100,
+      "variant": "White"
+     },
+     {
+      "id": 2320607,
+      "subtype": "Bacterium Alcyoneum",
+      "type": "Bacterium",
+      "value": 1658500,
+      "variant": "Teal"
+     },
+     {
+      "id": 2330207,
+      "subtype": "Cactoida Lapis",
+      "type": "Cactoida",
+      "value": 2483600,
+      "variant": "Amethyst"
+     }
+    ]
+   },
+   {
+    "body_id": 27,
+    "name": "Plaa Eurk QM-C b13-0 B 7",
+    "type": "Planet",
+    "subtype": "High metal content world",
+    "distance_to_arrival": 1629.708701,
+    "estimated_scan_value": 11930,
+    "estimated_mapping_value": 43345,
+    "terraforming_state": "Not terraformable",
+    "is_landable": true,
+    "earth_masses": 0.01257,
+    "signals": [
+     {
+      "count": 7,
+      "name": "Planetary Mining Location"
+     },
+     {
+      "count": 4,
+      "name": "Biological"
+     }
+    ]
+   },
+   {
+    "body_id": 2,
+    "name": "Plaa Eurk QM-C b13-0 B",
+    "type": "Star",
+    "subtype": "M (Red dwarf) Star",
+    "distance_to_arrival": 1573.749994,
+    "estimated_scan_value": 1203,
+    "estimated_mapping_value": 4564,
+    "solar_masses": 0.21875
+   },
+   {
+    "body_id": 9,
+    "name": "Plaa Eurk QM-C b13-0 A 2",
+    "type": "Planet",
+    "subtype": "High metal content world",
+    "distance_to_arrival": 53.469556,
+    "estimated_scan_value": 11259,
+    "estimated_mapping_value": 40906,
+    "terraforming_state": "Not terraformable",
+    "is_landable": true,
+    "earth_masses": 0.002193,
+    "signals": [
+     {
+      "count": 16,
+      "name": "Planetary Mining Location"
+     }
+    ]
+   },
+   {
+    "body_id": 1,
+    "name": "Plaa Eurk QM-C b13-0 A",
+    "type": "Star",
+    "subtype": "M (Red dwarf) Star",
+    "distance_to_arrival": 0.0,
+    "estimated_scan_value": 1205,
+    "estimated_mapping_value": 4571,
+    "solar_masses": 0.300781
+   },
+   {
+    "body_id": 10,
+    "name": "Plaa Eurk QM-C b13-0 A 3",
+    "type": "Planet",
+    "subtype": "High metal content world",
+    "distance_to_arrival": 99.580892,
+    "estimated_scan_value": 11264,
+    "estimated_mapping_value": 40925,
+    "terraforming_state": "Not terraformable",
+    "is_landable": true,
+    "earth_masses": 0.002227
+   }
+  ],
+  "search_reference": "BC87470A-C70F-11F1-9E59-E8B4CDB1C634",
+  "size": 100
+ }
+}

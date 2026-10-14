@@ -1,0 +1,17 @@
+{
+ "request": {
+  "method": "GET",
+  "url": "https://api.github.com/repos/Martin8O/ED-Multitool/releases/latest",
+  "params": [],
+  "form": null
+ },
+ "status": 200,
+ "body": {
+  "html_url": "https://github.com/Martin8O/ED-Multitool/releases/tag/v99.1.0",
+  "tag_name": "v99.1.0",
+  "name": "ED Multitool 99.1.0",
+  "draft": false,
+  "prerelease": false,
+  "published_at": "2026-12-01T10:00:00Z"
+ }
+}

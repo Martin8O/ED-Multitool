@@ -1,0 +1,34 @@
+# runtime data — never in git
+/data/
+EDMultitool/data/
+.devrun/
+
+# python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# in-project toolchain (uv + managed Python) and caches
+.tools/
+.cache/
+
+# build output
+dist/
+build/
+*.zip
+
+# secrets
+.env
+*.secret
+secrets/
+
+# editor / OS
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini

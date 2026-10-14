@@ -1,0 +1,1126 @@
+{
+ "request": {
+  "method": "POST",
+  "url": "https://spansh.co.uk/api/stations/search",
+  "params": [],
+  "form": null,
+  "json": {
+   "filters": {
+    "market": [
+     {
+      "name": "Painite",
+      "demand": {
+       "value": [
+        30,
+        999999999
+       ],
+       "comparison": "<=>"
+      }
+     }
+    ],
+    "market_updated_at": {
+     "value": [
+      "2026-10-11T00:50:00Z",
+      "2026-10-15T00:50:00Z"
+     ],
+     "comparison": "<=>"
+    },
+    "distance": {
+     "min": "0",
+     "max": "50"
+    },
+    "type": {
+     "value": [
+      "Asteroid base",
+      "Coriolis Starport",
+      "Dodec Starport",
+      "Mega ship",
+      "Ocellus Starport",
+      "Orbis Starport",
+      "Outpost",
+      "Planetary Construction Depot",
+      "Planetary Outpost",
+      "Planetary Port",
+      "Settlement",
+      "Space Construction Depot",
+      "Surface Settlement"
+     ]
+    }
+   },
+   "sort": [
+    {
+     "market_sell_price": [
+      {
+       "name": "Painite",
+       "direction": "desc"
+      }
+     ]
+    }
+   ],
+   "reference_coords": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "size": 25,
+   "page": 0
+  }
+ },
+ "status": 200,
+ "body": {
+  "count": 554,
+  "results": [
+   {
+    "name": "Jang Chemical Installation",
+    "type": "Settlement",
+    "distance_to_arrival": 355.666228,
+    "has_large_pad": true,
+    "medium_pads": 0,
+    "small_pads": 0,
+    "is_planetary": true,
+    "system_id64": 2870246319521,
+    "system_name": "San Tu",
+    "system_x": 24.96875,
+    "system_y": 36.8125,
+    "system_z": -8.78125,
+    "has_market": true,
+    "market_updated_at": "2026-10-13T22:52:18Z",
+    "controlling_minor_faction": "Wolf 406 Transport & Co",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Minerals",
+      "commodity": "Painite",
+      "demand": 96,
+      "sell_price": 391116,
+      "supply": 0
+     },
+     {
+      "buy_price": 0,
+      "category": "Metals",
+      "commodity": "Platinum",
+      "demand": 73,
+      "sell_price": 262732,
+      "supply": 0
+     },
+     {
+      "buy_price": 45354,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 0,
+      "sell_price": 45351,
+      "supply": 0
+     }
+    ]
+   },
+   {
+    "name": "Parise Dock",
+    "type": "Outpost",
+    "distance_to_arrival": 652.792819,
+    "has_large_pad": false,
+    "medium_pads": 1,
+    "small_pads": 2,
+    "is_planetary": false,
+    "system_id64": 5366025177936,
+    "system_name": "WISE 1506+7027",
+    "system_x": -7.375,
+    "system_y": 7.09375,
+    "system_z": -2.4375,
+    "has_market": true,
+    "market_updated_at": "2026-10-13T15:57:14Z",
+    "controlling_minor_faction": "Redshift Logistics",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Minerals",
+      "commodity": "Painite",
+      "demand": 885,
+      "sell_price": 247663,
+      "supply": 0
+     },
+     {
+      "buy_price": 0,
+      "category": "Metals",
+      "commodity": "Platinum",
+      "demand": 759,
+      "sell_price": 231861,
+      "supply": 0
+     },
+     {
+      "buy_price": 0,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 3598,
+      "sell_price": 57574,
+      "supply": 0
+     }
+    ]
+   },
+   {
+    "name": "Borman Port",
+    "type": "Outpost",
+    "distance_to_arrival": 899.280502,
+    "has_large_pad": false,
+    "medium_pads": 1,
+    "small_pads": 2,
+    "is_planetary": false,
+    "system_id64": 5366025177936,
+    "system_name": "WISE 1506+7027",
+    "system_x": -7.375,
+    "system_y": 7.09375,
+    "system_z": -2.4375,
+    "has_market": true,
+    "market_updated_at": "2026-10-13T21:14:21Z",
+    "controlling_minor_faction": "Redshift Logistics",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Minerals",
+      "commodity": "Painite",
+      "demand": 522,
+      "sell_price": 247663,
+      "supply": 0
+     },
+     {
+      "buy_price": 0,
+      "category": "Metals",
+      "commodity": "Platinum",
+      "demand": 448,
+      "sell_price": 231861,
+      "supply": 0
+     },
+     {
+      "buy_price": 0,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 2123,
+      "sell_price": 57584,
+      "supply": 0
+     }
+    ]
+   },
+   {
+    "name": "Nobleport",
+    "type": "Coriolis Starport",
+    "distance_to_arrival": 81.944914,
+    "has_large_pad": true,
+    "medium_pads": 18,
+    "small_pads": 17,
+    "is_planetary": false,
+    "system_id64": 11666339210657,
+    "system_name": "Luyten 674-15",
+    "system_x": 16.71875,
+    "system_y": 2.28125,
+    "system_z": -9.125,
+    "has_market": true,
+    "market_updated_at": "2026-10-13T21:17:27Z",
+    "controlling_minor_faction": "Earth Defense Fleet",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Minerals",
+      "commodity": "Painite",
+      "demand": 120,
+      "sell_price": 218593,
+      "supply": 0
+     },
+     {
+      "buy_price": 0,
+      "category": "Metals",
+      "commodity": "Platinum",
+      "demand": 103,
+      "sell_price": 219522,
+      "supply": 0
+     },
+     {
+      "buy_price": 0,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 0,
+      "sell_price": 56806,
+      "supply": 0
+     }
+    ]
+   },
+   {
+    "name": "Tayler Platform",
+    "type": "Outpost",
+    "distance_to_arrival": 507.325732,
+    "has_large_pad": false,
+    "medium_pads": 1,
+    "small_pads": 2,
+    "is_planetary": false,
+    "system_id64": 11666339210657,
+    "system_name": "Luyten 674-15",
+    "system_x": 16.71875,
+    "system_y": 2.28125,
+    "system_z": -9.125,
+    "has_market": true,
+    "market_updated_at": "2026-10-13T15:56:42Z",
+    "controlling_minor_faction": "Earth Defense Fleet",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Minerals",
+      "commodity": "Painite",
+      "demand": 260,
+      "sell_price": 218593,
+      "supply": 0
+     },
+     {
+      "buy_price": 0,
+      "category": "Metals",
+      "commodity": "Platinum",
+      "demand": 223,
+      "sell_price": 219522,
+      "supply": 0
+     },
+     {
+      "buy_price": 0,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 1056,
+      "sell_price": 57652,
+      "supply": 0
+     }
+    ]
+   },
+   {
+    "name": "Chomsky Terminal",
+    "type": "Coriolis Starport",
+    "distance_to_arrival": 281.139953,
+    "has_large_pad": true,
+    "medium_pads": 10,
+    "small_pads": 10,
+    "is_planetary": false,
+    "system_id64": 2870246319521,
+    "system_name": "San Tu",
+    "system_x": 24.96875,
+    "system_y": 36.8125,
+    "system_z": -8.78125,
+    "has_market": true,
+    "market_updated_at": "2026-10-14T00:27:40Z",
+    "controlling_minor_faction": "Wolf 406 Transport & Co",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Minerals",
+      "commodity": "Painite",
+      "demand": 205,
+      "sell_price": 217592,
+      "supply": 0
+     },
+     {
+      "buy_price": 0,
+      "category": "Metals",
+      "commodity": "Platinum",
+      "demand": 2840,
+      "sell_price": 285867,
+      "supply": 0
+     },
+     {
+      "buy_price": 0,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 16635,
+      "sell_price": 61316,
+      "supply": 0
+     }
+    ]
+   },
+   {
+    "name": "Zaschka Point",
+    "type": "Coriolis Starport",
+    "distance_to_arrival": 4.137096,
+    "has_large_pad": true,
+    "medium_pads": 12,
+    "small_pads": 9,
+    "is_planetary": false,
+    "system_id64": 20461626926513,
+    "system_name": "LHS 6350",
+    "system_x": -42.71875,
+    "system_y": 4.9375,
+    "system_z": 22.8125,
+    "has_market": true,
+    "market_updated_at": "2026-10-11T11:08:16Z",
+    "controlling_minor_faction": "League of LFT 1492",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Minerals",
+      "commodity": "Painite",
+      "demand": 401,
+      "sell_price": 208038,
+      "supply": 0
+     },
+     {
+      "buy_price": 0,
+      "category": "Metals",
+      "commodity": "Platinum",
+      "demand": 396,
+      "sell_price": 280682,
+      "supply": 0
+     },
+     {
+      "buy_price": 0,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 2699,
+      "sell_price": 57797,
+      "supply": 0
+     }
+    ]
+   },
+   {
+    "name": "Cowper Exchange",
+    "type": "Orbis Starport",
+    "distance_to_arrival": 122.134806,
+    "has_large_pad": true,
+    "medium_pads": 18,
+    "small_pads": 17,
+    "is_planetary": false,
+    "system_id64": 5306532762322,
+    "system_name": "70 Ophiuchi",
+    "system_x": -8.21875,
+    "system_y": 3.09375,
+    "system_z": 14.0625,
+    "has_market": true,
+    "market_updated_at": "2026-10-12T00:55:31Z",
+    "controlling_minor_faction": "Elite Rebel Force",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Minerals",
+      "commodity": "Painite",
+      "demand": 924,
+      "sell_price": 195192,
+      "supply": 0
+     },
+     {
+      "buy_price": 153076,
+      "category": "Metals",
+      "commodity": "Platinum",
+      "demand": 0,
+      "sell_price": 152856,
+      "supply": 0
+     },
+     {
+      "buy_price": 53632,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 1,
+      "sell_price": 52979,
+      "supply": 7955
+     }
+    ]
+   },
+   {
+    "name": "Tevis Terminal",
+    "type": "Outpost",
+    "distance_to_arrival": 855.846074,
+    "has_large_pad": false,
+    "medium_pads": 1,
+    "small_pads": 2,
+    "is_planetary": false,
+    "system_id64": 5306532762322,
+    "system_name": "70 Ophiuchi",
+    "system_x": -8.21875,
+    "system_y": 3.09375,
+    "system_z": 14.0625,
+    "has_market": true,
+    "market_updated_at": "2026-10-11T21:20:07Z",
+    "controlling_minor_faction": "Elite Rebel Force",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Minerals",
+      "commodity": "Painite",
+      "demand": 1828,
+      "sell_price": 195192,
+      "supply": 0
+     },
+     {
+      "buy_price": 53260,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 1,
+      "sell_price": 52368,
+      "supply": 42883
+     }
+    ]
+   },
+   {
+    "name": "Good Landing",
+    "type": "Orbis Starport",
+    "distance_to_arrival": 22199.551752,
+    "has_large_pad": true,
+    "medium_pads": 10,
+    "small_pads": 8,
+    "is_planetary": false,
+    "system_id64": 2869977687457,
+    "system_name": "LHS 1827",
+    "system_x": 13.40625,
+    "system_y": -5.8125,
+    "system_z": -11.78125,
+    "has_market": true,
+    "market_updated_at": "2026-10-13T17:56:37Z",
+    "controlling_minor_faction": "Hutton Orbital Truckers Co-Operative",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Minerals",
+      "commodity": "Painite",
+      "demand": 5472,
+      "sell_price": 184612,
+      "supply": 0
+     },
+     {
+      "buy_price": 0,
+      "category": "Metals",
+      "commodity": "Platinum",
+      "demand": 3289,
+      "sell_price": 222193,
+      "supply": 0
+     },
+     {
+      "buy_price": 0,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 21983,
+      "sell_price": 57604,
+      "supply": 0
+     }
+    ]
+   },
+   {
+    "name": "Patsayev Station",
+    "type": "Coriolis Starport",
+    "distance_to_arrival": 1797.455629,
+    "has_large_pad": true,
+    "medium_pads": 18,
+    "small_pads": 17,
+    "is_planetary": false,
+    "system_id64": 38054081340841,
+    "system_name": "IL Aquarii",
+    "system_x": -6.15625,
+    "system_y": -13.34375,
+    "system_z": 4.78125,
+    "has_market": true,
+    "market_updated_at": "2026-10-13T14:57:13Z",
+    "controlling_minor_faction": "Independents of IL Aquarii",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Minerals",
+      "commodity": "Painite",
+      "demand": 2737,
+      "sell_price": 183620,
+      "supply": 0
+     },
+     {
+      "buy_price": 0,
+      "category": "Metals",
+      "commodity": "Platinum",
+      "demand": 1996,
+      "sell_price": 264350,
+      "supply": 0
+     },
+     {
+      "buy_price": 54020,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 1,
+      "sell_price": 53037,
+      "supply": 1516
+     }
+    ]
+   },
+   {
+    "name": "Apt Landing",
+    "type": "Outpost",
+    "distance_to_arrival": 0.732518,
+    "has_large_pad": false,
+    "medium_pads": 1,
+    "small_pads": 2,
+    "is_planetary": false,
+    "system_id64": 5369245748072,
+    "system_name": "Cranhcat",
+    "system_x": 16.125,
+    "system_y": -37.5,
+    "system_z": 28.6875,
+    "has_market": true,
+    "market_updated_at": "2026-10-13T16:26:40Z",
+    "controlling_minor_faction": "L 119-33 United Co",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Minerals",
+      "commodity": "Painite",
+      "demand": 110,
+      "sell_price": 172041,
+      "supply": 0
+     },
+     {
+      "buy_price": 0,
+      "category": "Metals",
+      "commodity": "Platinum",
+      "demand": 578,
+      "sell_price": 280818,
+      "supply": 0
+     },
+     {
+      "buy_price": 42267,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 0,
+      "sell_price": 42264,
+      "supply": 0
+     }
+    ]
+   },
+   {
+    "name": "Bursch Enterprise",
+    "type": "Coriolis Starport",
+    "distance_to_arrival": 2068.806171,
+    "has_large_pad": true,
+    "medium_pads": 11,
+    "small_pads": 11,
+    "is_planetary": false,
+    "system_id64": 4271084931435,
+    "system_name": "Saktsak",
+    "system_x": 1.40625,
+    "system_y": 16.6875,
+    "system_z": -12.03125,
+    "has_market": true,
+    "market_updated_at": "2026-10-13T18:41:34Z",
+    "controlling_minor_faction": "Terran Colonial Forces",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Minerals",
+      "commodity": "Painite",
+      "demand": 986,
+      "sell_price": 164413,
+      "supply": 0
+     },
+     {
+      "buy_price": 0,
+      "category": "Metals",
+      "commodity": "Platinum",
+      "demand": 4303,
+      "sell_price": 280160,
+      "supply": 0
+     },
+     {
+      "buy_price": 0,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 27382,
+      "sell_price": 61284,
+      "supply": 0
+     }
+    ]
+   },
+   {
+    "name": "Davy Vision",
+    "type": "Coriolis Starport",
+    "distance_to_arrival": 127.748423,
+    "has_large_pad": true,
+    "medium_pads": 12,
+    "small_pads": 10,
+    "is_planetary": false,
+    "system_id64": 5367098264416,
+    "system_name": "Core Sys Sector FW-N a6-0",
+    "system_x": -4.34375,
+    "system_y": -42.78125,
+    "system_z": 17.75,
+    "has_market": true,
+    "market_updated_at": "2026-10-12T17:08:08Z",
+    "controlling_minor_faction": "Izumo Heavy Industries Ltd",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Minerals",
+      "commodity": "Painite",
+      "demand": 1413,
+      "sell_price": 162888,
+      "supply": 0
+     },
+     {
+      "buy_price": 0,
+      "category": "Metals",
+      "commodity": "Platinum",
+      "demand": 8002,
+      "sell_price": 63018,
+      "supply": 0
+     },
+     {
+      "buy_price": 0,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 5780,
+      "sell_price": 57840,
+      "supply": 0
+     }
+    ]
+   },
+   {
+    "name": "Weber Hub",
+    "type": "Planetary Outpost",
+    "distance_to_arrival": 24.079756,
+    "has_large_pad": true,
+    "medium_pads": 4,
+    "small_pads": 4,
+    "is_planetary": true,
+    "system_id64": 5856288576210,
+    "system_name": "61 Cygni",
+    "system_x": -11.21875,
+    "system_y": -1.1875,
+    "system_z": 1.40625,
+    "has_market": true,
+    "market_updated_at": "2026-10-13T18:45:52Z",
+    "controlling_minor_faction": "Elite Rebel Force",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Minerals",
+      "commodity": "Painite",
+      "demand": 226,
+      "sell_price": 152685,
+      "supply": 0
+     },
+     {
+      "buy_price": 0,
+      "category": "Metals",
+      "commodity": "Platinum",
+      "demand": 134,
+      "sell_price": 250913,
+      "supply": 0
+     }
+    ]
+   },
+   {
+    "name": "Dobrovolskiy Enterprise",
+    "type": "Ocellus Starport",
+    "distance_to_arrival": 214.976843,
+    "has_large_pad": true,
+    "medium_pads": 18,
+    "small_pads": 17,
+    "is_planetary": false,
+    "system_id64": 5366025177936,
+    "system_name": "WISE 1506+7027",
+    "system_x": -7.375,
+    "system_y": 7.09375,
+    "system_z": -2.4375,
+    "has_market": true,
+    "market_updated_at": "2026-10-13T23:46:35Z",
+    "controlling_minor_faction": "Redshift Logistics",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Minerals",
+      "commodity": "Painite",
+      "demand": 713,
+      "sell_price": 150358,
+      "supply": 0
+     },
+     {
+      "buy_price": 0,
+      "category": "Metals",
+      "commodity": "Platinum",
+      "demand": 1063,
+      "sell_price": 231861,
+      "supply": 0
+     },
+     {
+      "buy_price": 0,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 1952,
+      "sell_price": 56918,
+      "supply": 0
+     }
+    ]
+   },
+   {
+    "name": "Luk Station",
+    "type": "Coriolis Starport",
+    "distance_to_arrival": 66.806821,
+    "has_large_pad": true,
+    "medium_pads": 13,
+    "small_pads": 8,
+    "is_planetary": false,
+    "system_id64": 5306532762322,
+    "system_name": "70 Ophiuchi",
+    "system_x": -8.21875,
+    "system_y": 3.09375,
+    "system_z": 14.0625,
+    "has_market": true,
+    "market_updated_at": "2026-10-13T11:56:49Z",
+    "controlling_minor_faction": "Elite Rebel Force",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Minerals",
+      "commodity": "Painite",
+      "demand": 925,
+      "sell_price": 143525,
+      "supply": 0
+     },
+     {
+      "buy_price": 53150,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 1,
+      "sell_price": 52425,
+      "supply": 20915
+     }
+    ]
+   },
+   {
+    "name": "Butz Port",
+    "type": "Coriolis Starport",
+    "distance_to_arrival": 4886.476196,
+    "has_large_pad": true,
+    "medium_pads": 12,
+    "small_pads": 8,
+    "is_planetary": false,
+    "system_id64": 8879945552602,
+    "system_name": "Carener",
+    "system_x": -5.5625,
+    "system_y": -14.625,
+    "system_z": 15.28125,
+    "has_market": true,
+    "market_updated_at": "2026-10-12T23:07:58Z",
+    "controlling_minor_faction": "Carener Electronics Inc",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Minerals",
+      "commodity": "Painite",
+      "demand": 777,
+      "sell_price": 132753,
+      "supply": 0
+     },
+     {
+      "buy_price": 0,
+      "category": "Metals",
+      "commodity": "Platinum",
+      "demand": 13900,
+      "sell_price": 57000,
+      "supply": 0
+     },
+     {
+      "buy_price": 0,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 14893,
+      "sell_price": 53360,
+      "supply": 0
+     }
+    ]
+   },
+   {
+    "name": "Shiner Port",
+    "type": "Outpost",
+    "distance_to_arrival": 15.664209,
+    "has_large_pad": false,
+    "medium_pads": 1,
+    "small_pads": 4,
+    "is_planetary": false,
+    "system_id64": 5069001074081,
+    "system_name": "Ross 104",
+    "system_x": 5.5625,
+    "system_y": 19.6875,
+    "system_z": -7.3125,
+    "has_market": true,
+    "market_updated_at": "2026-10-13T13:29:27Z",
+    "controlling_minor_faction": "Earth Defense Fleet",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Minerals",
+      "commodity": "Painite",
+      "demand": 2144,
+      "sell_price": 132381,
+      "supply": 0
+     },
+     {
+      "buy_price": 0,
+      "category": "Metals",
+      "commodity": "Platinum",
+      "demand": 7663,
+      "sell_price": 56926,
+      "supply": 0
+     },
+     {
+      "buy_price": 49617,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 1,
+      "sell_price": 48862,
+      "supply": 19797
+     }
+    ]
+   },
+   {
+    "name": "Nespoli Orbital",
+    "type": "Outpost",
+    "distance_to_arrival": 1626.84,
+    "has_large_pad": false,
+    "medium_pads": 1,
+    "small_pads": 3,
+    "is_planetary": false,
+    "system_id64": 4786497784171,
+    "system_name": "Ditibi",
+    "system_x": 28.9375,
+    "system_y": -11.53125,
+    "system_z": 3.46875,
+    "has_market": true,
+    "market_updated_at": "2026-10-12T18:54:06Z",
+    "controlling_minor_faction": "Union of Ditibi Revolutionary Party",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Minerals",
+      "commodity": "Painite",
+      "demand": 5787,
+      "sell_price": 129405,
+      "supply": 0
+     },
+     {
+      "buy_price": 0,
+      "category": "Metals",
+      "commodity": "Platinum",
+      "demand": 34094,
+      "sell_price": 56331,
+      "supply": 0
+     },
+     {
+      "buy_price": 0,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 24354,
+      "sell_price": 53772,
+      "supply": 0
+     }
+    ]
+   },
+   {
+    "name": "Broglie Terminal",
+    "type": "Ocellus Starport",
+    "distance_to_arrival": 24.011338,
+    "has_large_pad": true,
+    "medium_pads": 12,
+    "small_pads": 10,
+    "is_planetary": false,
+    "system_id64": 5856288576210,
+    "system_name": "61 Cygni",
+    "system_x": -11.21875,
+    "system_y": -1.1875,
+    "system_z": 1.40625,
+    "has_market": true,
+    "market_updated_at": "2026-10-13T14:04:00Z",
+    "controlling_minor_faction": "Elite Rebel Force",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Minerals",
+      "commodity": "Painite",
+      "demand": 2208,
+      "sell_price": 123822,
+      "supply": 0
+     },
+     {
+      "buy_price": 0,
+      "category": "Metals",
+      "commodity": "Platinum",
+      "demand": 86,
+      "sell_price": 231047,
+      "supply": 0
+     },
+     {
+      "buy_price": 54238,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 1,
+      "sell_price": 53217,
+      "supply": 7268
+     }
+    ]
+   },
+   {
+    "name": "Bunch City",
+    "type": "Coriolis Starport",
+    "distance_to_arrival": 11.548288,
+    "has_large_pad": true,
+    "medium_pads": 18,
+    "small_pads": 17,
+    "is_planetary": false,
+    "system_id64": 5069001074081,
+    "system_name": "Ross 104",
+    "system_x": 5.5625,
+    "system_y": 19.6875,
+    "system_z": -7.3125,
+    "has_market": true,
+    "market_updated_at": "2026-10-13T20:00:12Z",
+    "controlling_minor_faction": "Earth Defense Fleet",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Minerals",
+      "commodity": "Painite",
+      "demand": 2102,
+      "sell_price": 118600,
+      "supply": 0
+     },
+     {
+      "buy_price": 0,
+      "category": "Metals",
+      "commodity": "Platinum",
+      "demand": 10558,
+      "sell_price": 56926,
+      "supply": 0
+     },
+     {
+      "buy_price": 50337,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 1,
+      "sell_price": 49494,
+      "supply": 261
+     }
+    ]
+   },
+   {
+    "name": "Discordia Dispatch",
+    "type": "Asteroid base",
+    "distance_to_arrival": 0.872148,
+    "has_large_pad": true,
+    "medium_pads": 8,
+    "small_pads": 4,
+    "is_planetary": false,
+    "system_id64": 22960358181744,
+    "system_name": "Drahlian",
+    "system_x": 6.71875,
+    "system_y": -30.25,
+    "system_z": 35.5625,
+    "has_market": true,
+    "market_updated_at": "2026-10-13T11:32:42Z",
+    "controlling_minor_faction": "The Astral Diamonds Club",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Minerals",
+      "commodity": "Painite",
+      "demand": 1140,
+      "sell_price": 117548,
+      "supply": 0
+     },
+     {
+      "buy_price": 0,
+      "category": "Metals",
+      "commodity": "Platinum",
+      "demand": 43086,
+      "sell_price": 73223,
+      "supply": 0
+     },
+     {
+      "buy_price": 39582,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 0,
+      "sell_price": 39499,
+      "supply": 0
+     }
+    ]
+   },
+   {
+    "name": "Kuivkäimla",
+    "type": "Orbis Starport",
+    "distance_to_arrival": 555.855896,
+    "has_large_pad": true,
+    "medium_pads": 14,
+    "small_pads": 9,
+    "is_planetary": false,
+    "system_id64": 5366025309016,
+    "system_name": "2MASS 1503+2525",
+    "system_x": -6.1875,
+    "system_y": 18.0,
+    "system_z": 8.125,
+    "has_market": true,
+    "market_updated_at": "2026-10-13T19:23:32Z",
+    "controlling_minor_faction": "LHS 2541 Alliance Combine",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Minerals",
+      "commodity": "Painite",
+      "demand": 6668,
+      "sell_price": 117280,
+      "supply": 0
+     },
+     {
+      "buy_price": 0,
+      "category": "Metals",
+      "commodity": "Platinum",
+      "demand": 4882,
+      "sell_price": 243790,
+      "supply": 0
+     },
+     {
+      "buy_price": 0,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 26582,
+      "sell_price": 57698,
+      "supply": 0
+     }
+    ]
+   },
+   {
+    "name": "Rota Obscura",
+    "type": "Coriolis Starport",
+    "distance_to_arrival": 3689.873021,
+    "has_large_pad": true,
+    "medium_pads": 14,
+    "small_pads": 10,
+    "is_planetary": false,
+    "system_id64": 22960358443856,
+    "system_name": "WISE 0359-5401",
+    "system_x": 13.125,
+    "system_y": -13.9375,
+    "system_z": -1.34375,
+    "has_market": true,
+    "market_updated_at": "2026-10-13T23:16:24Z",
+    "controlling_minor_faction": "Sirius Corporation",
+    "market": [
+     {
+      "buy_price": 0,
+      "category": "Minerals",
+      "commodity": "Painite",
+      "demand": 812,
+      "sell_price": 114386,
+      "supply": 0
+     },
+     {
+      "buy_price": 0,
+      "category": "Metals",
+      "commodity": "Platinum",
+      "demand": 30718,
+      "sell_price": 83283,
+      "supply": 0
+     },
+     {
+      "buy_price": 0,
+      "category": "Chemicals",
+      "commodity": "Tritium",
+      "demand": 7284,
+      "sell_price": 60736,
+      "supply": 0
+     }
+    ]
+   }
+  ]
+ }
+}

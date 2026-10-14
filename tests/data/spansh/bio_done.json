@@ -1,0 +1,754 @@
+{
+ "request": {
+  "method": "GET",
+  "url": "https://spansh.co.uk/api/results/C11889C8-C5C5-11F1-8E4B-A35A43D9E82C",
+  "params": [],
+  "form": null
+ },
+ "status": 200,
+ "body": {
+  "created_at": "2026-10-11T22:47:36",
+  "job": "C11889C8-C5C5-11F1-8E4B-A35A43D9E82C",
+  "parameters": {
+   "avoid_thargoids": 1,
+   "destination": "Colonia",
+   "loop": "0",
+   "max_distance": "50000",
+   "max_results": "5",
+   "min_value": "1000000",
+   "radius": "25",
+   "range": "22.00",
+   "source": "Sol"
+  },
+  "result": [
+   {
+    "bodies": [],
+    "id64": "10477373803",
+    "jumps": 1,
+    "name": "Sol",
+    "x": 0,
+    "y": 0,
+    "z": 0
+   },
+   {
+    "bodies": [
+     {
+      "distance_to_arrival": 4546.092109,
+      "estimated_mapping_value": 2221,
+      "estimated_scan_value": 500,
+      "id": 1765415840410241395,
+      "id64": "1765415840410241395",
+      "landmark_value": 34841800,
+      "landmarks": [
+       {
+        "count": 16,
+        "subtype": "Frutexa Acus",
+        "type": "Frutexa",
+        "value": 7774700
+       },
+       {
+        "count": 24,
+        "subtype": "Aleoida Coronamus",
+        "type": "Aleoida",
+        "value": 6284600
+       },
+       {
+        "count": 20,
+        "subtype": "Concha Renibus",
+        "type": "Concha",
+        "value": 4572400
+       },
+       {
+        "count": 13,
+        "subtype": "Osseus Fractus",
+        "type": "Osseus",
+        "value": 4027800
+       },
+       {
+        "count": 21,
+        "subtype": "Cactoida Cortexum",
+        "type": "Cactoida",
+        "value": 3667600
+       },
+       {
+        "count": 17,
+        "subtype": "Tussock Caputus",
+        "type": "Tussock",
+        "value": 3472400
+       },
+       {
+        "count": 17,
+        "subtype": "Fungoida Stabitis",
+        "type": "Fungoida",
+        "value": 2680300
+       },
+       {
+        "count": 21,
+        "subtype": "Stratum Paleas",
+        "type": "Stratum",
+        "value": 1362000
+       },
+       {
+        "count": 15,
+        "subtype": "Bacterium Aurasus",
+        "type": "Bacterium",
+        "value": 1000000
+       }
+      ],
+      "name": "Qa'wakana 12 f",
+      "subtype": "Rocky body",
+      "type": "Planet"
+     },
+     {
+      "distance_to_arrival": 4568.011319,
+      "estimated_mapping_value": 2221,
+      "estimated_scan_value": 500,
+      "id": 1909531028486097267,
+      "id64": "1909531028486097267",
+      "landmark_value": 18398400,
+      "landmarks": [
+       {
+        "count": 3,
+        "subtype": "Frutexa Acus",
+        "type": "Frutexa",
+        "value": 7774700
+       },
+       {
+        "count": 4,
+        "subtype": "Tubus Compagibus",
+        "type": "Tubus",
+        "value": 7774700
+       },
+       {
+        "count": 2,
+        "subtype": "Tussock Ignis",
+        "type": "Tussock",
+        "value": 1849000
+       },
+       {
+        "count": 3,
+        "subtype": "Bacterium Aurasus",
+        "type": "Bacterium",
+        "value": 1000000
+       }
+      ],
+      "name": "Qa'wakana 12 i",
+      "subtype": "Rocky body",
+      "type": "Planet"
+     },
+     {
+      "distance_to_arrival": 4568.051052,
+      "estimated_mapping_value": 2221,
+      "estimated_scan_value": 500,
+      "id": 1945559825505061235,
+      "id64": "1945559825505061235",
+      "landmark_value": 18398400,
+      "landmarks": [
+       {
+        "count": 3,
+        "subtype": "Frutexa Acus",
+        "type": "Frutexa",
+        "value": 7774700
+       },
+       {
+        "count": 7,
+        "subtype": "Tubus Compagibus",
+        "type": "Tubus",
+        "value": 7774700
+       },
+       {
+        "count": 6,
+        "subtype": "Tussock Ignis",
+        "type": "Tussock",
+        "value": 1849000
+       },
+       {
+        "count": 5,
+        "subtype": "Bacterium Aurasus",
+        "type": "Bacterium",
+        "value": 1000000
+       }
+      ],
+      "name": "Qa'wakana 12 j",
+      "subtype": "Rocky body",
+      "type": "Planet"
+     }
+    ],
+    "id64": "4786481006963",
+    "jumps": 4,
+    "name": "Qa'wakana",
+    "x": -17.65625,
+    "y": -19.125,
+    "z": 61.78125
+   },
+   {
+    "bodies": [
+     {
+      "distance_to_arrival": 1661.124366,
+      "estimated_mapping_value": 2221,
+      "estimated_scan_value": 500,
+      "id": 1116896738154645875,
+      "id64": "1116896738154645875",
+      "landmark_value": 12002400,
+      "landmarks": [
+       {
+        "count": 3,
+        "subtype": "Frutexa Acus",
+        "type": "Frutexa",
+        "value": 7774700
+       },
+       {
+        "count": 3,
+        "subtype": "Tussock Ventusa",
+        "type": "Tussock",
+        "value": 3227700
+       },
+       {
+        "count": 1,
+        "subtype": "Bacterium Aurasus",
+        "type": "Bacterium",
+        "value": 1000000
+       }
+      ],
+      "name": "Imhotian 6 b",
+      "subtype": "Rocky body",
+      "type": "Planet"
+     },
+     {
+      "distance_to_arrival": 1662.285279,
+      "estimated_mapping_value": 2221,
+      "estimated_scan_value": 500,
+      "id": 1261011926230501747,
+      "id64": "1261011926230501747",
+      "landmark_value": 14354800,
+      "landmarks": [
+       {
+        "count": 2,
+        "subtype": "Frutexa Acus",
+        "type": "Frutexa",
+        "value": 7774700
+       },
+       {
+        "count": 1,
+        "subtype": "Tussock Ventusa",
+        "type": "Tussock",
+        "value": 3227700
+       },
+       {
+        "count": 1,
+        "subtype": "Concha Labiata",
+        "type": "Concha",
+        "value": 2352400
+       },
+       {
+        "count": 1,
+        "subtype": "Bacterium Aurasus",
+        "type": "Bacterium",
+        "value": 1000000
+       }
+      ],
+      "name": "Imhotian 6 e",
+      "subtype": "Rocky body",
+      "type": "Planet"
+     },
+     {
+      "distance_to_arrival": 1662.810191,
+      "estimated_mapping_value": 2221,
+      "estimated_scan_value": 500,
+      "id": 1080867941135681907,
+      "id64": "1080867941135681907",
+      "landmark_value": 14354800,
+      "landmarks": [
+       {
+        "count": 5,
+        "subtype": "Frutexa Acus",
+        "type": "Frutexa",
+        "value": 7774700
+       },
+       {
+        "count": 6,
+        "subtype": "Tussock Ventusa",
+        "type": "Tussock",
+        "value": 3227700
+       },
+       {
+        "count": 3,
+        "subtype": "Concha Labiata",
+        "type": "Concha",
+        "value": 2352400
+       },
+       {
+        "count": 3,
+        "subtype": "Bacterium Aurasus",
+        "type": "Bacterium",
+        "value": 1000000
+       }
+      ],
+      "name": "Imhotian 6 a",
+      "subtype": "Rocky body",
+      "type": "Planet"
+     }
+    ],
+    "id64": "4030566762867",
+    "jumps": 4,
+    "name": "Imhotian",
+    "x": -44.21875,
+    "y": 5.59375,
+    "z": 110.71875
+   },
+   {
+    "bodies": [
+     {
+      "distance_to_arrival": 3496.497466,
+      "estimated_mapping_value": 2221,
+      "estimated_scan_value": 500,
+      "id": 1621297422502201723,
+      "id64": "1621297422502201723",
+      "landmark_value": 20750800,
+      "landmarks": [
+       {
+        "count": 11,
+        "subtype": "Frutexa Acus",
+        "type": "Frutexa",
+        "value": 7774700
+       },
+       {
+        "count": 5,
+        "subtype": "Tubus Compagibus",
+        "type": "Tubus",
+        "value": 7774700
+       },
+       {
+        "count": 6,
+        "subtype": "Concha Labiata",
+        "type": "Concha",
+        "value": 2352400
+       },
+       {
+        "count": 6,
+        "subtype": "Tussock Ignis",
+        "type": "Tussock",
+        "value": 1849000
+       },
+       {
+        "count": 4,
+        "subtype": "Bacterium Aurasus",
+        "type": "Bacterium",
+        "value": 1000000
+       }
+      ],
+      "name": "HR 6999 ABCD 8 d",
+      "subtype": "Rocky body",
+      "type": "Planet"
+     },
+     {
+      "distance_to_arrival": 3514.044764,
+      "estimated_mapping_value": 2221,
+      "estimated_scan_value": 500,
+      "id": 2017614189710805371,
+      "id64": "2017614189710805371",
+      "landmark_value": 23199700,
+      "landmarks": [
+       {
+        "count": 11,
+        "subtype": "Frutexa Acus",
+        "type": "Frutexa",
+        "value": 7774700
+       },
+       {
+        "count": 7,
+        "subtype": "Tubus Compagibus",
+        "type": "Tubus",
+        "value": 7774700
+       },
+       {
+        "count": 9,
+        "subtype": "Stratum Excutitus",
+        "type": "Stratum",
+        "value": 2448900
+       },
+       {
+        "count": 8,
+        "subtype": "Concha Labiata",
+        "type": "Concha",
+        "value": 2352400
+       },
+       {
+        "count": 16,
+        "subtype": "Tussock Ignis",
+        "type": "Tussock",
+        "value": 1849000
+       },
+       {
+        "count": 6,
+        "subtype": "Bacterium Aurasus",
+        "type": "Bacterium",
+        "value": 1000000
+       }
+      ],
+      "name": "HR 6999 ABCD 9 e",
+      "subtype": "Rocky body",
+      "type": "Planet"
+     },
+     {
+      "distance_to_arrival": 3521.735562,
+      "estimated_mapping_value": 2221,
+      "estimated_scan_value": 500,
+      "id": 1657326219521165691,
+      "id64": "1657326219521165691",
+      "landmark_value": 22112800,
+      "landmarks": [
+       {
+        "count": 7,
+        "subtype": "Frutexa Acus",
+        "type": "Frutexa",
+        "value": 7774700
+       },
+       {
+        "count": 5,
+        "subtype": "Tubus Compagibus",
+        "type": "Tubus",
+        "value": 7774700
+       },
+       {
+        "count": 5,
+        "subtype": "Concha Labiata",
+        "type": "Concha",
+        "value": 2352400
+       },
+       {
+        "count": 4,
+        "subtype": "Tussock Ignis",
+        "type": "Tussock",
+        "value": 1849000
+       },
+       {
+        "count": 7,
+        "subtype": "Stratum Paleas",
+        "type": "Stratum",
+        "value": 1362000
+       },
+       {
+        "count": 4,
+        "subtype": "Bacterium Aurasus",
+        "type": "Bacterium",
+        "value": 1000000
+       }
+      ],
+      "name": "HR 6999 ABCD 8 e",
+      "subtype": "Rocky body",
+      "type": "Planet"
+     }
+    ],
+    "id64": "1556648823163",
+    "jumps": 3,
+    "name": "HR 6999",
+    "x": -75.71875,
+    "y": 2.375,
+    "z": 136.875
+   },
+   {
+    "bodies": [
+     {
+      "distance_to_arrival": 1571.575412,
+      "estimated_mapping_value": 2221,
+      "estimated_scan_value": 500,
+      "id": 756613877591318786,
+      "id64": "756613877591318786",
+      "landmark_value": 15421200,
+      "landmarks": [
+       {
+        "count": 2,
+        "subtype": "Frutexa Flammasis",
+        "type": "Frutexa",
+        "value": 10326000
+       },
+       {
+        "count": 2,
+        "subtype": "Tussock Catena",
+        "type": "Tussock",
+        "value": 1766600
+       },
+       {
+        "count": 2,
+        "subtype": "Fungoida Setisis",
+        "type": "Fungoida",
+        "value": 1670100
+       },
+       {
+        "count": 1,
+        "subtype": "Bacterium Alcyoneum",
+        "type": "Bacterium",
+        "value": 1658500
+       }
+      ],
+      "name": "Dryio Flyuae JH-C c33 3 e",
+      "subtype": "Rocky body",
+      "type": "Planet"
+     },
+     {
+      "distance_to_arrival": 1573.379515,
+      "estimated_mapping_value": 2221,
+      "estimated_scan_value": 500,
+      "id": 864700268648210690,
+      "id64": "864700268648210690",
+      "landmark_value": 15421200,
+      "landmarks": [
+       {
+        "count": 1,
+        "subtype": "Frutexa Flammasis",
+        "type": "Frutexa",
+        "value": 10326000
+       },
+       {
+        "count": 1,
+        "subtype": "Tussock Catena",
+        "type": "Tussock",
+        "value": 1766600
+       },
+       {
+        "count": 1,
+        "subtype": "Fungoida Setisis",
+        "type": "Fungoida",
+        "value": 1670100
+       },
+       {
+        "count": 1,
+        "subtype": "Bacterium Alcyoneum",
+        "type": "Bacterium",
+        "value": 1658500
+       }
+      ],
+      "name": "Dryio Flyuae JH-C c33 3 g",
+      "subtype": "Rocky body",
+      "type": "Planet"
+     },
+     {
+      "distance_to_arrival": 1575.87193,
+      "estimated_mapping_value": 2221,
+      "estimated_scan_value": 500,
+      "id": 828671471629246722,
+      "id64": "828671471629246722",
+      "landmark_value": 20309500,
+      "landmarks": [
+       {
+        "count": 1,
+        "subtype": "Frutexa Flammasis",
+        "type": "Frutexa",
+        "value": 10326000
+       },
+       {
+        "count": 3,
+        "subtype": "Cactoida Lapis",
+        "type": "Cactoida",
+        "value": 2483600
+       },
+       {
+        "count": 5,
+        "subtype": "Osseus Spiralis",
+        "type": "Osseus",
+        "value": 2404700
+       },
+       {
+        "count": 1,
+        "subtype": "Tussock Catena",
+        "type": "Tussock",
+        "value": 1766600
+       },
+       {
+        "count": 1,
+        "subtype": "Fungoida Setisis",
+        "type": "Fungoida",
+        "value": 1670100
+       },
+       {
+        "count": 1,
+        "subtype": "Bacterium Alcyoneum",
+        "type": "Bacterium",
+        "value": 1658500
+       }
+      ],
+      "name": "Dryio Flyuae JH-C c33 3 f",
+      "subtype": "Rocky body",
+      "type": "Planet"
+     }
+    ],
+    "id64": "9140193075458",
+    "jumps": 1010,
+    "name": "Dryio Flyuae JH-C c33",
+    "x": -8732.03125,
+    "y": -824.875,
+    "z": 18140.375
+   },
+   {
+    "bodies": [
+     {
+      "distance_to_arrival": 2586.581912,
+      "estimated_mapping_value": 2221,
+      "estimated_scan_value": 500,
+      "id": 900729932638671139,
+      "id64": "900729932638671139",
+      "landmark_value": 32831400,
+      "landmarks": [
+       {
+        "count": 48,
+        "subtype": "Frutexa Flammasis",
+        "type": "Frutexa",
+        "value": 10326000
+       },
+       {
+        "count": 12,
+        "subtype": "Concha Aureolas",
+        "type": "Concha",
+        "value": 7774700
+       },
+       {
+        "count": 39,
+        "subtype": "Aleoida Laminiae",
+        "type": "Aleoida",
+        "value": 3385200
+       },
+       {
+        "count": 34,
+        "subtype": "Cactoida Lapis",
+        "type": "Cactoida",
+        "value": 2483600
+       },
+       {
+        "count": 28,
+        "subtype": "Osseus Spiralis",
+        "type": "Osseus",
+        "value": 2404700
+       },
+       {
+        "count": 36,
+        "subtype": "Tussock Catena",
+        "type": "Tussock",
+        "value": 1766600
+       },
+       {
+        "count": 24,
+        "subtype": "Fungoida Setisis",
+        "type": "Fungoida",
+        "value": 1670100
+       },
+       {
+        "count": 22,
+        "subtype": "Bacterium Alcyoneum",
+        "type": "Bacterium",
+        "value": 1658500
+       },
+       {
+        "count": 41,
+        "subtype": "Stratum Paleas",
+        "type": "Stratum",
+        "value": 1362000
+       }
+      ],
+      "name": "Eol Prou PX-T d3-291 ABC 3 d",
+      "subtype": "Rocky body",
+      "type": "Planet"
+     },
+     {
+      "distance_to_arrival": 3533.666296,
+      "estimated_mapping_value": 2221,
+      "estimated_scan_value": 500,
+      "id": 1297046699847274787,
+      "id64": "1297046699847274787",
+      "landmark_value": 34964300,
+      "landmarks": [
+       {
+        "count": 43,
+        "subtype": "Tussock Stigmasis",
+        "type": "Tussock",
+        "value": 19010800
+       },
+       {
+        "count": 46,
+        "subtype": "Recepta Conditivus",
+        "type": "Recepta",
+        "value": 14313700
+       },
+       {
+        "count": 37,
+        "subtype": "Frutexa Collum",
+        "type": "Frutexa",
+        "value": 1639800
+       }
+      ],
+      "name": "Eol Prou PX-T d3-291 ABC 4 i",
+      "subtype": "Rocky body",
+      "type": "Planet"
+     },
+     {
+      "distance_to_arrival": 3608.755303,
+      "estimated_mapping_value": 2221,
+      "estimated_scan_value": 500,
+      "id": 1008816323695563043,
+      "id64": "1008816323695563043",
+      "landmark_value": 20309500,
+      "landmarks": [
+       {
+        "count": 5,
+        "subtype": "Frutexa Flammasis",
+        "type": "Frutexa",
+        "value": 10326000
+       },
+       {
+        "count": 7,
+        "subtype": "Cactoida Lapis",
+        "type": "Cactoida",
+        "value": 2483600
+       },
+       {
+        "count": 7,
+        "subtype": "Osseus Spiralis",
+        "type": "Osseus",
+        "value": 2404700
+       },
+       {
+        "count": 5,
+        "subtype": "Tussock Catena",
+        "type": "Tussock",
+        "value": 1766600
+       },
+       {
+        "count": 6,
+        "subtype": "Fungoida Setisis",
+        "type": "Fungoida",
+        "value": 1670100
+       },
+       {
+        "count": 4,
+        "subtype": "Bacterium Alcyoneum",
+        "type": "Bacterium",
+        "value": 1658500
+       }
+      ],
+      "name": "Eol Prou PX-T d3-291 ABC 4 b",
+      "subtype": "Rocky body",
+      "type": "Planet"
+     }
+    ],
+    "id64": "10007164571939",
+    "jumps": 93,
+    "name": "Eol Prou PX-T d3-291",
+    "x": -9537.5,
+    "y": -890.71875,
+    "z": 19787.125
+   },
+   {
+    "bodies": [],
+    "id64": "3238296097059",
+    "jumps": 2,
+    "name": "Colonia",
+    "x": -9530.5,
+    "y": -910.28125,
+    "z": 19808.125
+   }
+  ],
+  "state": "completed",
+  "status": "ok",
+  "updated_at": "2026-10-11T22:47:36"
+ }
+}

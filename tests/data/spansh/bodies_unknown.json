@@ -1,0 +1,32 @@
+{
+ "request": {
+  "method": "POST",
+  "url": "https://spansh.co.uk/api/bodies/search",
+  "params": [],
+  "form": null,
+  "json": {
+   "filters": {
+    "system_id64": {
+     "value": 1234567
+    }
+   },
+   "size": 100,
+   "page": 0
+  }
+ },
+ "status": 200,
+ "body": {
+  "count": 0,
+  "from": 0,
+  "reference": {
+   "id64": 10477373803,
+   "name": "Sol",
+   "x": 0.0,
+   "y": 0.0,
+   "z": 0.0
+  },
+  "results": [],
+  "search_reference": "BD21BB78-C70F-11F1-92FA-AABD9CD961E1",
+  "size": 100
+ }
+}
