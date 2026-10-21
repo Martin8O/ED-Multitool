@@ -1,6 +1,6 @@
 [project]
 name = "edmultitool"
-version = "0.37.0"
+version = "0.80.0"
 description = "EDMC plugin: route scouting and nearest-X lookups for Elite Dangerous"
 requires-python = "==3.13.*"
 dependencies = []

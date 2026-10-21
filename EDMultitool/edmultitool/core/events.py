@@ -881,15 +881,34 @@ class PowerRanked:
     when: str
 
 
-CareerEvent = ReputationKnown | RanksKnown | PowerplayKnown | MeritsEarned | PledgeChanged | PowerRanked
+@dataclass(frozen=True, slots=True)
+class ProgressMoved:
+    """A sale that moves a rank on (exploration data, exobiology, market goods): the game writes the new
+    percent only at the next login, so the last one known is now too low."""
+
+    rank: str  # "Explore", "Exobiologist", "Trade"
+    when: str
+
+
+CareerEvent = (
+    ReputationKnown | RanksKnown | PowerplayKnown | MeritsEarned | PledgeChanged | PowerRanked | ProgressMoved
+)
 
 # The journal events of the career; `edmultitool.history` pre-filters on these.
 CAREER_EVENTS = (
     "Reputation", "Rank", "Progress", "Promotion",
     "Powerplay", "PowerplayMerits", "PowerplayJoin", "PowerplayDefect", "PowerplayLeave", "PowerplayRank",
+    "MultiSellExplorationData", "SellExplorationData", "SellOrganicData", "MarketSell",
 )  # fmt: skip
 SUPERPOWERS = ("Federation", "Empire", "Alliance", "Independent")
 RANKS = ("Combat", "Trade", "Explore", "Soldier", "Exobiologist", "Empire", "Federation", "CQC")
+# the sales that move a rank on → that rank
+_RANK_SALES = {
+    "MultiSellExplorationData": "Explore",
+    "SellExplorationData": "Explore",
+    "SellOrganicData": "Exobiologist",
+    "MarketSell": "Trade",
+}
 
 
 def _named(e: dict[str, Any], names: tuple[str, ...], kind: type) -> tuple[tuple[str, Any], ...]:
@@ -932,6 +951,8 @@ def parse_career(e: dict[str, Any]) -> list[CareerEvent]:
             power, rank = e.get("Power"), _int(e.get("Rank"))
             if isinstance(power, str) and power and rank is not None:
                 return [PowerRanked(power, rank, when)]
+        case str() as name if name in _RANK_SALES:
+            return [ProgressMoved(_RANK_SALES[name], when)]
     return []
 
 
@@ -968,6 +989,7 @@ class BodyScanned:
     distance_ls: float
     discovered: bool | None  # someone scanned it before you (None: the entry does not say)
     mapped: bool | None  # someone mapped it before you
+    footfalled: bool | None = None  # someone walked on it before you (planets; None: the entry does not say)
 
 
 @dataclass(frozen=True, slots=True)
@@ -1028,7 +1050,7 @@ def _scanned(e: dict[str, Any], address: int) -> BodyScanned | None:
         mass, star = _num(e.get("MassEM")), ""
     else:
         return None  # a belt cluster or a ring
-    discovered, mapped = e.get("WasDiscovered"), e.get("WasMapped")
+    discovered, mapped, walked = e.get("WasDiscovered"), e.get("WasMapped"), e.get("WasFootfalled")
     return BodyScanned(
         address,
         body,
@@ -1041,6 +1063,7 @@ def _scanned(e: dict[str, Any], address: int) -> BodyScanned | None:
         distance_ls=_num(e.get("DistanceFromArrivalLS")) or 0.0,
         discovered=discovered if isinstance(discovered, bool) else None,
         mapped=mapped if isinstance(mapped, bool) else None,
+        footfalled=walked if isinstance(walked, bool) and not star else None,
     )
 
 

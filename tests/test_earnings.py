@@ -308,7 +308,7 @@ def test_history_pass_reads_carried_data_across_files(tmp_path: Path) -> None:
            SystemAddress=1, Body=2),
     ])  # fmt: skip
     e = scan_earnings(folder, threading.Event())
-    assert len(e.bodies) == 1 and [n for n, _ in e.species] == ["Bacterium Volu"]
+    assert len(e.bodies) == 1 and [s[0] for s in e.species] == ["Bacterium Volu"]
     assert e.latest == "2026-10-13T10:05:00Z"
     assert e.moves == [] and e.session_start == ""
 
@@ -482,3 +482,114 @@ def test_live_balance_comes_from_the_status_only(tmp_path: Path) -> None:
     assert p.earnings.live is None  # the login's figure is a balance point, not a live one
     p.on_dashboard({"timestamp": "2026-10-13T10:01:00Z", "Balance": 5_100_000, "Flags": 0})
     assert p.earnings.live == ("2026-10-13T10:01:00Z", 5_100_000)
+
+
+def test_a_species_on_a_body_nobody_walked_on_counts_five_times() -> None:
+    alpha = hash("Alpha") & 0xFFFFFF
+    hmc = {"PlanetClass": "High metal content body", "MassEM": 0.5, "Landable": True}
+    e = _fold(
+        _scan("2026-10-13T10:00:00Z", "Alpha", 3, WasFootfalled=False, **hmc),
+        _scan("2026-10-13T10:01:00Z", "Alpha", 4, WasFootfalled=True, **hmc),
+        _e("2026-10-13T10:05:00Z", "ScanOrganic", ScanType="Analyse", Species_Localised="Bacterium Volu",
+           SystemAddress=alpha, Body=3),
+        _e("2026-10-13T10:09:00Z", "ScanOrganic", ScanType="Analyse", Species_Localised="Bacterium Volu",
+           SystemAddress=alpha, Body=4),
+        _e("2026-10-13T10:12:00Z", "ScanOrganic", ScanType="Analyse", Species_Localised="Tussock Cultro",
+           SystemAddress=alpha, Body=9),  # no scan of that body: the base value
+    )  # fmt: skip
+    base, tussock = species_value("Bacterium Volu") or 0, species_value("Tussock Cultro") or 0
+    ui = ui_earnings(e, NOW)
+    newest_first = [(tussock, False), (base, False), (base * 5, True)]
+    assert [(s.value, s.first) for s in ui.bio_species] == newest_first
+    assert ui.bio_value == base * 6 + tussock
+    # a death loses the bonus too
+    e.add(parse_money(_e("2026-10-13T11:00:00Z", "Died"))[0])
+    assert e.lost == ui.data_value + base * 6 + tussock
+
+
+def test_each_window_shows_what_was_gathered_in_it_and_is_still_unsold() -> None:
+    alpha = hash("Alpha") & 0xFFFFFF
+    hmc = {
+        "PlanetClass": "High metal content body",
+        "MassEM": 0.5,
+        "WasDiscovered": False,
+        "WasMapped": False,
+    }
+    e = _fold(
+        _e("2026-10-11T09:00:00Z", "ScanOrganic", ScanType="Analyse", Species_Localised="Tussock Cultro",
+           SystemAddress=1, Body=1),  # last week
+        _scan("2026-10-12T10:00:00Z", "Alpha", 3, **hmc),  # this week, before today
+        _e("2026-10-13T10:00:00Z", "LoadGame", Credits=5),  # the session starts today 12:00 local
+        _e("2026-10-13T11:00:00Z", "SAAScanComplete", SystemAddress=alpha, BodyID=3, ProbesUsed=5,
+           EfficiencyTarget=6),
+        _e("2026-10-13T12:00:00Z", "ScanOrganic", ScanType="Analyse", Species_Localised="Bacterium Volu",
+           SystemAddress=2, Body=2),
+    )  # fmt: skip
+    scan = e.bodies[(alpha, 3)].scan
+    full, scan_only = sale_value(scan, True, True), sale_value(scan, False, False)
+    ui = ui_earnings(e, NOW)
+    mapping = full - scan_only
+    assert (ui.unsold_map.session, ui.unsold_map.today, ui.unsold_map.week) == (mapping, mapping, full)
+    bacterium = species_value("Bacterium Volu") or 0
+    assert (ui.unsold_bio.session, ui.unsold_bio.today, ui.unsold_bio.week) == (bacterium,) * 3
+    assert ui.data_value == full  # everything carried, whenever gathered
+    assert ui.bio_value == bacterium + (species_value("Tussock Cultro") or 0)
+    # selling clears it from every window
+    sale = _e("2026-10-13T13:00:00Z", "SellExplorationData", Systems=["Alpha"], TotalEarnings=9)
+    for ev in parse_money(sale):
+        e.add(ev)
+    ui = ui_earnings(e, NOW)
+    assert (ui.unsold_map.session, ui.unsold_map.week) == (0, 0)
+
+
+def test_a_honk_inside_a_window_adds_only_the_bodies_not_scanned_before_it() -> None:
+    alpha = hash("Alpha") & 0xFFFFFF
+    star = {"StarType": "K", "StellarMass": 0.7}
+    e = _fold(
+        _scan("2026-10-12T10:00:00Z", "Alpha", 0, **star),  # the arrival star, scanned yesterday
+        _scan("2026-10-12T10:01:00Z", "Alpha", 3, PlanetClass="Icy body", MassEM=0.1,
+              DistanceFromArrivalLS=900),
+        _e("2026-10-13T11:00:00Z", "FSSDiscoveryScan", SystemAddress=alpha, SystemName="Alpha", BodyCount=5),
+        _e("2026-10-13T11:30:00Z", "FSSDiscoveryScan", SystemAddress=alpha, SystemName="Alpha", BodyCount=5),
+    )  # fmt: skip
+    ui = ui_earnings(e, NOW)
+    # three bodies only counted by the honk today, at the 500 minimum each; the scans count in the week
+    assert ui.unsold_map.today == 3 * honk_value(None)
+    assert ui.unsold_map.week == ui.data_value
+    assert e.surveyed[alpha][2] == "2026-10-13T11:00:00Z"  # honked again: carried since the first
+
+
+def test_a_death_inside_a_window_leaves_nothing_unsold_in_it() -> None:
+    e = _fold(
+        _e("2026-10-13T10:00:00Z", "LoadGame", Credits=5),
+        _scan("2026-10-13T10:05:00Z", "Alpha", 1, StarType="K", StellarMass=0.7),
+        _e("2026-10-13T10:06:00Z", "ScanOrganic", ScanType="Analyse", Species_Localised="Bacterium Volu",
+           SystemAddress=1, Body=2),
+        _e("2026-10-13T10:30:00Z", "Died"),
+    )  # fmt: skip
+    ui = ui_earnings(e, NOW)
+    assert (ui.unsold_map.session, ui.unsold_bio.session, ui.unsold_map.week, ui.unsold_bio.week) == (
+        0,
+        0,
+        0,
+        0,
+    )
+
+
+def test_first_footfall_stays_once_a_scan_showed_the_body_untouched() -> None:
+    alpha = hash("Alpha") & 0xFFFFFF
+    hmc = {"PlanetClass": "High metal content body", "MassEM": 0.5}
+    e = _fold(
+        _scan("2026-10-13T10:00:00Z", "Alpha", 3, WasFootfalled=False, **hmc),
+        _scan("2026-10-13T11:00:00Z", "Alpha", 3, WasFootfalled=True, **hmc),  # back after your own landing
+        _e("2026-10-13T11:05:00Z", "ScanOrganic", ScanType="Analyse", Species_Localised="Bacterium Volu",
+           SystemAddress=alpha, Body=3),
+    )  # fmt: skip
+    assert ui_earnings(e, NOW).bio_species[0].first
+
+
+def test_a_star_never_counts_as_walked_on() -> None:
+    (ev,) = parse_money(
+        _scan("2026-10-13T10:00:00Z", "Alpha", 0, StarType="K", StellarMass=0.7, WasFootfalled=False)
+    )
+    assert isinstance(ev, DataScanned) and ev.body.footfalled is None

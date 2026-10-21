@@ -9,6 +9,8 @@ from typing import Literal
 from edmultitool.core.plot import PLOT_KINDS, PlotKind
 
 RouteBasis = Literal["full", "now", "best"]
+FollowBy = Literal["position", "stops"]
+FOLLOW_BY: tuple[FollowBy, ...] = ("position", "stops")
 ROUTE_BASES: tuple[RouteBasis, ...] = ("full", "now", "best")
 ROUTE_BASIS_LABELS: dict[RouteBasis, str] = {
     "full": "full tank",
@@ -75,6 +77,7 @@ class Settings:
     flash: bool = True  # the page flashes on arriving where one body is worth at least `flash_over`
     flash_over: int = 30_000_000  # Cr
     update_check: bool = True  # ask GitHub about once a day whether a newer version is out
+    follow_by: FollowBy = "position"  # stops flown past count as behind you; "stops": only those reached
 
 
 def remember_destination(recent: tuple[str, ...], name: str) -> tuple[str, ...]:
@@ -184,6 +187,7 @@ def normalise(raw: dict[str, object]) -> Settings:
     margin = _number(raw.get("margin_pct"))
     flash, over = raw.get("flash"), _number(raw.get("flash_over"))
     check = raw.get("update_check")
+    by = raw.get("follow_by")
     return Settings(
         route_basis=basis if basis in ROUTE_BASES else "full",
         margin_pct=min(MAX_MARGIN_PCT, max(0.0, margin)) if margin is not None else 0.0,
@@ -194,6 +198,7 @@ def normalise(raw: dict[str, object]) -> Settings:
         if over is not None and FLASH_LIMITS[0] <= over <= FLASH_LIMITS[1]
         else 30_000_000,
         update_check=check if isinstance(check, bool) else True,
+        follow_by=by if by in FOLLOW_BY else "position",
     )
 
 

@@ -90,6 +90,20 @@ Checked by hand on 2026-10-12 against spansh.co.uk's own results pages for the r
 riches 7 systems / 11 bodies / scan 3,354,293 / mapping 12,187,252 / 1,114 jumps — identical; bio
 per-body species values and sums identical (e.g. Qa'wakana 12 f: 9 species, 34,841,800 Cr).
 
+A tour job's `from` must be a system Spansh has a record of: from an undiscovered one it answers 400
+`{"error": "Could not find starting system"}`. When that start is the system you are in, the search starts
+instead from the nearest system Spansh knows (next section) and says so.
+
+### The nearest system Spansh knows to a point  (verified 2026-10-18)
+`POST /systems/search` with no filter at all, nearest first, one row:
+```json
+{"filters": {}, "sort": [{"distance": {"direction": "asc"}}],
+ "reference_coords": {"x": -75.0, "y": -150.0, "z": -340.0}, "size": 1, "page": 0}
+```
+→ `{"count": 10000, "results": [{"id64", "name", "x", "y", "z", "distance", …}]}` (Merope, 3.65 ly; from its
+own coordinates: Merope at 0.0 ly). Recorded reply: `tests/data/spansh/systems_nearest_merope.json`
+(trimmed). Cached like the other searches.
+
 ### Route-only plots: the galaxy plotter  (verified 2026-10-12)
 Both route-only choices — "Normal" and "With neutron boosts" — use Spansh's **galaxy plotter**, so both show
 every jump with fuel (the same table either way). Shape read off spansh.co.uk's own page

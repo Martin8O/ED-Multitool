@@ -3,10 +3,12 @@
 A route's points are its start, then its stops (tour) or waypoints (plots), then its destination, each
 known by id64. `next` indexes them: 0 = go to the start first, len(points) = arrived. Arriving in ANY
 later point moves `next` past it, so skipping or overshooting a stop is safe; arriving in an earlier
-point, or anywhere off the route, changes nothing.
+point, or anywhere off the route, changes nothing — unless the route is followed by your position: then a
+tour's stops you are clearly beyond along the start → destination line count as behind you too.
 """
 
 import math
+from dataclasses import replace
 
 from edmultitool.core.events import GameRoute
 from edmultitool.core.view import UiFollow, UiGameRoute, UiRoute, UiStop, UiWaypoint, stop_worth
@@ -44,17 +46,48 @@ def step(route: UiRoute, next_index: int, by: int) -> int:
     return max(0, min(len(points(route)), next_index + by))
 
 
-def ui_follow(route: UiRoute | None, next_index: int) -> UiFollow:
+def along(route: UiRoute, pos: tuple[float, float, float] | None) -> float | None:
+    """How far along a tour's start → destination line `pos` is, ly: its projection, kept within the line.
+    None for a plot, or when the route's ends or your position are not known."""
+    a, b = route.from_pos, route.to_pos
+    if route.mode != "tour" or a is None or b is None or pos is None:
+        return None
+    line = math.dist(a, b)
+    if line == 0:
+        return 0.0
+    t = sum((pos[i] - a[i]) * (b[i] - a[i]) for i in range(3)) / (line * line)
+    return max(0.0, min(1.0, t)) * line
+
+
+def pass_by_position(route: UiRoute, next_index: int, pos: tuple[float, float, float] | None) -> int:
+    """`next_index` moved past every tour stop you are more than one jump (the route's range) beyond along
+    the line: flown past, not visited. Never back, never past the destination — that one you arrive in."""
+    here = along(route, pos)
+    if here is None:
+        return next_index
+    margin = max(route.range_ly, 1.0)
+    passed = sum(1 for s in route.stops if s.along_ly + margin < here)  # stops are in order along the line
+    return max(next_index, passed + 1) if passed else next_index  # the start stays until a stop is passed
+
+
+def ui_follow(
+    route: UiRoute | None,
+    next_index: int,
+    by: str = "position",
+    pos: tuple[float, float, float] | None = None,
+) -> UiFollow:
+    """`by` = how the route is followed ("position" / "stops"); `pos` = where you are."""
     if route is None:
-        return UiFollow()
+        return UiFollow(by=by)
     ids = points(route)
     count = len(ids)
     n = max(0, min(count, next_index))
+    here = along(route, pos) if by == "position" else None
+    where = round(here, 1) if here is not None else None
     if n >= count:
-        return UiFollow(True, n, count, True, text=f"arrived at {route.to_name}")
-    if route.mode == "tour":
-        return _tour(route, n, count)
-    return _plot(route, n, count)
+        return UiFollow(True, n, count, True, text=f"arrived at {route.to_name}", by=by, along_ly=where)
+    f = _tour(route, n, count) if route.mode == "tour" else _plot(route, n, count)
+    return replace(f, by=by, along_ly=where)
 
 
 def _tour(route: UiRoute, n: int, count: int) -> UiFollow:

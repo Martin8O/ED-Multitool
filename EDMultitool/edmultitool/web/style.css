@@ -611,6 +611,26 @@ td.worth .wealth { margin-left: 0; font-size: var(--fs-lg); }
   border-radius: var(--r-sm);
 }
 .follow[hidden] { display: none; }
+/* the route strip: one mark per jump, the stops coloured by what they offer, what is behind you dimmed */
+.route-strip { display: flex; align-items: center; gap: 0.6rem; margin: 0 0 0.6rem; font-size: var(--fs-sm); }
+.route-strip[hidden] { display: none; }
+.strip-count, .strip-ly { color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.strip-lane { flex: 1 1 auto; min-width: 0; overflow: hidden; }
+.strip-lane svg { display: block; }
+.strip .s-line { stroke: var(--accent); stroke-width: 2; }
+.strip .s-arc { fill: none; stroke: var(--accent); stroke-width: 1.5; }
+.strip .s-tick { stroke: var(--accent); stroke-width: 1.5; }
+.strip .s-dot { fill: var(--accent); stroke: var(--panel); stroke-width: 1; }
+.strip .s-start, .strip .s-end { fill: var(--panel); stroke: var(--accent); stroke-width: 2; }
+.strip .s-bio { fill: var(--bio); }
+.strip .s-map { fill: var(--scan); }
+.strip .s-both { fill: var(--bio); stroke: var(--scan); stroke-width: 2.5; }
+.strip .s-neutron { fill: var(--key); }
+.strip .s-spent { fill: var(--muted); }
+.strip .past { opacity: 0.3; }
+.strip .s-here { fill: none; stroke: var(--text); stroke-width: 1.5; }
+.strip .s-arrow { stroke: var(--key); stroke-width: 2; }
+.strip .s-head { fill: var(--key); }
 .follow-next { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.6rem; }
 .follow-label {
   font-size: var(--fs-xs);
@@ -754,6 +774,7 @@ tbody.stop.filtered { display: none; }
 .legend-title { color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; font-size: var(--fs-xs); }
 .legend span:not(.legend-title) { padding: 0 0.4rem; border-radius: var(--r-sm); background: var(--chip); }
 .legend .legend-title:not(:first-child) { margin-left: 0.8rem; }
+.lg-bio { color: var(--bio); } .lg-map { color: var(--scan); } .lg-neutron { color: var(--key); }
 
 .route .hint { margin-top: 0.6rem; }
 
@@ -874,9 +895,11 @@ textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; 
 #svc-table tr.barred .sys, #svc-table tr.barred .st { color: var(--bad); }
 .price { font-weight: 700; }
 .standing { font-size: var(--fs-sm); color: var(--muted); }
-.standing.s-hostile { color: var(--bad); font-weight: 700; }
-.standing.s-unfriendly { color: var(--c-far); }
-.standing.s-friendly, .standing.s-allied { color: var(--ok); }
+.standing.s-hostile { color: var(--rep-hostile); font-weight: 700; }
+.standing.s-unfriendly { color: var(--rep-unfriendly); }
+.standing.s-cordial { color: var(--rep-cordial); }
+.standing.s-friendly { color: var(--rep-friendly); }
+.standing.s-allied { color: var(--rep-allied); font-weight: 700; }
 .faction { display: block; font-size: var(--fs-sm); max-width: 14rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 /* market data age: five steps, fresh green → old red; a tinted tag, quieter than the values beside it */
 .age { --age: var(--ok); display: inline-block; padding: 0.05rem 0.45rem; border-radius: var(--r-sm); font-size: var(--fs-sm);
@@ -945,7 +968,7 @@ button.copy-icon.copy-failed { color: var(--bad); border-color: var(--bad); }
 
 /* --- services: the Stations / Engineers switch, the places, the service groups; the answer below -------- */
 .svc-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.4rem 1rem; }
-.svc-switch { display: inline-flex; gap: 0.4rem; }
+.svc-switch { display: inline-flex; gap: 0.4rem; margin: 0 0.3rem; vertical-align: middle; font-size: var(--fs-md); font-weight: 400; letter-spacing: normal; text-transform: none; }
 .svc-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 1rem; }
 .svc-row .sub-head { margin: 0; }
 /* one card, two views: the stations or the engineers (the switch) */
@@ -984,6 +1007,13 @@ button.copy-icon.copy-failed { color: var(--bad); border-color: var(--bad); }
   --sp-emp: light-dark(#a07400, #ffd75e); /* Empire: gold */
   --sp-all: var(--ok); /* Alliance: green */
   --sp-ind: light-dark(#6b717c, #b9bec7); /* Independent: grey */
+  /* reputation, worst to best: red, orange, grey, then ever stronger green */
+  --rep-hostile: var(--bad);
+  --rep-unfriendly: light-dark(#b04a00, #ff9a4d);
+  --rep-neutral: var(--muted);
+  --rep-cordial: light-dark(#557a5c, #8fb898); /* a greyish green: better than neutral, not yet friendly */
+  --rep-friendly: var(--ok);
+  --rep-allied: light-dark(#008a35, #2bff6e); /* the most vivid green, bold */
 }
 .cr-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.7rem; }
 .cr-head { display: flex; align-items: baseline; gap: 0.5rem; }
@@ -993,9 +1023,22 @@ button.copy-icon.copy-failed { color: var(--bad); border-color: var(--bad); }
   border-radius: 50%; background: var(--dot);
 }
 .cr-value { font-variant-numeric: tabular-nums; color: var(--muted); font-size: var(--fs-md); }
-.cr-tier.t-hostile, .cr-tier.t-unfriendly { color: var(--bad); }
-.cr-tier.t-cordial, .cr-tier.t-friendly { color: var(--ok); }
-.cr-tier.t-allied { color: var(--v-high); }
+.cr-tier.t-hostile { color: var(--rep-hostile); }
+.cr-tier.t-unfriendly { color: var(--rep-unfriendly); }
+.cr-tier.t-neutral { color: var(--rep-neutral); }
+.cr-tier.t-cordial { color: var(--rep-cordial); }
+.cr-tier.t-friendly { color: var(--rep-friendly); }
+.cr-tier.t-allied { color: var(--rep-allied); text-shadow: 0 0 6px color-mix(in srgb, var(--ok) 55%, transparent); }
+/* the reputation bar shows its words as coloured zones (-100 … 100: -90, -35, 4, 35, 90) */
+.cr-bar.rep {
+  background: linear-gradient(90deg,
+    color-mix(in srgb, var(--rep-hostile) 45%, var(--chip)) 0 5%,
+    color-mix(in srgb, var(--rep-unfriendly) 35%, var(--chip)) 5% 32.5%,
+    var(--chip) 32.5% 52%,
+    color-mix(in srgb, var(--rep-cordial) 30%, var(--chip)) 52% 67.5%,
+    color-mix(in srgb, var(--rep-friendly) 40%, var(--chip)) 67.5% 95%,
+    color-mix(in srgb, var(--rep-allied) 65%, var(--chip)) 95% 100%);
+}
 .cr-bar { position: relative; height: 0.45rem; margin-top: 0.3rem; border-radius: var(--r-sm); background: var(--chip); overflow: hidden; }
 .cr-bar.rep { overflow: visible; }
 .cr-fill { display: block; height: 100%; background: var(--accent); }
@@ -1072,6 +1115,14 @@ button.copy-icon.copy-failed { color: var(--bad); border-color: var(--bad); }
 .rk-label { font-size: var(--fs-sm); color: color-mix(in srgb, var(--rk) 80%, var(--muted)); }
 .rk-title { font-size: var(--fs-lg); font-weight: 600; text-shadow: 0 0 6px color-mix(in srgb, var(--rk) 55%, transparent); }
 .rk-next { font-size: var(--fs-xs); color: var(--muted); }
+/* moved on since the game last said: the known part solid, the rest of the track hatched */
+.rk-bar.stale {
+  background: repeating-linear-gradient(
+    -45deg,
+    color-mix(in srgb, var(--rk) 22%, #0b0c0e) 0 3px,
+    color-mix(in srgb, var(--rk) 40%, #0b0c0e) 3px 6px
+  );
+}
 .rk-bar { position: relative; height: 0.3rem; background: color-mix(in srgb, var(--rk) 22%, #0b0c0e); }
 .rk-bar > span {
   display: block;
@@ -1105,6 +1156,8 @@ body.flash::after {
 .ea-table td.n, .ea-table th.n { text-align: center; }
 .ea-table tbody th { font-weight: 400; }
 .ea-table td.zero { color: var(--muted); }
+.ea-unsold, #credits .unsold { color: var(--muted); font-weight: 400; font-size: 0.85em; white-space: nowrap; }
+.ea-first { color: var(--bio); font-size: var(--fs-xs); }
 .ea-head th { padding-top: 0.7rem; }
 .ea-total th, .ea-total td { border-top: 1px solid var(--line); font-weight: 600; }
 tr.ea-net th, tr.ea-net td { border-top: 2px solid var(--line); font-weight: 700; font-size: var(--fs-lg); }
@@ -1263,10 +1316,10 @@ button.info.rk-open {
 .st-lines { list-style: none; margin: 0.5rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(13.5rem, 1fr)); gap: 0.5rem 0.9rem; }
 .st-line { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "label label" "value delta" "spark spark"; gap: 0.1rem 0.5rem; padding: 0.45rem 0.6rem; background: var(--stop); border-radius: var(--r-sm); }
 .st-line .st-label { grid-area: label; font-size: var(--fs-xs); color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
-.st-line .st-value { grid-area: value; font-size: var(--fs-lg); font-weight: 700; color: var(--key); font-variant-numeric: tabular-nums; }
+.st-line .st-value { grid-area: value; font-size: var(--fs-xl); font-weight: 700; color: var(--key); font-variant-numeric: tabular-nums; }
 .st-line .st-delta { grid-area: delta; align-self: end; }
 .st-line .spark { grid-area: spark; width: 100%; height: 1.9rem; }
-.st-delta { font-size: var(--fs-sm); color: var(--ok); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.st-delta { font-size: var(--fs-xs); color: color-mix(in srgb, var(--ok) 55%, var(--muted)); font-variant-numeric: tabular-nums; white-space: nowrap; } /* the growth stays quiet beside the value */
 .st-delta.down { color: var(--muted); }
 .spark-line { fill: none; stroke: var(--accent); stroke-width: 1.5; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
 .spark-hit { fill: transparent; }
@@ -1350,3 +1403,6 @@ dialog.about:focus, dialog.about:focus-visible { outline: none; }
 
 /* the one value a row or card is there for: the same colour everywhere (see --key) */
 .key { color: var(--key); font-weight: 700; }
+.follow-by { margin-left: auto; }
+.follow-by[hidden] { display: none; }
+.follow-by:not([hidden]) + .follow-buttons { margin-left: 0; }

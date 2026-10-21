@@ -177,10 +177,24 @@ function rankEmblem(kind, rank, size = 64) {
   return root;
 }
 
+// a rank moved on since the game last wrote its percent (it does so only at login)
+const STALE_NOTE = "Moved on since the game last said: it tells the exact percent at your next login.";
+
+/**
+ * The percent to the next rank as shown: once a promotion or a sale moved it on (`stale`), the game tells
+ * the new one only at the next login, so the last known is the least it is ("?" right after a promotion).
+ * @param {{progress: number, stale: boolean}} r
+ * @returns {string}
+ */
+function rankPercent(r) {
+  if (!r.stale) return `${r.progress} %`;
+  return r.progress > 0 ? `≥ ${r.progress} %` : "? %";
+}
+
 /**
  * One rank as a HUD card: emblem, label, progress bar, title, and what comes next.
  * @param {{kind: string, rank: number, top: number, title: string, next_title: string, progress: number,
- *   how: string, note: string, ladder: {title: string, unlocks: string}[]}} r
+ *   stale: boolean, how: string, note: string, ladder: {title: string, unlocks: string}[]}} r
  * @returns {HTMLElement}
  */
 function rankCard(r) {
@@ -196,7 +210,7 @@ function rankCard(r) {
   label.className = "rk-label";
   label.textContent = look.label;
   const bar = document.createElement("div");
-  bar.className = "rk-bar";
+  bar.className = r.stale && !top ? "rk-bar stale" : "rk-bar";
   bar.setAttribute("role", "progressbar");
   bar.setAttribute("aria-valuemin", "0");
   bar.setAttribute("aria-valuemax", "100");
@@ -210,7 +224,8 @@ function rankCard(r) {
   title.textContent = r.title;
   const next = document.createElement("span");
   next.className = "rk-next";
-  next.textContent = top ? "The top rank" : `${r.progress} % to ${r.next_title}`;
+  next.textContent = top ? "The top rank" : `${rankPercent(r)} to ${r.next_title}`;
+  if (r.stale && !top) next.title = STALE_NOTE;
   body.append(label, bar, title, next);
   // the whole card opens its ladder in the page's (i) bubble; the emblem is its button for the keyboard
   li.dataset.info = `rk-ladder-${r.kind}`;
@@ -227,8 +242,8 @@ function rankCard(r) {
 /**
  * Every rank of one kind, yours marked, with what moves you up and what each rank opens: the text of the
  * (i) bubble the card opens (hidden in the card).
- * @param {{kind: string, rank: number, progress: number, next_title: string, how: string, note: string,
- *   ladder: {title: string, unlocks: string}[]}} r
+ * @param {{kind: string, rank: number, progress: number, stale: boolean, next_title: string, how: string,
+ *   note: string, ladder: {title: string, unlocks: string}[]}} r
  * @param {string} label
  * @returns {HTMLElement}
  */
@@ -257,7 +272,7 @@ function rankLadder(r, label) {
       item.setAttribute("aria-current", "step");
       const you = document.createElement("span");
       you.className = "rk-you";
-      you.textContent = r.next_title ? `you · ${r.progress} %` : "you";
+      you.textContent = r.next_title ? `you · ${rankPercent(r)}` : "you";
       item.append(you);
     }
     if (step.unlocks) {
@@ -269,6 +284,12 @@ function rankLadder(r, label) {
     list.append(item);
   });
   box.append(head, how, list);
+  if (r.stale && r.next_title) {
+    const later = document.createElement("p");
+    later.className = "rk-note";
+    later.textContent = STALE_NOTE;
+    box.append(later);
+  }
   if (r.note) {
     const note = document.createElement("p");
     note.className = "rk-note";

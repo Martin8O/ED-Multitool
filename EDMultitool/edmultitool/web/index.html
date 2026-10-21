@@ -281,8 +281,15 @@
               <span class="v-low">low</span><span class="v-mid">fair</span><span class="v-high">good</span><span class="v-top">top</span>
               <span class="legend-title">Distance</span>
               <span class="c-near">near</span><span class="c-ok">fair</span><span class="c-far">far</span><span class="c-vfar">very far</span>
+              <span class="legend-title">Strip</span>
+              <span class="lg-bio">exobiology</span><span class="lg-map">FSS/DSS</span><span class="lg-neutron">neutron</span>
             </span>
           </span>
+        </div>
+        <div id="route-strip" class="route-strip" hidden>
+          <span id="strip-count" class="strip-count"></span>
+          <div id="strip-lane" class="strip-lane"></div>
+          <span id="strip-ly" class="strip-ly"></span>
         </div>
         <div id="follow" class="follow" hidden>
           <div class="follow-next">
@@ -291,6 +298,10 @@
             <button id="b-copy" type="button" class="copy-icon" title="Copy the next system's name to the clipboard"
                     aria-label="Copy the next system's name"></button>
             <span id="follow-wealth" class="wealth"></span>
+            <span id="follow-by" class="svc-switch follow-by" role="group" aria-label="Follow">
+              <button id="fb-position" type="button" aria-pressed="true" title="Stops you flew past by more than a jump count as behind you, as if you had skipped them">By my position</button>
+              <button id="fb-stops" type="button" aria-pressed="false" title="Next moves on only when you arrive in the next stop (or press Skip)">Stop by stop</button>
+            </span>
             <span class="follow-buttons">
               <button id="b-back" type="button" title="Make the previous point the next one again">Back</button>
               <button id="b-skip" type="button" title="Leave this point out and go on to the one after">Skip</button>
@@ -663,11 +674,12 @@
   <div id="panel-services" class="grid tab-panel" role="tabpanel" aria-labelledby="tab-services" hidden>
     <section id="services" class="card wide services" aria-labelledby="h-services">
       <div class="svc-head">
-        <h2 id="h-services">Nearest service <button type="button" class="info" data-info="i-services" aria-describedby="i-services" aria-label="About this card">i</button></h2>
-        <span class="svc-switch" role="group" aria-label="Show">
-          <button id="svc-stations" type="button" aria-pressed="true" title="Stations with the services you tick">Stations</button>
-          <button id="svc-engineers" type="button" aria-pressed="false" title="The nearest ship or on-foot engineers (built in: no online search)">Engineers</button>
-        </span>
+        <h2 id="h-services">Nearest
+          <span class="svc-switch" role="group" aria-label="Show">
+            <button id="svc-stations" type="button" aria-pressed="true" title="Stations with the services you tick">Stations</button>
+            <button id="svc-engineers" type="button" aria-pressed="false" title="The nearest ship or on-foot engineers (built in: no online search)">Engineers</button>
+          </span>
+          <button type="button" class="info" data-info="i-services" aria-describedby="i-services" aria-label="About this card">i</button></h2>
       </div>
       <form id="svc-form" class="svc-form svc-only" autocomplete="off" novalidate>
         <div class="svc-row" role="group" aria-label="Places">
@@ -1055,6 +1067,8 @@
         <ul>
           <li><strong>Trade profit</strong>: what you sold for minus what you paid (mined or found cargo counts in full).
             Bought cargo is not spending until it is sold.</li>
+          <li><strong>+ in grey</strong>: exploration and exobiology data gathered in that period and not sold yet, an
+            estimate. It moves into the paid figure when you sell it, and is lost if you die first.</li>
           <li><strong>This session</strong> runs from the game's start; <strong>today</strong> from midnight;
             <strong>this week</strong> from Monday, both by this computer's clock.</li>
         </ul>
@@ -1080,8 +1094,8 @@
         <ul>
           <li><strong>Cartographic data</strong>: every star and planet you scanned since you last sold that system, valued
             with the first-discovery, first-mapped and probe bonuses your scans show. An estimate.</li>
-          <li><strong>Exobiology</strong>: species analysed since your last sale at Vista Genomics, at their base value
-            (a first-logged bonus is not counted).</li>
+          <li><strong>Exobiology</strong>: species analysed since your last sale at Vista Genomics, at their base value;
+            five times that where your scan showed nobody had walked on the body before (first footfall).</li>
         </ul>
       </div>
     </section>

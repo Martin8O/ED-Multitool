@@ -12,6 +12,7 @@ from typing import Any
 
 import pytest
 
+from edmultitool.core.events import GameRoute, NavPoint
 from edmultitool.core.settings import ScoutPrefs, Settings, load_settings, parse_scout_prefs
 from edmultitool.plugin import ScoutPlugin
 from edmultitool.server import MAX_BODY, ApiReply, ScoutServer
@@ -430,3 +431,90 @@ def test_tk_settings_tab_keeps_the_scout_form(tmp_path: Path) -> None:
 
     current = Settings(scout=ScoutPrefs(to_system="Colonia"))
     assert settings_from_form("full tank", "10", current).scout == current.scout
+
+
+def test_a_start_spansh_has_no_record_of_begins_at_the_nearest_system_it_knows(tmp_path: Path) -> None:
+    p = ScoutPlugin(tmp_path)
+    for entry in _sample():
+        p.on_journal(entry, None)
+    here = p.state.system
+    assert here and p.state.star_pos is not None
+    starts: list[str] = []
+
+    def answer(request: Request) -> Response:
+        if request.url.endswith("/systems/search"):
+            return reply("systems_nearest_merope")
+        if request.method == "POST":
+            start = dict(request.form or ())["from"]
+            starts.append(start)
+            if start == here:  # an undiscovered system: Spansh has no record of it
+                return reply("error_unknown_system")
+        return _spansh(request)
+
+    p.client = make_client(ScriptedTransport(answer, repeat_last=True), FakeTime())
+    p.start_worker()
+    try:
+        p.api_post("/api/scout", {**PREFS, "from_system": here})
+        _pump_until(p, "done")
+    finally:
+        p.stop_worker()
+    assert starts[0] == here and set(starts[1:]) == {"Merope"}
+    route = p.scout.route
+    assert route is not None
+    assert p.scout.message == f"Spansh has no record of {here} yet: started from {route.from_name}, nearby."
+    assert p.ui.follow.next_index == 1  # you are by the start already: its first stop is next
+
+
+def test_a_typed_start_spansh_does_not_know_is_still_refused(tmp_path: Path) -> None:
+    p = ScoutPlugin(tmp_path)
+    for entry in _sample():
+        p.on_journal(entry, None)
+    p.client = make_client(ScriptedTransport(reply("error_unknown_system"), repeat_last=True), FakeTime())
+    p.start_worker()
+    try:
+        p.api_post("/api/scout", {**PREFS, "from_system": "Nowhere Xyzzy Qq"})
+        _pump_until(p, "error")
+    finally:
+        p.stop_worker()
+    assert p.scout.message.startswith("Spansh does not know the start system 'Nowhere Xyzzy Qq'")
+
+
+def test_a_galaxy_map_destination_spansh_has_no_record_of_ends_at_the_nearest_system_it_knows(
+    tmp_path: Path,
+) -> None:
+    p = ScoutPlugin(tmp_path)
+    for entry in _sample():
+        p.on_journal(entry, None)
+    here, pos = p.state.system, p.state.star_pos
+    assert here and pos is not None and p.state.address is not None
+    far = (-75.0, -150.0, -340.0)
+    p.game = GameRoute(
+        (NavPoint(here, p.state.address, pos, "K"), NavPoint("Prae Undiscovered", 99, far, "M")),
+        "2026-10-18T10:00:00Z",
+    )
+    dests: list[str] = []
+
+    def answer(request: Request) -> Response:
+        if request.url.endswith("/systems/search"):
+            assert json.loads(request.json_body or "{}")["reference_coords"] == dict(
+                zip("xyz", far, strict=True)
+            )
+            return reply("systems_nearest_merope")
+        if request.method == "POST":
+            dest = dict(request.form or ())["to"]
+            dests.append(dest)
+            if dest == "Prae Undiscovered":
+                return Response(400, json.dumps({"error": "Could not find finishing system"}).encode("utf-8"))
+        return _spansh(request)
+
+    p.client = make_client(ScriptedTransport(answer, repeat_last=True), FakeTime())
+    p.start_worker()
+    try:
+        p.api_post("/api/scout", {**PREFS, "from_system": here, "to_system": "Prae Undiscovered"})
+        _pump_until(p, "done")
+    finally:
+        p.stop_worker()
+    assert dests[0] == "Prae Undiscovered" and set(dests[1:]) == {"Merope"}
+    route = p.scout.route
+    assert route is not None
+    assert "Spansh has no record of" in p.scout.message and "Prae Undiscovered" in p.scout.message

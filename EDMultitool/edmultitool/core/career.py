@@ -18,6 +18,7 @@ from edmultitool.core.events import (
     PledgeChanged,
     PowerplayKnown,
     PowerRanked,
+    ProgressMoved,
     RanksKnown,
     ReputationKnown,
 )
@@ -108,6 +109,8 @@ class Career:
     standings: dict[str, float] = field(default_factory=dict)  # superpower → -100..100, the newest known
     ranks: dict[str, int] = field(default_factory=dict)  # every rank the game keeps → its number
     progress: dict[str, int] = field(default_factory=dict)  # → percent to the next
+    # ranks moved on (a promotion, a sale) since the game last wrote their percent: known at the next login
+    stale: set[str] = field(default_factory=set)
     power: str | None = None  # pledged to; "" = none, None = no Powerplay entry seen
     merits: int | None = None  # in all, for the power pledged to
     pp_rank: int | None = None  # the game's own rank with that power (None = no entry says it)
@@ -137,9 +140,11 @@ class Career:
             case RanksKnown():
                 if event.progress:
                     self.progress.update(event.values)
+                    self.stale.difference_update(kind for kind, _ in event.values)
                 else:
                     if len(event.values) == 1:  # a promotion: that rank's progress starts again
                         self.progress[event.values[0][0]] = 0
+                        self.stale.add(event.values[0][0])  # what pushed it over may count already
                     self.ranks.update(event.values)
                 self.navy_days[_day(when)] = tuple(self._navy_level(n) for n in NAVIES)
             case PowerplayKnown():
@@ -179,6 +184,8 @@ class Career:
                 self.last_ranked = (event.power, event.rank, when)
                 if event.power == self.power or self.power is None:
                     self.pp_rank = event.rank
+            case ProgressMoved():
+                self.stale.add(event.rank)
 
     def week_merits(self) -> dict[str, int]:
         """Merits earned in each Powerplay week: the rise of the game's total over the week (from 0 in a week
@@ -233,6 +240,7 @@ class UiRank:
     title: str  # "Cadet"
     next_title: str  # "" = the top rank
     progress: int  # percent to the next
+    stale: bool = False  # moved on since the game last wrote it: `progress` is the least it is now
     ladder: tuple[UiRankStep, ...] = ()  # every rank of this kind, lowest first
     how: str = ""  # what moves you up
     note: str = ""  # anything else worth knowing about the ladder
@@ -348,7 +356,16 @@ def ui_career(c: Career, now: datetime, hold: UiHold | None = None) -> UiCareer:
         progress = c.progress.get(kind, 0)
         ranks.append(
             UiRank(
-                kind, rank, len(titles) - 1, titles[rank], next_title, progress, ladder, guide.how, guide.note
+                kind,
+                rank,
+                len(titles) - 1,
+                titles[rank],
+                next_title,
+                progress,
+                kind in c.stale and not top,
+                ladder,
+                guide.how,
+                guide.note,
             )
         )
     this_week = cycle_start(now)

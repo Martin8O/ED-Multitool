@@ -2,6 +2,30 @@
 
 What changed in each version of ED Multitool. Newest first.
 
+## 0.80.0 · 2026-10-22
+- **Version numbers jump to 0.80**: ED Multitool is close to its first full release, and the number now says so.
+- **Unsold data next to your credits.** The top row shows what your exploration and exobiology data is worth
+  until you sell it, and the Earnings card shows, in grey beside what was paid, what you gathered this session,
+  today and this week and have not sold yet. Exploring no longer looks like earning nothing.
+- **First footfall counted.** A species analysed on a body nobody walked on before is valued at five times its
+  base value while you carry it, as Vista Genomics will pay.
+- **The route as a strip**, like the game's own: one mark per jump, the stops coloured by what they offer,
+  what is behind you dimmed, an arrow to the next jump. Long routes turn into ticks, then a line.
+- **Follow a route by your position.** Stops you fly past without visiting (by more than a jump) now count as
+  behind you, so Next keeps up with where you really are; **Back** still takes you to one you want after all.
+  **Stop by stop** in the Next box keeps the old way: Next moves on only when you arrive in the stop. Routes
+  saved by 0.37 look their start and end up once.
+- **Scouting from undiscovered space works.** When Spansh has no record of the system you are in (or of the
+  galaxy-map destination), the search starts (or ends) at the nearest system it knows and says so.
+- **From and To follow you.** From is the system you are in, To the route you plotted in the galaxy map (or
+  the one you follow), until you type something else.
+- **Reputation colours make sense:** red, orange, grey, then ever stronger green up to Allied; the bars show
+  each word as a coloured zone.
+- The Services card's heading is now **Nearest Stations | Engineers**.
+- **Rank progress after a promotion or a sale is no longer shown as exact.** The game tells the percent only
+  when you log in, so after a promotion the card says **? %**, after a sale **≥ 5 %** (at least what it was),
+  with the rest of the bar hatched, until your next login gives the real figure.
+
 ## 0.37.0 · 2026-10-15
 - **First public release.** ED Multitool is now open to everyone on GitHub: download the zip from the
   release page; later versions announce themselves in EDMC's panel and on the page.

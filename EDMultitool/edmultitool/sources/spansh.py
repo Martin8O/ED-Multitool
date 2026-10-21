@@ -539,6 +539,25 @@ def _power_row(row: Any) -> PowerRow:
     )
 
 
+def nearest_system(
+    client: PoliteClient, pos: tuple[float, float, float], cancel: threading.Event
+) -> SystemInfo:
+    """The system Spansh knows nearest to `pos` (x, y, z ly): the system search with no filter, nearest first,
+    one row (docs/api-notes.md). A start for a route search when you are where Spansh has no record yet."""
+    x, y, z = pos
+    query = {
+        "filters": {},
+        "sort": [{"distance": {"direction": "asc"}}],
+        "reference_coords": {"x": x, "y": y, "z": z},
+        "size": 1,
+        "page": 0,
+    }
+    rows = _search(client, "systems", query, cancel)
+    if not rows:
+        raise SourceError("Spansh knows no system near you")
+    return _system_info(rows[0])
+
+
 def _search(client: PoliteClient, what: str, query: dict[str, Any], cancel: threading.Event) -> list[Any]:
     """POST /{what}/search; cached by query (the replies hold whole markets, so they are trimmed first)."""
     cache_key = f"spansh {what} search " + json.dumps(query, sort_keys=True)

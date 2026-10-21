@@ -176,3 +176,19 @@ def test_system_names_parse_exact_ids_and_skip_short_text(tmp_path: Path) -> Non
     # The same text again comes from the cache.
     assert spansh.system_names(client, "Col 285 Sector", threading.Event()) == hits
     assert len(t.requests) == 1
+
+
+def test_the_nearest_system_spansh_knows_to_a_point() -> None:
+    t = ScriptedTransport(reply("systems_nearest_merope"))
+    hit = spansh.nearest_system(make_client(t, FakeTime()), (-75.0, -150.0, -340.0), threading.Event())
+    assert (hit.id64, hit.name, hit.x) == (224644818084, "Merope", -78.59375)
+    sent = json.loads(t.requests[0].json_body or "{}")
+    assert sent == recorded("systems_nearest_merope")["request"]["json"]
+
+
+def test_no_system_near_a_point_is_a_source_error() -> None:
+    empty = Response(200, json.dumps({"count": 0, "results": []}).encode("utf-8"))
+    with pytest.raises(SourceError):
+        spansh.nearest_system(
+            make_client(ScriptedTransport(empty), FakeTime()), (0.0, 0.0, 0.0), threading.Event()
+        )

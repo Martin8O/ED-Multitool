@@ -9,10 +9,13 @@ Carried data:
   and probe-efficiency bonuses as the scan tells them), plus what each system's other bodies add to its sale
   (`arrival.honk_value`; bodies only counted by the discovery scan at the 500 minimum, and nothing for them
   where you did not honk); a sale clears the systems it names, by name;
-- exobiology: every species analysed (third sample), at its base value (`catalog.species`): the journal does
-  not say whether you are the first to log it, so that bonus is never counted; a sale clears one of each
-  species sold.
+- exobiology: every species analysed (third sample), at its base value (`catalog.species`), five times that
+  where the body's scan said nobody had walked on it before (the first-footfall bonus); a sale clears one of
+  each species sold.
 A death loses both.
+
+What was gathered in a window (this session, today, this week) = what you carry now less what of it you
+already carried when the window opened: a body scanned before and mapped inside counts only its mapping.
 
 Balance over time: exact at every login (LoadGame `Credits`), followed between logins by every credit earned,
 spent, or paid for cargo and got back for it (checked against the next login's exact figure: off by a few
@@ -66,9 +69,16 @@ SPEND_LABELS = {
     "rebuy": "Insurance (rebuy)",
     "other": "Other",
 }
+FIRST_FOOTFALL = 5  # a species logged on a body nobody walked on before pays five times its base value
 BALANCE_POINTS = 300  # at most this many points on the balance chart
 MIN_HOURS = 0.1  # credits per hour need at least six minutes of play
 MINUS = "\N{MINUS SIGN}"
+
+
+def species_worth(entry: tuple[str, str, bool]) -> int:
+    """A carried species (name, when, first footfall) at what it sells for; 0 = not in the catalog."""
+    name, _, first = entry
+    return (species_value(name) or 0) * (FIRST_FOOTFALL if first else 1)
 
 
 def _parse(when: str) -> datetime | None:
@@ -85,13 +95,18 @@ class _Body:
     scan: BodyScanned
     mapped: bool = False
     efficient: bool = False
-    when: str = ""
+    when: str = ""  # scanned (a mapping-only body: mapped)
     mapping_only: bool = False  # its scan data was sold before: only the mapping is left to sell
+    mapped_when: str = ""
 
-    def value(self) -> int:
+    def value(self, before: str | None = None) -> int:
+        """What it sells for; with `before`, what of it you carried already before that time."""
+        if before is not None and self.when >= before:
+            return 0
+        mapped = self.mapped and (before is None or self.mapped_when < before)
         if self.mapping_only:
             return sale_value(self.scan, True, self.efficient) - sale_value(self.scan, False, False)
-        return sale_value(self.scan, self.mapped, self.efficient)
+        return sale_value(self.scan, mapped, self.efficient)
 
 
 @dataclass(slots=True)
@@ -100,14 +115,16 @@ class Earnings:
     session_start: str = ""  # the last LoadGame
     session_end: str = ""  # the last Shutdown (older than session_start = the game is still running)
     bodies: dict[tuple[int, int], _Body] = field(default_factory=dict)  # (system id64, BodyID) → unsold data
-    surveyed: dict[int, tuple[str, int]] = field(default_factory=dict)  # system id64 → (name, body count)
+    # system id64 → (name, body count, when first honked)
+    surveyed: dict[int, tuple[str, int, str]] = field(default_factory=dict)
     # what you sold already: Universal Cartographics buys a body's data (scan, then mapping) and a system's
     # discovery scan once. sold_bodies: body → its mapping was sold too
     sold_bodies: dict[tuple[int, int], bool] = field(default_factory=dict)
     sold_systems: set[int] = field(default_factory=set)
     _sold_scans: dict[tuple[int, int], tuple[str, BodyScanned]] = field(default_factory=dict)  # scanned again
     _remapped: dict[tuple[int, int], bool] = field(default_factory=dict)  # mapped again before its new scan
-    species: list[tuple[str, str]] = field(default_factory=list)  # (species name, when) analysed, unsold
+    species: list[tuple[str, str, bool]] = field(default_factory=list)  # (name, when, first footfall), unsold
+    _walked: dict[tuple[int, int], bool] = field(default_factory=dict)  # body → someone walked on it before
     refined: list[Refined] = field(default_factory=list)  # every tonne refined this session, oldest first
     died: str = ""  # the last death
     lost: int = 0  # what that death cost in unsold data, Cr (estimated)
@@ -117,7 +134,8 @@ class Earnings:
     balance: list[tuple[str, int]] = field(default_factory=list)  # (when, credits) after each change
     _balance: int | None = None  # None until the first login gives the exact figure
     live: tuple[str, int] | None = None  # (when, credits) the game's live status said last
-    _value: int | None = None  # data_value() until the carried data changes (the page asks on every refresh)
+    # data_value() per `before` until the carried data changes (the page asks on every refresh)
+    _values: dict[str | None, int] = field(default_factory=dict)
 
     def add(self, event: MoneyEvent) -> None:
         when = event.when
@@ -142,6 +160,9 @@ class Earnings:
                 self.session_end = when
             case DataScanned():
                 key = (event.body.system_address, event.body.body_id)
+                # once seen untouched it stays so: your own landing makes a later scan say walked on
+                if event.body.footfalled is not None and self._walked.get(key) is not False:
+                    self._walked[key] = event.body.footfalled
                 old = self.bodies.get(key)
                 if old is None and key in self.sold_bodies:  # sold once: only an unsold mapping can count
                     self._sold_scans[key] = (event.system, event.body)
@@ -153,11 +174,15 @@ class Earnings:
                     old.system, old.scan = event.system, event.body
             case DataSurveyed():
                 if event.system_address not in self.sold_systems:
-                    self.surveyed[event.system_address] = (event.system, event.body_count)
+                    old_survey = self.surveyed.get(event.system_address)
+                    since = old_survey[2] if old_survey else when  # honked again: carried since the first
+                    self.surveyed[event.system_address] = (event.system, event.body_count, since)
             case DataMapped():
                 key = (event.system_address, event.body_id)
                 body = self.bodies.get(key)
                 if body is not None:
+                    if not body.mapped:
+                        body.mapped_when = when
                     body.mapped, body.efficient = True, event.efficient
                 elif self.sold_bodies.get(key) is False:  # its scan sold, its mapping not
                     if key in self._sold_scans:
@@ -165,7 +190,8 @@ class Earnings:
                     else:  # the game writes the new scan just after
                         self._remapped[key] = event.efficient
             case SpeciesAnalysed():
-                self.species.append((event.species, when))
+                walked = self._walked.get((event.system_address, event.body_id))
+                self.species.append((event.species, when, walked is False))
             case Refined():
                 self.refined.append(event)
             case ExplorationSold():
@@ -181,19 +207,19 @@ class Earnings:
             case OrganicSold():
                 left = Counter(species_key(s) for s in event.species)
                 kept = []
-                for name, at in self.species:
-                    if left[species_key(name)] > 0:
-                        left[species_key(name)] -= 1
+                for entry in self.species:
+                    if left[species_key(entry[0])] > 0:
+                        left[species_key(entry[0])] -= 1
                     else:
-                        kept.append((name, at))
+                        kept.append(entry)
                 self.species = kept
             case Died():
                 self.died = when
-                self.lost = self.data_value() + sum(species_value(n) or 0 for n, _ in self.species)
+                self.lost = self.data_value() + self.bio_value()
                 self.bodies, self.surveyed, self.species = {}, {}, []
                 self._remapped = {}
         if isinstance(event, DataScanned | DataSurveyed | DataMapped | ExplorationSold | Died):
-            self._value = None  # the carried data changed
+            self._values = {}  # the carried data changed
 
     def _credits(self, change: int, when: str) -> None:
         if self._balance is not None:
@@ -202,7 +228,7 @@ class Earnings:
 
     def _map_again(self, key: tuple[int, int], efficient: bool, when: str) -> None:
         system, scan = self._sold_scans.pop(key)
-        self.bodies[key] = _Body(system, scan, True, efficient, when, mapping_only=True)
+        self.bodies[key] = _Body(system, scan, True, efficient, when, mapping_only=True, mapped_when=when)
 
     def saw(self, when: str) -> None:
         """Any journal entry: the game was running at `when`."""
@@ -221,24 +247,36 @@ class Earnings:
                 continue
             self.add(event)
 
-    def data_value(self) -> int:
-        if self._value is None:
+    def data_value(self, before: str | None = None) -> int:
+        """The cartographic data you carry; with `before`, what of it you carried already before that time."""
+        if before not in self._values:
             systems: dict[int, list[_Body]] = {}
             for (address, _), b in self.bodies.items():
-                systems.setdefault(address, []).append(b)
-            self._value = sum(self._system_value(address, found) for address, found in systems.items())
-        return self._value
+                if before is None or b.when < before:
+                    systems.setdefault(address, []).append(b)
+            self._values[before] = sum(self._system_value(a, found, before) for a, found in systems.items())
+        return self._values[before]
 
-    def _system_value(self, address: int, found: list[_Body]) -> int:
+    def gathered(self, since: str) -> tuple[int, int]:
+        """What of the data you carry now you gathered from `since` on: (cartographic, exobiology) Cr."""
+        data = self.data_value() - self.data_value(since)
+        return max(0, data), sum(species_worth(s) for s in self.species if s[1] >= since)
+
+    def bio_value(self) -> int:
+        return sum(species_worth(s) for s in self.species)
+
+    def _system_value(self, address: int, found: list[_Body], before: str | None = None) -> int:
         """The scanned bodies, then what every body but the arrival star adds, scanned or only counted."""
-        value = sum(b.value() for b in found)
+        value = sum(b.value(before) for b in found)
         found = [b for b in found if not b.mapping_only]  # their discovery value was sold with their scan
         if not found:
             return value
         nearest = min(found, key=lambda b: (b.scan.distance_ls, b.scan.body_id))
         arrival = nearest if nearest.scan.distance_ls == 0 else None  # None: the arrival star not scanned
         value += sum(honk_value(b.scan) for b in found if b is not arrival)
-        _, count = self.surveyed.get(address, ("", 0))
+        _, count, honked = self.surveyed.get(address, ("", 0, ""))
+        if before is not None and honked >= before:
+            count = 0  # honked later: its count was not known yet
         unscanned = count - len(found) - (1 if arrival is None else 0)
         return value + max(0, unscanned) * honk_value(None)
 
@@ -257,7 +295,8 @@ class UiMoney:
 @dataclass(frozen=True, slots=True)
 class UiCarriedSpecies:
     name: str
-    value: int | None  # base value, Cr; None = not in the catalog
+    value: int | None  # what it sells for, Cr; None = not in the catalog
+    first: bool = False  # first footfall: the value is five times the base
 
 
 @dataclass(frozen=True, slots=True)
@@ -277,11 +316,14 @@ class UiEarnings:
     earned: tuple[UiMoney, ...] = ()  # EARN_KINDS order, then "total"
     spent: tuple[UiMoney, ...] = ()  # SPEND_KINDS order, then "total"
     net: UiMoney = field(default_factory=lambda: UiMoney("net", "Net"))
+    # gathered in each window and still unsold, Cr (estimated): shown beside what was paid
+    unsold_map: UiMoney = field(default_factory=lambda: UiMoney("exploration", EARN_LABELS["exploration"]))
+    unsold_bio: UiMoney = field(default_factory=lambda: UiMoney("exobiology", EARN_LABELS["exobiology"]))
     data_value: int = 0  # unsold cartographic data, Cr (estimated)
     data_bodies: int = 0
     data_systems: int = 0
     data_since: str = ""  # the oldest unsold scan, ISO
-    bio_value: int = 0  # unsold exobiology at base value, Cr
+    bio_value: int = 0  # unsold exobiology, Cr (base value, five times on a first footfall)
     bio_species: tuple[UiCarriedSpecies, ...] = ()  # newest first
     bio_since: str = ""
     died: str = ""  # the last death, ISO (shown when it was this week)
@@ -331,7 +373,12 @@ def ui_earnings(
     running = bool(e.session_start) and e.session_end < e.session_start
     end = _parse(e.latest) if e.latest else None
     hours = max(0.0, (end - start).total_seconds() / 3600) if start is not None and end is not None else 0.0
-    bio = tuple(UiCarriedSpecies(n, species_value(n)) for n, _ in reversed(e.species))
+    bio = tuple(
+        UiCarriedSpecies(s[0], None if species_value(s[0]) is None else species_worth(s), s[2])
+        for s in reversed(e.species)
+    )
+    windows = [e.session_start if start is not None else None, _journal_time(day), _journal_time(week)]
+    got = [e.gathered(w) if w is not None else (0, 0) for w in windows]
     died = _parse(e.died) if e.died else None
     recent_death = died is not None and died >= week
     ui = UiEarnings(
@@ -344,18 +391,25 @@ def ui_earnings(
         earned=earned,
         spent=spent,
         net=net,
+        unsold_map=UiMoney("exploration", EARN_LABELS["exploration"], *(g[0] for g in got)),
+        unsold_bio=UiMoney("exobiology", EARN_LABELS["exobiology"], *(g[1] for g in got)),
         data_value=e.data_value(),
         data_bodies=len(e.bodies),
         data_systems=len({b.system for b in e.bodies.values()}),
         data_since=min((b.when for b in e.bodies.values()), default=""),
         bio_value=sum(s.value or 0 for s in bio),
         bio_species=bio,
-        bio_since=min((w for _, w in e.species), default=""),
+        bio_since=min((s[1] for s in e.species), default=""),
         died=e.died if recent_death else "",
         lost=e.lost if recent_death else 0,
         balance=_balance_points(e),
     )
     return replace(ui, text=_text(ui)) if known else ui
+
+
+def _journal_time(t: datetime) -> str:
+    """An aware time the way the journal writes it (UTC, "Z"), so it compares with journal times as text."""
+    return t.astimezone(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 def _balance_points(e: Earnings) -> tuple[UiBalance, ...]:

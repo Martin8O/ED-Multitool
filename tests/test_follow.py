@@ -5,7 +5,7 @@ survive a restart; a failed or cancelled search keeps the followed route. Journa
 import json
 import math
 import time
-from collections.abc import Iterator
+from collections.abc import Callable, Iterator
 from dataclasses import asdict, replace
 from pathlib import Path
 from typing import Any
@@ -13,9 +13,22 @@ from typing import Any
 import pytest
 
 from edmultitool.core.events import GameRoute, parse_nav_route
-from edmultitool.core.follow import arrive, game_offer, game_route, points, start_index, step, ui_follow
+from edmultitool.core.follow import (
+    along,
+    arrive,
+    game_offer,
+    game_route,
+    pass_by_position,
+    points,
+    start_index,
+    step,
+    ui_follow,
+)
+from edmultitool.core.scout import SystemHit
 from edmultitool.core.view import UiBody, UiRoute, UiStop, UiWaypoint, regrade, route_from_doc, wealth
 from edmultitool.plugin import ScoutPlugin
+from edmultitool.sources import spansh
+from edmultitool.sources.http import SourceError
 from fakes import FakeTime, ScriptedTransport, make_client, reply
 from test_scout_api import PREFS, _pump_until, _sample, _spansh
 
@@ -393,3 +406,227 @@ def test_taking_without_a_plotted_route_does_nothing(tmp_path: Path) -> None:
     p.api_post("/api/follow", {"take": "game"})
     p.pump()
     assert p.scout.route is None
+
+
+# --- following by position --------------------------------------------------------------------------------
+def _placed(n: int = 4) -> UiRoute:
+    """`_tour` along the x axis: start at 0, destination at 50 ly, stops 10 ly apart, 20 ly jumps."""
+    return replace(_tour(n), from_pos=(0.0, 0.0, 0.0), to_pos=(50.0, 0.0, 0.0))
+
+
+def test_how_far_along_the_line_you_are() -> None:
+    r = _placed()
+    assert along(r, (35.0, 30.0, -4.0)) == pytest.approx(35.0)  # off the line: its projection
+    assert along(r, (-10.0, 0.0, 0.0)) == 0.0 and along(r, (90.0, 0.0, 0.0)) == 50.0  # kept within it
+    assert along(_tour(), (35.0, 0.0, 0.0)) is None  # ends not known
+    assert along(r, None) is None and along(_plot(), (1.0, 0.0, 0.0)) is None
+
+
+def test_stops_flown_past_by_more_than_a_jump_are_behind_you() -> None:
+    r = _placed()  # stops at 10, 20, 30, 40 ly along; one jump = 20 ly
+    assert pass_by_position(r, 1, (25.0, 0.0, 0.0)) == 1  # not a whole jump past the first stop yet
+    assert pass_by_position(r, 1, (35.0, 3.0, 0.0)) == 2  # past stop 1: stop 2 is next
+    assert pass_by_position(r, 1, (50.0, 0.0, 0.0)) == 3  # at the end of the line: stops 3, 4 still near
+    assert pass_by_position(r, 4, (5.0, 0.0, 0.0)) == 4  # never back
+    far = replace(r, to_pos=(500.0, 0.0, 0.0), total_ly=500.0)
+    assert pass_by_position(far, 1, (400.0, 0.0, 0.0)) == 5  # every stop behind: the destination is next
+    assert pass_by_position(_tour(), 1, (400.0, 0.0, 0.0)) == 1  # ends not known: nothing moves
+
+
+def test_follow_says_how_it_follows_and_where_you_are_on_the_line() -> None:
+    r = _placed()
+    f = ui_follow(r, 2, "position", (35.0, 0.0, 0.0))
+    assert (f.by, f.along_ly, f.next_name) == ("position", 35.0, "Stop 2")
+    f = ui_follow(r, 2, "stops", (35.0, 0.0, 0.0))
+    assert (f.by, f.along_ly) == ("stops", None)
+    assert ui_follow(None, 0, "stops").by == "stops"
+
+
+def test_a_saved_route_keeps_its_ends_and_an_older_one_has_none() -> None:
+    r = _placed()
+    back = route_from_doc(json.loads(json.dumps(asdict(r))))
+    assert (back.from_pos, back.to_pos) == ((0.0, 0.0, 0.0), (50.0, 0.0, 0.0))
+    old = {k: v for k, v in asdict(r).items() if k not in ("from_pos", "to_pos")}
+    assert route_from_doc(old).from_pos is None
+    assert route_from_doc({**asdict(r), "from_pos": [1, "x", 3]}).from_pos is None
+
+
+def test_plugin_moves_past_stops_flown_past_unless_stop_by_stop(scouted: ScoutPlugin) -> None:
+    p = scouted
+    route = p.scout.route
+    assert route is not None and route.from_pos is not None and route.to_pos is not None
+    a, b = route.from_pos, route.to_pos
+    p.on_journal(_jump("Sol", route.from_id64), None)
+    assert p.ui.follow.next_index == 1
+
+    def at(ly: float) -> list[float]:
+        t = ly / math.dist(a, b)
+        return [a[i] + (b[i] - a[i]) * t for i in range(3)]
+
+    beyond = route.stops[2].along_ly + route.range_ly + 1
+    assert p.api_post("/api/follow", {"by": "stops"}) == (202, {"accepted": "follow-by"})
+    assert p.api_post("/api/follow", {"by": "jumps"}) == (400, {"error": "by must be 'position' or 'stops'"})
+    p.pump()
+    p.on_journal({**_jump("Somewhere Else", 42), "StarPos": at(beyond)}, None)
+    assert p.ui.follow.next_index == 1 and p.ui.follow.by == "stops"  # stop by stop: waits for stop 1
+
+    p.api_post("/api/follow", {"by": "position"})
+    p.pump()  # switching applies at once
+    expected = 1 + sum(1 for s in route.stops if s.along_ly + route.range_ly < beyond)
+    assert expected >= 4 and p.ui.follow.next_index == expected
+    assert p.settings.follow_by == "position"
+    assert _state(p)["follow"]["along_ly"] == pytest.approx(beyond, abs=0.1)
+
+
+def test_an_older_saved_route_looks_its_ends_up_once(
+    scouted: ScoutPlugin, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    p = scouted
+    route = p.scout.route
+    assert route is not None and route.from_pos is not None and route.to_pos is not None
+    a, b = route.from_pos, route.to_pos
+    asked: list[str] = []
+
+    def resolve(client: object, name: str, cancel: object) -> SystemHit:
+        asked.append(name)
+        return _ends_of(route)(client, name, cancel)
+
+    monkeypatch.setattr(spansh, "resolve_system", resolve)
+    p.scout = replace(p.scout, route=replace(route, from_pos=None, to_pos=None))  # saved by 0.37
+    beyond = [a[i] + (b[i] - a[i]) * 0.9 for i in range(3)]
+    p.on_journal({**_jump("Somewhere Else", 42), "StarPos": beyond}, None)
+    deadline = time.monotonic() + 5
+    while (p.scout.route is None or p.scout.route.from_pos is None) and time.monotonic() < deadline:
+        p.pump()
+        time.sleep(0.01)
+    assert asked == [route.from_name, route.to_name]
+    assert p.scout.route is not None and p.scout.route.from_pos == a
+    assert p.ui.follow.next_index > 1  # caught up once the ends were known
+    saved = json.loads((p.data_dir / "route.json").read_text(encoding="utf-8"))
+    assert saved["route"]["to_pos"] == list(b)
+    p.on_journal({**_jump("Elsewhere", 43), "StarPos": beyond}, None)
+    p.pump()
+    assert len(asked) == 2  # known now: not asked again
+
+
+def _ends_of(route: UiRoute) -> Callable[[object, str, object], SystemHit]:
+    """A stand-in for Spansh's name lookup that knows the route's two ends, ids included."""
+    a, b = route.from_pos, route.to_pos
+    assert a is not None and b is not None
+
+    def resolve(client: object, name: str, cancel: object) -> SystemHit:
+        start = name == route.from_name
+        return SystemHit(int(route.from_id64 if start else route.to_id64), name, *(a if start else b))
+
+    return resolve
+
+
+def test_by_position_the_start_stays_next_until_a_stop_is_passed() -> None:
+    r = _placed()
+    assert pass_by_position(r, 0, (5.0, 900.0, 0.0)) == 0  # far to the side, near the start's end
+    assert pass_by_position(r, 0, (45.0, 0.0, 0.0)) == 3  # well along: the stops behind count as passed
+
+
+def _beyond(route: UiRoute, part: float) -> list[float]:
+    a, b = route.from_pos, route.to_pos
+    assert a is not None and b is not None
+    return [a[i] + (b[i] - a[i]) * part for i in range(3)]
+
+
+def test_a_back_holds_until_you_reach_a_point_of_the_route(scouted: ScoutPlugin) -> None:
+    p = scouted
+    route = p.scout.route
+    assert route is not None
+    p.on_journal(_jump("Sol", route.from_id64), None)
+    p.on_journal({**_jump("Somewhere Else", 42), "StarPos": _beyond(route, 0.5)}, None)
+    ahead = p.ui.follow.next_index
+    assert ahead > 2
+    p.api_post("/api/follow", {"step": -1})
+    p.pump()
+    assert p.ui.follow.next_index == ahead - 1
+    p.on_journal({**_jump("Elsewhere", 43), "StarPos": _beyond(route, 0.55)}, None)
+    assert p.ui.follow.next_index == ahead - 1  # the Back holds
+    p.api_post("/api/follow", {"by": "position"})  # pressing the switch already on changes nothing
+    p.pump()
+    assert p.ui.follow.next_index == ahead - 1
+    stop = route.stops[ahead - 2]  # arriving in the stop you went back for releases it
+    p.on_journal({**_jump(stop.name, stop.id64), "StarPos": _beyond(route, 0.6)}, None)
+    assert p.ui.follow.next_index >= ahead
+
+
+def test_a_failed_lookup_is_asked_again_after_a_jump_not_before(
+    scouted: ScoutPlugin, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    p = scouted
+    route = p.scout.route
+    assert route is not None
+    asked: list[str] = []
+
+    def down(client: object, name: str, cancel: object) -> SystemHit:
+        asked.append(name)
+        raise SourceError("Spansh is down")
+
+    monkeypatch.setattr(spansh, "resolve_system", down)
+    p.scout = replace(p.scout, route=replace(route, from_pos=None, to_pos=None))
+
+    def settle() -> None:
+        deadline = time.monotonic() + 2
+        while (p._ends_job is not None or not asked) and time.monotonic() < deadline:
+            p.pump()
+            time.sleep(0.01)
+
+    p.on_journal({**_jump("Somewhere Else", 42), "StarPos": _beyond(route, 0.5)}, None)
+    settle()
+    assert asked == [route.from_name]
+    p._last_tick = 0  # the 30 s tick does not ask again
+    p.pump()
+    p._catch_up()
+    assert asked == [route.from_name]
+    p.on_journal({**_jump("Elsewhere", 43), "StarPos": _beyond(route, 0.6)}, None)
+    settle()
+    assert asked == [route.from_name] * 2
+
+
+def test_a_lookup_for_a_route_replaced_meanwhile_is_dropped(
+    scouted: ScoutPlugin, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    p = scouted
+    route = p.scout.route
+    assert route is not None and route.from_pos is not None and route.to_pos is not None
+    monkeypatch.setattr(spansh, "resolve_system", _ends_of(route))
+    old = replace(route, from_pos=None, to_pos=None)
+    p.scout = replace(p.scout, route=old)
+    p._catch_up()
+    assert p._ends_job is not None
+    p.scout = replace(p.scout, route=replace(old, finished="2026-10-13T00:00:00+00:00"))  # a new search
+    deadline = time.monotonic() + 2
+    while p._ends_job is not None and time.monotonic() < deadline:
+        p.pump()
+        time.sleep(0.01)
+    assert p.scout.route is not None and p.scout.route.from_pos is None  # not the ends of the old one
+
+
+def test_after_a_restart_an_older_route_looks_its_ends_up_without_a_jump(
+    scouted: ScoutPlugin, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    p = scouted
+    route = p.scout.route
+    assert route is not None and route.from_pos is not None and route.to_pos is not None
+    a, b = route.from_pos, route.to_pos
+    doc = json.loads(p.route_path.read_text(encoding="utf-8"))
+    del doc["route"]["from_pos"], doc["route"]["to_pos"]  # as 0.37 saved it
+    p.route_path.write_text(json.dumps(doc), encoding="utf-8")
+    p.stop_worker()
+    monkeypatch.setattr(spansh, "resolve_system", _ends_of(route))
+    again = ScoutPlugin(tmp_path)
+    assert again.scout.route is not None and again.scout.route.from_pos is None
+    again.client = make_client(ScriptedTransport(_spansh, repeat_last=True), FakeTime())
+    again.start_worker()
+    try:
+        deadline = time.monotonic() + 5
+        while again.scout.route.from_pos is None and time.monotonic() < deadline:
+            again.pump()
+            time.sleep(0.01)
+        assert again.scout.route.from_pos == a and again.scout.route.to_pos == b
+    finally:
+        again.stop_worker()

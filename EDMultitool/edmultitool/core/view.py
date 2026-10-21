@@ -216,6 +216,10 @@ class UiRoute:
     worth_map: int = 0
     worth_bio: int = 0
     worth_scan: int = 0
+    # tour: where the start and the destination are (x, y, z ly), to follow it by your position; None = not
+    # known (a route saved by an older version, until they are looked up)
+    from_pos: tuple[float, float, float] | None = None
+    to_pos: tuple[float, float, float] | None = None
 
 
 @dataclass(frozen=True, slots=True)
@@ -235,6 +239,8 @@ class UiFollow:
     jumps_left: int = 0  # plots: jumps still ahead
     value_ahead: int = 0  # tour: what the stops not yet reached are worth, Cr
     text: str = "—"  # the EDMC panel's "Next:" row
+    by: str = "position"  # "position": stops you flew past count as behind you; "stops": only those reached
+    along_ly: float | None = None  # tour, by position: how far along the start → destination line you are
 
 
 @dataclass(frozen=True, slots=True)
@@ -333,6 +339,8 @@ def ui_route(route: Route, finished: str) -> UiRoute:
             from_id64=str(route.from_id64 or ""),
             to_id64=str(route.to_id64 or ""),
             min_bio_body=route.min_bio_body,
+            from_pos=route.from_pos,
+            to_pos=route.to_pos,
         )
     )
 
@@ -611,6 +619,15 @@ def _ship_pad(planning: GameState) -> str:
     return ship_pad(ship.ship_type) if ship is not None else ""
 
 
+def _point(raw: object) -> tuple[float, float, float] | None:
+    """x, y, z from the saved route's list; None when absent or not three numbers."""
+    if not isinstance(raw, list | tuple) or len(raw) != 3:
+        return None
+    if not all(isinstance(v, int | float) and not isinstance(v, bool) for v in raw):
+        return None
+    return (float(raw[0]), float(raw[1]), float(raw[2]))
+
+
 def route_from_doc(doc: object) -> UiRoute:
     """A UiRoute back from its `asdict` form (the saved route). Raises ValueError / TypeError / KeyError
     on anything that is not one."""
@@ -623,7 +640,8 @@ def route_from_doc(doc: object) -> UiRoute:
         )
         stops.append(UiStop(**{**s, "bodies": bodies}))
     waypoints = tuple(UiWaypoint(**w) for w in doc["waypoints"])
-    route = UiRoute(**{**doc, "stops": tuple(stops), "waypoints": waypoints})
+    ends = {k: _point(doc.get(k)) for k in ("from_pos", "to_pos")}
+    route = UiRoute(**{**doc, "stops": tuple(stops), "waypoints": waypoints, **ends})
     followable = ("tour", "exact", "neutron", "game")
     if route.mode not in followable or (route.mode != "tour" and len(waypoints) < 2):
         raise ValueError(f"not a followable route: {route.mode}")

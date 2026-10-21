@@ -55,11 +55,13 @@
  * @typedef {{
  *   active: boolean, next_index: number, count: number, finished: boolean, next_name: string,
  *   next_kind: ""|"start"|"stop"|"waypoint"|"destination", next_wealth: number, stops_left: number,
- *   ly_left: number, jumps_left: number, value_ahead: number, text: string
- * }} UiFollow  progress along `scout.route`. `next_index` counts the start (0), then the stops (tour) or
+ *   ly_left: number, jumps_left: number, value_ahead: number, text: string, by: "position"|"stops",
+ *   along_ly: ?number
+ * }} UiFollow  progress along `scout.route`; by "position" = a tour's stops flown past count as behind you,
+ * along_ly = how far along its start → destination line you are (null: not known, or by "stops"). `next_index` counts the start (0), then the stops (tour) or
  * the waypoints after the start (plots), then the destination; `count` = all of them; `next_index` ==
  * `count` = arrived. POST /api/follow {step: 1|-1} skips / goes back one point; {take: "game"} follows the
- * route plotted in the galaxy map.
+ * route plotted in the galaxy map; {by: "position"|"stops"} sets how it is followed (remembered).
  * @typedef {{offer: boolean, to_name: string, jumps: number, plotted: string}} UiGameRoute  that route;
  * `offer` = the followed route does not already lead there.
  * @typedef {{
@@ -178,8 +180,9 @@
  *   not 0 (or missions done), best first; neutral = met at exactly 0 and not listed; warning = hostile where you are
  * @typedef {{title: string, unlocks: string}} UiRankStep  one rank of a ladder, and what reaching it opens
  * @typedef {{kind: string, rank: number, top: number, title: string, next_title: string, progress: number,
- *   ladder: UiRankStep[], how: string, note: string}} UiRank  `how` = what moves you up
- *   a rank the game keeps (kind = its journal name: Combat … CQC); next_title "" = the top rank
+ *   stale: boolean, ladder: UiRankStep[], how: string, note: string}} UiRank  `how` = what moves you up
+ *   a rank the game keeps (kind = its journal name: Combat … CQC); next_title "" = the top rank; stale = moved
+ *   on since the game last wrote the percent (it does so only at login): `progress` is the least it is
  * @typedef {{
  *   power: string, known: boolean, merits: ?number, week: number, week_start: string, rank: ?number,
  *   next_rank_merits: ?number, since: string
@@ -211,15 +214,18 @@
  * @typedef {{kind: string, label: string, session: number, today: number, week: number}} UiMoney  one row, Cr;
  *   kind "total" closes each list, "net" = earned minus spent
  * @typedef {{when: string, credits: number}} UiBalance  one point of the balance line, oldest first
- * @typedef {{name: string, value: ?number}} UiCarriedSpecies  value null = not in the catalogue
+ * @typedef {{name: string, value: ?number, first: boolean}} UiCarriedSpecies  value null = not in the
+ *   catalogue; first = first footfall (five times the base value)
  * @typedef {{
  *   known: boolean, session_start: string, session_hours: number, running: boolean, per_hour: ?number,
- *   week_start: string, earned: UiMoney[], spent: UiMoney[], net: UiMoney, data_value: number,
+ *   week_start: string, earned: UiMoney[], spent: UiMoney[], net: UiMoney, unsold_map: UiMoney,
+ *   unsold_bio: UiMoney, data_value: number,
  *   data_bodies: number, data_systems: number, data_since: string, bio_value: number,
  *   bio_species: UiCarriedSpecies[], bio_since: string, died: string, lost: number, balance: UiBalance[],
  *   text: string
  * }} UiEarnings  the Earnings tab (`edmultitool.core.earnings.UiEarnings`); known false = journals not read yet;
- *   died "" = no death this week; text = the panel's Earned: row
+ *   died "" = no death this week; text = the panel's Earned: row; unsold_map / unsold_bio = gathered in each
+ *   window and still unsold (estimated), shown beside what was paid
  * @typedef {{
  *   id: string, kind: string, title: string, faction: string, system: string, station: string, expiry: string,
  *   reward: number, wing: boolean, taken: string, done: boolean, here: boolean, distance_ly: ?number,
@@ -273,6 +279,7 @@ const SUGGEST_MIN_CHARS = 2;
 /** Debug hook for checks without screenshots: last reply, fetch counters, last error, scout traffic. */
 const debug = {
   tab: "", // the tab shown
+  credits: "", // the top row's credits, with the unsold data beside them
   reply: /** @type {?StateReply} */ (null),
   fetches: 0,
   failures: 0,
@@ -281,6 +288,8 @@ const debug = {
   flashes: 0, // window flashes on arriving somewhere rich
   copied: /** @type {?{name: string, ok: boolean}} */ (null), // the last "Copy" click
   follow: { rows: 0, passed: 0, hidden: 0, next: "" }, // what the route table shows of the progress
+  // the route strip: how it is drawn (dots / ticks / line), its marks, where you are and the next point
+  strip: { look: "", jumps: 0, at: -1, next: -1, stops: /** @type {string[]} */ ([]), count: "" },
   suggest: { fetches: 0, aborted: 0, stale: 0, last: /** @type {?{q: string, names: string[]}} */ (null) },
   view: { order: "", show: "", shown: 0, rows: /** @type {string[]} */ ([]) }, // the tour table as ordered
   best: { stop: "", body: "" }, // the id64s framed in the tour table: the most valuable system and body
@@ -455,8 +464,16 @@ let warningsKey = "";
 /** Balance next to the ship; warning chips in the top row and on the route card. @param {UiState} s */
 function renderCommander(s) {
   const c = s.commander || { credits: null, warnings: [] };
-  $("credits").textContent =
-    c.credits === null ? "—" : `${c.credits.toLocaleString("en-US", { minimumFractionDigits: 1 })}M`;
+  const box = $("credits");
+  box.textContent = c.credits === null ? "—" : `${c.credits.toLocaleString("en-US", { minimumFractionDigits: 1 })}M`;
+  const e = s.earnings;
+  const unsold = e && e.known ? e.data_value + e.bio_value : 0;
+  if (unsold) {
+    const more = el("span", "unsold", ` +${credits(unsold)} unsold`);
+    more.title = "Exploration and exobiology data you carry and have not sold yet (estimated): lost if you die before you sell it";
+    box.append(more);
+  }
+  debug.credits = box.textContent || "";
   const key = JSON.stringify(c.warnings);
   if (key === warningsKey) return;
   warningsKey = key;
@@ -665,9 +682,11 @@ function render(reply) {
   document.body.dataset.seq = String(reply.seq);
   document.title = s.system ? `ED Multitool · ${s.system}` : "ED Multitool";
   if (!formFilled) fillForm(s.scout_prefs);
+  followFields(s);
   input("f-from").placeholder = s.system ? `current: ${s.system}` : "current system";
   renderScout(s.scout);
   renderFollow(s);
+  renderStrip(s);
   renderGameOffer(s);
   renderReplan(s);
   renderGear(s.gear, s.address, s.plan.ship ?? "your current ship");
@@ -799,6 +818,7 @@ async function poll() {
     setConn("down", "EDMC not reachable");
   } finally {
     fitBalance();
+    if (stripState) renderStrip(stripState); // redrawn only when its width changed: a hidden window reports no resizes
     setTimeout(poll, POLL_MS);
   }
 }
@@ -819,10 +839,26 @@ const AMOUNTS = /** @type {const} */ ([
   ["f-min-bio-body", "min_bio_body"],
 ]);
 
+/** From / To typed in by hand: they stop following the game until emptied again. */
+const typedField = { from: false, to: false };
+
+/**
+ * From follows the system you are in; To the route you fly: the one plotted in the galaxy map when the
+ * followed route does not already lead there, else the followed route's destination. Never while you type.
+ * @param {UiState} s
+ */
+function followFields(s) {
+  const from = input("f-from");
+  if (!typedField.from && document.activeElement !== from) from.value = s.system || "";
+  const to = input("f-to");
+  const route = s.scout.route;
+  const dest = s.game_route.offer ? s.game_route.to_name : route ? route.to_name : "";
+  if (!typedField.to && dest && document.activeElement !== to) to.value = dest;
+}
+
 /** @param {ScoutPrefs} p */
 function fillForm(p) {
   formFilled = true;
-  input("f-from").value = p.from_system;
   input("f-to").value = p.to_system;
   const plan = p.riches && p.bio ? "both" : p.riches ? "riches" : p.bio ? "bio" : "route";
   radio("plan", plan).checked = true;
@@ -1032,7 +1068,7 @@ function renderScout(sc) {
   } else if (sc.status === "done" && sc.route && sc.route.mode !== "tour") {
     showStatus(plotSummary(sc.route), "done");
   } else if (sc.status === "done" && sc.route) {
-    showStatus(tourSummary(sc.route), "done");
+    showStatus(sc.message ? `${tourSummary(sc.route)} ${sc.message}` : tourSummary(sc.route), "done");
   } else {
     showStatus(sc.message, answerKind(sc.status, false));
   }
@@ -1467,6 +1503,11 @@ function renderFollow(s) {
   /** @type {HTMLButtonElement} */ ($("b-skip")).disabled = f.finished;
   /** @type {HTMLButtonElement} */ ($("b-back")).disabled = f.next_index === 0;
   $("follow-progress").replaceChildren(...factLine(followProgress(f, route), "").childNodes);
+  const tour = route.mode === "tour";
+  $("follow-by").hidden = !tour; // a plot passes through every one of its systems
+  for (const [id, by] of /** @type {const} */ ([["fb-position", "position"], ["fb-stops", "stops"]])) {
+    $(id).setAttribute("aria-pressed", String((f.by || "position") === by));
+  }
 
   const key = `${route.finished}|${f.next_index}|${showPassed}`;
   if (key === lastFollowKey) return;
@@ -1529,6 +1570,154 @@ function markRows(route, f) {
     next: (table.querySelector(".is-next .sys") || { textContent: "" }).textContent || "",
   };
 }
+
+/**
+ * The route at a glance, like the game's own route strip: one mark per jump on a line, the stops worth a
+ * visit coloured by what they offer, what is behind you dimmed, an arrow to the next point.
+ * @typedef {{kind: "start"|"jump"|"stop"|"end", point: number, cls: string, name: string, along: number}} StripMark
+ * `point` = the follow point it is (-1: a jump between points, whose system we do not know); `along` = a
+ * tour point's distance along the start → destination line (-1: not known)
+ * @param {UiRoute} route @returns {StripMark[]}
+ */
+function stripMarks(route) {
+  /** @type {StripMark[]} */
+  const marks = [];
+  const between = (/** @type {number} */ jumps) => {
+    for (let j = 1; j < jumps; j += 1) marks.push({ kind: "jump", point: -1, cls: "", name: "", along: -1 });
+  };
+  if (route.mode === "tour") {
+    marks.push({ kind: "start", point: 0, cls: "", name: route.from_name, along: 0 });
+    route.stops.forEach((st, i) => {
+      between(st.leg_jumps);
+      const map = st.scan_value > 0 || st.mapping_value > 0;
+      const cls = st.spent ? "spent" : st.bio_value > 0 && map ? "both" : st.bio_value > 0 ? "bio" : "map";
+      // kept within the line, so the marks' distances only grow (a corridor stop may lie just beyond an end)
+      const along = Math.min(Math.max(st.along_ly, 0), route.total_ly);
+      marks.push({ kind: "stop", point: i + 1, cls, name: st.name, along });
+    });
+    between(route.final_leg_jumps);
+    marks.push({ kind: "end", point: route.stops.length + 1, cls: "", name: route.to_name, along: route.total_ly });
+    return marks;
+  }
+  route.waypoints.forEach((w, i) => {
+    if (i) between(w.jumps);
+    const last = i === route.waypoints.length - 1;
+    const kind = i === 0 ? "start" : last ? "end" : "jump";
+    marks.push({ kind, point: i, cls: !last && i && w.neutron ? "neutron" : "", name: w.name, along: -1 });
+  });
+  return marks;
+}
+
+/**
+ * The mark you are nearest to on a tour, from how far along its line you are: between the two points around
+ * you, in proportion. -1 when that is not known.
+ * @param {StripMark[]} marks @param {?number} along
+ */
+function nearMark(marks, along) {
+  if (along === null || along === undefined) return -1;
+  const known = marks.map((m, i) => [i, m.along]).filter(([, a]) => a >= 0);
+  if (known.length < 2) return -1;
+  let [i0, a0] = known[0];
+  for (const [i1, a1] of known.slice(1)) {
+    if (along <= a1) return a1 > a0 ? Math.round(i0 + ((along - a0) / (a1 - a0)) * (i1 - i0)) : i0;
+    [i0, a0] = [i1, a1];
+  }
+  return i0;
+}
+
+const STRIP_DOTS = 16; // px between jumps from which each jump is a dot joined by an arc
+const STRIP_TICKS = 3; // … from which it is a tick on the line; closer still, only the stops show
+let stripKey = "";
+let stripState = /** @type {?UiState} */ (null);
+
+/** Drawn at the lane's own width: again when that width changes (window resized, tab shown). @param {UiState} s */
+function renderStrip(s) {
+  stripState = s;
+  const box = $("route-strip");
+  const route = s.scout.status === "done" ? s.scout.route : null;
+  box.hidden = !route;
+  const lane = $("strip-lane");
+  const width = lane.clientWidth;
+  const spent = route ? route.stops.map((st) => (st.spent ? 1 : 0)).join("") : "";
+  const f0 = s.follow;
+  const key = route ? `${route.finished}|${f0.active}|${f0.next_index}|${f0.along_ly}|${width}|${spent}` : "";
+  if (key === stripKey) return;
+  stripKey = key;
+  if (!route) return;
+  const marks = stripMarks(route);
+  const f = s.follow;
+  const reached = f.active ? marks.reduce((best, m, i) => (m.point >= 0 && m.point < f.next_index ? i : best), -1) : -1;
+  const near = f.active && !f.finished ? nearMark(marks, f.along_ly) : -1;
+  const at = Math.max(reached, near);
+  const next = f.active && !f.finished ? Math.min(at + 1, marks.length - 1) : -1; // the next jump, as in the game
+  const jumps = marks.length - 1;
+  const stops = marks.filter((m) => m.kind === "stop").length;
+  // the jump you are on is known only where every jump is a point of the route (not between tour stops)
+  const counted = marks.every((m) => m.point >= 0);
+  $("strip-count").textContent = f.active && f.finished
+    ? `arrived · ${CR.format(jumps)} jumps`
+    : f.active && (counted || near >= 0)
+      ? `${counted ? "" : "≈ "}#${CR.format(Math.max(1, at + 1))} of ${CR.format(jumps)}`
+      : `${CR.format(jumps)} ${jumps === 1 ? "jump" : "jumps"}`;
+  // a tour flies from stop to stop, longer than the straight line its total_ly measures
+  const ly = route.mode === "tour" ? route.stops.reduce((sum, st) => sum + st.leg_ly, route.final_leg_ly) : route.total_ly;
+  $("strip-ly").textContent = `${ly.toLocaleString("en-US", { minimumFractionDigits: 1, maximumFractionDigits: 1 })} ly`;
+  if (!width) return; // drawn once the card has a width
+  const H = 26;
+  const pad = 8;
+  const step = jumps ? (width - 2 * pad) / jumps : 0;
+  const look = step >= STRIP_DOTS ? "dots" : step >= STRIP_TICKS ? "ticks" : "line";
+  const x = (/** @type {number} */ i) => pad + i * step;
+  const mid = H / 2;
+  const chart = svg("svg", { width: String(width), height: String(H), viewBox: `0 0 ${width} ${H}`, class: `strip ${look}` });
+  chart.setAttribute("role", "img");
+  const done = at >= 0 ? x(at) : pad;
+  // the line: behind you dimmed, ahead bright
+  if (look !== "dots") {
+    if (at > 0) chart.append(svg("line", { x1: String(pad), x2: String(done), y1: String(mid), y2: String(mid), class: "s-line past" }));
+    chart.append(svg("line", { x1: String(done), x2: String(width - pad), y1: String(mid), y2: String(mid), class: "s-line" }));
+  }
+  marks.forEach((m, i) => {
+    const past = at >= 0 && i <= at ? " past" : "";
+    if (look === "dots" && i) {
+      const x0 = x(i - 1) + 4;
+      const x1 = x(i) - 4;
+      const lift = Math.min(6, (x1 - x0) / 3);
+      chart.append(svg("path", { d: `M${x0} ${mid} Q${(x0 + x1) / 2} ${mid - 2 * lift} ${x1} ${mid}`, class: `s-arc${at >= 0 && i <= at ? " past" : ""}` }));
+    }
+    const plain = m.kind === "jump" && !m.cls;
+    if (plain && look === "line") return;
+    if (plain && look === "ticks") {
+      chart.append(svg("line", { x1: String(x(i)), x2: String(x(i)), y1: String(mid - 3), y2: String(mid + 3), class: `s-tick${past}` }));
+      return;
+    }
+    const r = m.kind === "stop" ? 5 : m.kind === "jump" ? (look === "dots" ? 3.5 : 2.5) : 4;
+    const dot = svg("circle", { cx: String(x(i)), cy: String(mid), r: String(r), class: `s-dot s-${m.kind}${m.cls ? ` s-${m.cls}` : ""}${past}` });
+    if (m.name) dot.append(svg("title", {}));
+    if (m.name) /** @type {SVGElement} */ (dot.firstChild).textContent = m.kind === "stop" ? `${m.name} · stop` : m.name;
+    chart.append(dot);
+  });
+  if (at >= 0) chart.append(svg("circle", { cx: String(x(at)), cy: String(mid), r: "7", class: "s-here" }));
+  if (look === "dots" && at >= 0 && next > at) { // closer marks leave no room for an arrow
+    const from = at >= 0 ? x(at) + 8 : pad;
+    const to = x(next) - 7;
+    if (to - from > 6) {
+      chart.append(svg("line", { x1: String(from), x2: String(to - 4), y1: String(mid), y2: String(mid), class: "s-arrow" }));
+    }
+    chart.append(svg("path", { d: `M${to - 6} ${mid - 4} L${to} ${mid} L${to - 6} ${mid + 4} Z`, class: "s-head" }));
+  }
+  const words = [`${CR.format(jumps)} jumps`];
+  if (stops) words.push(`${CR.format(stops)} ${stops === 1 ? "stop" : "stops"}`);
+  if (at >= 0) words.push(`${CR.format(at)} behind you`);
+  chart.setAttribute("aria-label", `Route: ${words.join(", ")}`);
+  $("strip-lane").replaceChildren(chart);
+  debug.strip = {
+    look, jumps, at, next,
+    stops: marks.filter((m) => m.kind === "stop").map((m) => `${m.name}:${m.cls}`),
+    count: $("strip-count").textContent || "",
+  };
+}
+new ResizeObserver(() => stripState && renderStrip(stripState)).observe($("strip-lane"));
 
 let copyLabelTimer = 0;
 
@@ -3661,24 +3850,40 @@ function renderFactions(fs) {
 
 let eaKey = "";
 
-/** @param {UiMoney} m @param {string} cls the row's look */
-function moneyRow(m, cls) {
+/**
+ * One row: what was paid in each window, and beside it, quieter, what was gathered there and is still unsold.
+ * @param {UiMoney} m @param {string} cls the row's look @param {?UiMoney} [unsold]
+ */
+function moneyRow(m, cls, unsold = null) {
   const tr = el("tr", cls);
   tr.dataset.kind = m.kind;
   tr.append(el("th", "", m.label));
   tr.firstElementChild?.setAttribute("scope", "row");
-  for (const v of [m.session, m.today, m.week]) tr.append(el("td", v ? "n" : "n zero", v ? credits(v) : "—"));
+  const keep = unsold ? [unsold.session, unsold.today, unsold.week] : [0, 0, 0];
+  [m.session, m.today, m.week].forEach((v, i) => {
+    const td = el("td", v || keep[i] ? "n" : "n zero", v ? credits(v) : "—");
+    if (keep[i]) {
+      const more = el("span", "ea-unsold", `+${credits(keep[i])}`);
+      more.title = "Gathered in this period and not sold yet (estimated): lost if you die before you sell it";
+      td.append(" ", more);
+    }
+    tr.append(td);
+  });
   return tr;
 }
 
-/** @param {UiMoney[]} rows @param {string} head */
-function moneyBlock(rows, head) {
-  const used = rows.filter((m) => m.kind === "total" || m.session || m.today || m.week);
+/** Two UiMoney rows added up, window by window. @param {UiMoney} a @param {UiMoney} b @returns {UiMoney} */
+const moneySum = (a, b) => ({ ...a, session: a.session + b.session, today: a.today + b.today, week: a.week + b.week });
+
+/** @param {UiMoney[]} rows @param {string} head @param {Record<string, UiMoney>} [unsold] by row kind */
+function moneyBlock(rows, head, unsold = {}) {
+  const shown = (/** @type {UiMoney} */ m) => m.session || m.today || m.week;
+  const used = rows.filter((m) => m.kind === "total" || shown(m) || (unsold[m.kind] && shown(unsold[m.kind])));
   const title = el("tr", "ea-head");
   const th = el("th", "", head);
   th.colSpan = 4;
   title.append(th);
-  return [title, ...used.map((m) => moneyRow(m, m.kind === "total" ? "ea-total" : ""))];
+  return [title, ...used.map((m) => moneyRow(m, m.kind === "total" ? "ea-total" : "", unsold[m.kind] || null))];
 }
 
 /** @param {UiEarnings | undefined} e */
@@ -3699,9 +3904,14 @@ function renderEarnings(e) {
     session.textContent = `Session from ${whenText(e.session_start)}, ${length}${e.running ? " so far" : ""}${rate}`;
   }
   $("ea-week").title = e.week_start ? `From ${whenText(e.week_start)}` : "";
-  $("ea-earned").replaceChildren(...moneyBlock(e.earned, "Earned"));
+  const none = (/** @type {string} */ kind) => ({ kind, label: "", session: 0, today: 0, week: 0 });
+  const map = e.unsold_map || none("exploration"); // absent from an older plugin still running
+  const bio = e.unsold_bio || none("exobiology");
+  const unsoldAll = moneySum(map, bio);
+  const unsold = { exploration: map, exobiology: bio, total: unsoldAll };
+  $("ea-earned").replaceChildren(...moneyBlock(e.earned, "Earned", unsold));
   $("ea-spent").replaceChildren(...moneyBlock(e.spent, "Spent"));
-  $("ea-net").replaceChildren(moneyRow(e.net, "ea-net"));
+  $("ea-net").replaceChildren(moneyRow(e.net, "ea-net", unsoldAll));
   const facts = /** @type {[string, string][]} */ ([
     ["Cartographic data", e.data_bodies
       ? `≈ ${credits(e.data_value)} Cr · ${e.data_bodies} ${e.data_bodies === 1 ? "body" : "bodies"} in ${e.data_systems} ${e.data_systems === 1 ? "system" : "systems"}, since ${whenText(e.data_since)}`
@@ -3715,7 +3925,12 @@ function renderEarnings(e) {
   $("ea-species").replaceChildren(
     ...e.bio_species.map((sp) => {
       const li = el("li", "ea-sp");
-      li.append(el("span", "", sp.name), el("span", "n", sp.value === null ? "value not known" : `${credits(sp.value)} Cr`));
+      const value = el("span", "n", sp.value === null ? "value not known" : `${credits(sp.value)} Cr`);
+      if (sp.first) {
+        value.prepend(el("span", "ea-first", "first footfall ×5 "));
+        value.title = "Nobody walked on this body before you: five times the base value";
+      }
+      li.append(el("span", "", sp.name), value);
       li.dataset.name = sp.name;
       return li;
     }),
@@ -4488,6 +4703,12 @@ $("plan-ship").addEventListener("change", onPickShip);
 $("b-copy").innerHTML = COPY_SVG;
 $("b-copy").addEventListener("click", onCopy);
 $("b-skip").addEventListener("click", () => onStep(1));
+for (const [id, by] of /** @type {const} */ ([["fb-position", "position"], ["fb-stops", "stops"]])) {
+  $(id).addEventListener("click", async () => {
+    const r = await post("/api/follow", { by });
+    if (!r.ok) showStatus(r.error, "error");
+  });
+}
 $("b-back").addEventListener("click", () => onStep(-1));
 $("b-take-game").addEventListener("click", onTakeGame);
 select("v-order").value = view.order;
@@ -4499,6 +4720,13 @@ for (const b of document.querySelectorAll("button[data-preset]")) {
 }
 for (const r of document.querySelectorAll('input[name="plan"]')) r.addEventListener("change", syncPlan);
 attachSuggest(input("f-from"), $("s-from"));
+for (const [id, which] of /** @type {const} */ ([["f-from", "from"], ["f-to", "to"]])) {
+  for (const type of ["input", "change"]) { // change: a name picked from the list without typing
+    input(id).addEventListener(type, () => {
+      typedField[which] = input(id).value.trim() !== "";
+    });
+  }
+}
 attachSuggest(input("f-to"), $("s-to"), () => (debug.reply ? debug.reply.state.recent_to || [] : []));
 attachSuggest(input("m-commodity"), $("s-commodity"), undefined, commoditiesMatching);
 attachSuggest(input("t-system"), $("s-t-system"));

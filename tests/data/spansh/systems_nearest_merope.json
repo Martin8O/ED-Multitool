@@ -1,0 +1,37 @@
+{
+ "request": {
+  "method": "POST",
+  "url": "https://spansh.co.uk/api/systems/search",
+  "json": {
+   "filters": {},
+   "sort": [
+    {
+     "distance": {
+      "direction": "asc"
+     }
+    }
+   ],
+   "reference_coords": {
+    "x": -75.0,
+    "y": -150.0,
+    "z": -340.0
+   },
+   "size": 1,
+   "page": 0
+  }
+ },
+ "status": 200,
+ "body": {
+  "count": 10000,
+  "results": [
+   {
+    "id64": 224644818084,
+    "name": "Merope",
+    "x": -78.59375,
+    "y": -149.625,
+    "z": -340.53125,
+    "distance": 3.65210769624884
+   }
+  ]
+ }
+}

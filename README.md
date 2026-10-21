@@ -110,7 +110,8 @@ One chapter per tab, in the order they sit in the window.
 
 ![Scout a route: from, to, what to look for, and your minimum values](docs/images/search-form.png)
 
-1. **From** is your current system unless you type another; **To** is your destination. Both suggest names.
+1. **From** follows the system you are in unless you type another; **To** follows the route you fly (the one
+   plotted in the galaxy map, else the route you follow) unless you type one. Both suggest names.
 2. **Plan:** route only, + FSS/DSS (Earth-likes, water worlds, terraformables…), + exobiology, or + both.
 3. Fine-tune or pick a **preset** (*ELW hunt*, *Bio rich*, *Quick trip*): how far off the line a stop may be,
    how far from the arrival star a body may be, stops per search, planet types, and **minimum values** per
@@ -122,9 +123,12 @@ One chapter per tab, in the order they sit in the window.
 
 ![A scouted route from Bitjala to Merope: every stop, every body worth scanning or landing on, and what it pays](docs/images/search-route.png)
 
-The **Next** box follows you as you jump (**Back** / **Skip** by hand, copy button for the galaxy map). Plotted
-a route in the galaxy map yourself? **Follow it** takes it over. Bodies you mapped and species you analysed are
-read from your journals and never counted twice.
+A **strip** above the list draws the route like the game does: one mark per jump, the stops coloured by what
+they offer (green exobiology, blue FSS/DSS), what is behind you dimmed; long routes turn into ticks, then a line.
+The **Next** box follows you as you jump: **By my position** counts the stops you fly past without visiting
+as behind you, **Stop by stop** waits until you arrive in the next one; **Back** / **Skip** by hand, copy button
+for the galaxy map. Plotted a route in the galaxy map yourself? **Follow it** takes it over. Bodies you mapped and
+species you analysed are read from your journals and never counted twice.
 
 ![This system: what the system you just arrived in is worth to you](docs/images/this-system.png)
 
@@ -138,7 +142,7 @@ has been there. It grows as you scan. **Flash over … M Cr** flashes the window
 
 > **What to buy, where to sell it, and where your cargo pays the most.**
 
-![Best trade from Ray Gateway: what to buy, where to sell it and the profit](docs/images/trade.png)
+![Best trade from Wedge Terminal: what to buy, where to sell it and the profit](docs/images/trade.png)
 
 Three views at the top:
 
@@ -221,7 +225,8 @@ read in the background.
 ![Ranks, superpower reputation and Powerplay](docs/images/commander.png)
 
 From your journals, nothing to fill in: all eight ranks (Combat, Explorer, Trade, CQC, Mercenary,
-Exobiologist, Federal and Imperial Navy) with the percent to the next and an emblem that grows with the rank;
+Exobiologist, Federal and Imperial Navy) with the percent to the next (marked ≥ after a promotion or a sale, until
+your next login tells the new one) and an emblem that grows with the rank;
 Federation, Empire, Alliance and Independent reputation (−100 … +100, with the game's word for it); your
 Powerplay pledge, merits in all and this week (from Thursday 07:00 UTC), your rank and how many systems your
 power holds; and all of it over time.
@@ -256,7 +261,9 @@ killed you and what coming back cost.
 From your journals: **earned and spent** this session, today and this week (from Monday) by kind, with credits
 per hour; your **balance over time**, exact at every login and followed through every credit in between; and
 what you **still carry unsold**, cartographic data (an estimate with first-discovery and mapping bonuses) and
-species since your last Vista Genomics sale. All of it is lost if you die before you sell it.
+species since your last Vista Genomics sale (five times the value where you were the first to set foot on the
+body). All of it is lost if you die before you sell it. Beside what was paid, in grey, each column shows what
+you gathered in that period and have not sold yet; the top row shows the whole unsold amount next to your credits.
 
 <a name="missions"></a>
 

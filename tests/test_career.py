@@ -30,6 +30,7 @@ from edmultitool.core.events import (
     PledgeChanged,
     PowerplayKnown,
     PowerRanked,
+    ProgressMoved,
     RanksKnown,
     ReputationKnown,
     parse_career,
@@ -236,6 +237,30 @@ def test_ranks_and_promotion() -> None:
     assert tops["Empire"] == ("King", "", 14)
     assert tops["Combat"] == ("Elite V", "", 13)
     assert tops["CQC"] == ("Elite", "", 8)
+
+
+def test_a_promotion_or_a_sale_leaves_the_percent_unknown_until_the_next_login() -> None:
+    sale = {"timestamp": "2026-10-14T10:00:00Z", "event": "SellOrganicData", "MarketID": 1, "BioData": []}
+    assert parse_career(sale) == [ProgressMoved("Exobiologist", "2026-10-14T10:00:00Z")]
+    explore = {"timestamp": "2026-10-14T10:00:00Z", "event": "MultiSellExplorationData", "Discovered": []}
+    assert parse_career(explore) == [ProgressMoved("Explore", "2026-10-14T10:00:00Z")]
+    trade = {"timestamp": "2026-10-14T10:00:00Z", "event": "MarketSell"}
+    assert parse_career(trade) == [ProgressMoved("Trade", "2026-10-14T10:00:00Z")]
+    c = _fold([RANK, PROGRESS])
+    assert not any(r.stale for r in ui_career(c, NOW).ranks)
+    c.add(ProgressMoved("Explore", "2026-10-14T10:00:00Z"))
+    c.add(RanksKnown((("Exobiologist", 3),), False, "2026-10-14T10:01:00Z"))  # Promotion
+    ranks = {r.kind: r for r in ui_career(c, NOW).ranks}
+    assert ranks["Explore"].stale and ranks["Exobiologist"].stale and ranks["Exobiologist"].progress == 0
+    assert not ranks["Trade"].stale
+    # the next login's Progress tells the real percents again
+    c.add(RanksKnown((("Explore", 40), ("Exobiologist", 90)), True, "2026-10-15T10:00:00Z"))
+    ranks = {r.kind: r for r in ui_career(c, NOW).ranks}
+    assert (ranks["Exobiologist"].stale, ranks["Exobiologist"].progress) == (False, 90)
+    assert not ranks["Explore"].stale
+    # the top rank has nothing left to fill
+    c.add(RanksKnown((("Combat", 13),), False, "2026-10-15T11:00:00Z"))
+    assert not next(r for r in ui_career(c, NOW).ranks if r.kind == "Combat").stale
 
 
 def test_every_rank_carries_its_ladder() -> None:

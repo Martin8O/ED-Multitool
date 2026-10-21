@@ -91,7 +91,15 @@ from edmultitool.core.fleet import (
     remember,
     to_doc,
 )
-from edmultitool.core.follow import arrive, game_offer, game_route, start_index, step, ui_follow
+from edmultitool.core.follow import (
+    arrive,
+    game_offer,
+    game_route,
+    pass_by_position,
+    start_index,
+    step,
+    ui_follow,
+)
 from edmultitool.core.gear import (
     MAX_TEXT,
     GearRequest,
@@ -166,6 +174,8 @@ from edmultitool.core.sell import (
 from edmultitool.core.sell import hold as sell_hold
 from edmultitool.core.sell import load_of as sell_load
 from edmultitool.core.settings import (
+    FOLLOW_BY,
+    FollowBy,
     ScoutPrefs,
     Settings,
     load_settings,
@@ -190,6 +200,7 @@ from edmultitool.core.updates import Release, UiUpdate, is_newer
 from edmultitool.core.view import (
     PanelText,
     ScoutStatus,
+    UiFollow,
     UiRoute,
     UiScout,
     UiState,
@@ -249,7 +260,13 @@ SERVICES_JOB = "services"
 POWER_JOB = "powerplay"
 HISTORY = "history"  # the notice about the journal history
 # the card a page command belongs to, where it is not named after it (jobs are named after their card)
-_CARD = {"cancel": "scout", "plan-ship": "ship", "follow": "follow", "follow-game": "follow"}
+_CARD = {
+    "cancel": "scout",
+    "plan-ship": "ship",
+    "follow": "follow",
+    "follow-game": "follow",
+    "follow-by": "follow",
+}
 STANDINGS_JOB = "standings-scan"
 COMMANDER_JOB = "commander-scan"
 CAREER_JOB = "career-scan"
@@ -261,6 +278,7 @@ ARRIVAL_JOB = "arrival"  # the bodies Spansh knows in the system you just arrive
 HOLD_JOB = "career"  # how many systems your power holds (the Commander tab asks when it is shown)
 HOLD_TTL = 15 * 60  # seconds a count stands before the tab asks Spansh again
 UPDATE_JOB = "update-check"  # asks GitHub whether a newer version is out
+ROUTE_ENDS_JOB = "route-ends"  # where an older saved route starts and ends, to follow it by position
 UPDATE_EVERY = 24 * 3600.0  # seconds between two asks
 UPDATE_RETRY = 3600.0  # seconds to wait before asking again after a failed ask (offline, rate limit)
 MAX_GEAR_PLOTS = 6  # jump plots for one post, nearest first
@@ -293,11 +311,15 @@ def plugin_logger(plugin_dir: Path) -> logging.Logger:
     return logging.getLogger(f"EDMarketConnector.{plugin_dir.name}")
 
 
+START_UNKNOWN = "Could not find starting system"  # Spansh's words for a start it has no record of
+DEST_UNKNOWN = "Could not find finishing system"  # … and for such a destination
+
+
 def _friendly(error: str, start: str, dest: str) -> str:
     """Spansh's two everyday refusals in player words; anything else as Spansh said it."""
-    if "Could not find starting system" in error:
+    if START_UNKNOWN in error:
         return f"Spansh does not know the start system '{start}'. Pick a name from the suggestions."
-    if "Could not find finishing system" in error:
+    if DEST_UNKNOWN in error:
         return f"Spansh does not know the destination '{dest}'. Pick a name from the suggestions."
     if error.startswith(("Spansh does not know", "Spansh knows")):  # spansh.resolve_system
         return f"{error}. Pick a name from the suggestions."
@@ -379,7 +401,7 @@ class ScoutPlugin:
         self._load_route()
         self.ui: UiState = ui_state(
             self.state, self.settings, game_seen=False, scout=self.scout, fleet=self.fleet,
-            follow=ui_follow(self.scout.route, self.follow_next),
+            follow=self._ui_follow(),
             game_route=game_offer(self.game, self.scout.route, self.follow_next),
         )  # fmt: skip
         self.seq = 0
@@ -447,6 +469,10 @@ class ScoutPlugin:
         self._ui_stats_cache = UiStats()
         self.places: dict[str, StarPos] = {}
         self._places_job: tuple[int, list[str]] | None = None  # job id, the names asked
+        self._ends_job: tuple[int, str] | None = None  # job id, the route (its `finished`) it is for
+        self._ends_asked = ""  # the route whose ends were asked for (once per route and jump)
+        self._ends_failed = False  # that lookup failed: asked again after the next jump
+        self._held = False  # a Back holds Next where you put it until you reach a point of the route
         self._places_asked: set[str] = set()  # names asked (found or not): not asked again until you jump
         self._places_error = ""  # why the last lookup failed ("" = it did not)
         self.hold = UiHold()  # the pledged power's systems, by state (asked when the Commander tab is shown)
@@ -519,6 +545,7 @@ class ScoutPlugin:
         self.worker.start()
         client = self.client
         self.worker.submit("cache-prune", lambda _cancel: client.prune_cache(CACHE_MAX_AGE))
+        self._catch_up()  # a route loaded before the worker ran: its ends can be looked up now
         journal_dir, newer_than = self.journal_dir, self.fleet.scanned_mtime
         if journal_dir is None or not journal_dir.is_dir():
             where = "is not known" if journal_dir is None else f"({journal_dir}) cannot be read"
@@ -627,6 +654,9 @@ class ScoutPlugin:
             self._take_game_route()
         elif name == "follow":  # not a scout command either
             self._step_follow(prefs if isinstance(prefs, int) else 0)
+        elif name == "follow-by":  # the Next box's By my position / Stop by stop
+            if prefs in FOLLOW_BY:
+                self._set_follow_by(prefs)
         elif name == "market":  # the commodity card counts its own requests (UiMarket.handled)
             self._market_handled += 1
             if isinstance(prefs, MarketRequest):
@@ -710,6 +740,8 @@ class ScoutPlugin:
             self._finish_arrival(r)
         elif r.name == UPDATE_JOB:
             self._finish_update(r)
+        elif r.name == ROUTE_ENDS_JOB:
+            self._finish_route_ends(r)
 
     # --- "a new version is out" -------------------------------------------------------------------
     def _want_update(self) -> None:
@@ -809,6 +841,8 @@ class ScoutPlugin:
         elif card == PLACES_JOB:
             self._places_job = None
             self._places_error = INTERNAL_MESSAGE
+        elif card == ROUTE_ENDS_JOB:
+            self._ends_job = None
         # the background passes (fleet, explored, standings) and follow steps have no card: log only
 
     # --- route scouting (main thread) -------------------------------------------------------------
@@ -842,12 +876,43 @@ class ScoutPlugin:
             except ValueError as exc:  # a reply without start and destination
                 raise SourceError(str(exc)) from exc
 
+        # An end Spansh has no record of yet (an undiscovered system) is replaced by the nearest system it
+        # knows — where we know where that end is: the system you are in, or the galaxy map's destination.
+        s = self.state
+        here = (
+            s.star_pos
+            if s.system and start.casefold() == s.system.casefold() and not s.in_other_ship
+            else None
+        )
+        plotted = self.game.points[-1] if self.game is not None and self.game.points else None
+        there = (
+            plotted.pos
+            if plotted is not None and plotted.name.casefold() == prefs.to_system.casefold()
+            else None
+        )
+
         def run(cancel: threading.Event) -> Route:
-            route = build(queries, cancel, keep=prefs.max_stops)
+            begin, ask = start, prefs
+            asked, more = queries, pool
+            for _ in range(3):  # the start, then the destination may each be swapped once
+                try:
+                    route = build(asked, cancel, keep=prefs.max_stops)
+                    break
+                except SourceError as exc:
+                    if here is not None and begin == start and START_UNKNOWN in str(exc):
+                        begin = spansh.nearest_system(client, here, cancel).name
+                    elif there is not None and ask is prefs and DEST_UNKNOWN in str(exc):
+                        ask = replace(prefs, to_system=spansh.nearest_system(client, there, cancel).name)
+                    else:
+                        raise
+                    asked = scout_queries(ask, begin, range_ly)
+                    more = scout_queries(ask, begin, range_ly, max_results=pool_size(prefs.max_stops))
+            else:
+                raise SourceError("Spansh: the search returned no route")
             if spent(route) and prefs.max_detour_ly > 0 and pool_size(prefs.max_stops) > prefs.max_stops:
                 # Some stops hold only what is yours already: the same searches with more results give
                 # the next-best stops to swap in (asked only now, so a normal search stays as it was).
-                route = swap_spent(route, build(pool, cancel), prefs.max_detour_ly)
+                route = swap_spent(route, build(more, cancel), prefs.max_detour_ly)
             return route
 
         job_id = self.worker.submit(SCOUT_JOB, run)
@@ -919,6 +984,22 @@ class ScoutPlugin:
         recent = remember_destination(self.settings.recent_to, route.to_name)
         self.set_settings(replace(self.settings, recent_to=recent))
         self._follow_new(route)
+        if route.mode != "tour":
+            return
+        notes, unknown = [], []
+        if route.from_name.casefold() != start.casefold():
+            # started from the nearest system Spansh knows: you are there already, its first stop is next
+            notes.append(f"started from {route.from_name}, nearby")
+            unknown.append(start)
+            if self.follow_next == 0:
+                self.follow_next = 1
+                self._save_route()
+        if route.to_name.casefold() != prefs.to_system.casefold():
+            notes.append(f"it ends at {route.to_name}, the nearest it knows")
+            unknown.append(prefs.to_system)
+        if notes:
+            said = f"Spansh has no record of {' or '.join(unknown)} yet: {'; '.join(notes)}."
+            self.scout = replace(self.scout, message=said)
 
     # --- gear posts from the forum (main thread) -----------------------------------------------------
     def _set_gear(self, status: GearStatus, message: str, **changes: Any) -> None:
@@ -1752,25 +1833,102 @@ class ScoutPlugin:
         """A finished search replaces the followed route; it starts past the system you are in."""
         self.scout = UiScout("done", "", regrade(route, self.explored.snapshot()), self._handled)
         self.follow_next = start_index(route, self._address())
+        self._held = False
         self._save_route()
 
     def _address(self) -> str | None:
         return None if self.state.address is None else str(self.state.address)
 
     def _arrived(self) -> None:
+        """A jump: past the route's point you arrived in, and by position past the stops flown past."""
         route = self.scout.route
         if route is None:
             return
         n = arrive(route, self.follow_next, self._address())
         if n != self.follow_next:
+            self._held = False  # in one of its points: a Back is over
             self.follow_next = n
             self._save_route()
+        if self._ends_failed:  # the lookup failed: asked again once per jump
+            self._ends_failed, self._ends_asked = False, ""
+        self._catch_up()
+
+    def _catch_up(self) -> None:
+        """By position: Next moves past the stops flown past — not while a Back holds it where you put it."""
+        route = self.scout.route
+        if route is None or self.settings.follow_by != "position":
+            return
+        self._want_route_ends()
+        if self._held:
+            return
+        n = pass_by_position(route, self.follow_next, self._pos())
+        if n != self.follow_next:
+            self.follow_next = n
+            self._save_route()
+
+    def _pos(self) -> tuple[float, float, float] | None:
+        return None if self.state.in_other_ship else self.state.star_pos
+
+    def _ui_follow(self) -> UiFollow:
+        return ui_follow(self.scout.route, self.follow_next, self.settings.follow_by, self._pos())
+
+    def _set_follow_by(self, by: FollowBy) -> None:
+        """The Next box's switch; by position: the stops already flown past go behind you now."""
+        if by == self.settings.follow_by:
+            return
+        self.set_settings(replace(self.settings, follow_by=by))
+        self._held = False
+        self._catch_up()
+
+    def _want_route_ends(self) -> None:
+        """A tour saved by an older version does not know where it starts and ends: ask Spansh once (per
+        route, and again after a jump when it failed)."""
+        route = self.scout.route
+        if route is None or route.mode != "tour" or (route.from_pos is not None and route.to_pos is not None):
+            return
+        if self._ends_job is not None or self._ends_asked == route.finished:
+            return
+        client = self.client
+        if client is None or not self.worker.alive:
+            return
+        self._ends_asked = route.finished
+        ends = ((route.from_name, route.from_id64), (route.to_name, route.to_id64))
+
+        def ask(cancel: threading.Event) -> tuple[tuple[float, float, float], ...]:
+            out = []
+            for name, id64 in ends:  # found by name, then checked by id64 where the route knows it
+                hit = spansh.resolve_system(client, name, cancel)
+                if id64 and str(hit.id64) != id64:
+                    raise SourceError(f"Spansh's {name} is not the route's system")
+                out.append((hit.x, hit.y, hit.z))
+            return tuple(out)
+
+        self._ends_job = (self.worker.submit(ROUTE_ENDS_JOB, ask), route.finished)
+
+    def _finish_route_ends(self, r: JobResult) -> None:
+        if self._ends_job is None or self._ends_job[0] != r.job_id:
+            return
+        finished = self._ends_job[1]
+        self._ends_job = None
+        route = self.scout.route
+        if r.cancelled or route is None or route.finished != finished:
+            return
+        if r.error is not None or not isinstance(r.value, tuple):
+            self.log.warning("where the route starts and ends: %s", r.error)
+            self._ends_failed = True  # asked again after the next jump
+            return
+        start, dest = r.value
+        self.scout = replace(self.scout, route=replace(route, from_pos=start, to_pos=dest))
+        self._save_route()
+        self._catch_up()
+        self._refresh()
 
     def _step_follow(self, by: int) -> None:
         route = self.scout.route
         if route is None or by not in (1, -1):
             return
         n = step(route, self.follow_next, by)
+        self._held = by == -1  # Back: by position, a later jump must not move Next on again by itself
         if n != self.follow_next:
             self.follow_next = n
             self._save_route()
@@ -2048,6 +2206,11 @@ class ScoutPlugin:
             if isinstance(doc, dict) and doc.get("take") == "game":
                 self._commands.put(("follow-game", None))
                 return 202, {"accepted": "follow-game"}
+            if isinstance(doc, dict) and "by" in doc:
+                if doc["by"] not in FOLLOW_BY:
+                    return 400, {"error": "by must be 'position' or 'stops'"}
+                self._commands.put(("follow-by", doc["by"]))
+                return 202, {"accepted": "follow-by"}
             by = doc.get("step") if isinstance(doc, dict) else None
             if type(by) is not int or by not in (1, -1):
                 return 400, {"error": "step must be 1 (skip) or -1 (back)"}
@@ -2169,7 +2332,7 @@ class ScoutPlugin:
             scout=self.scout,
             fleet=self.fleet,
             pick=self.plan_pick,
-            follow=ui_follow(self.scout.route, self.follow_next),
+            follow=self._ui_follow(),
             game_route=game_offer(self.game, self.scout.route, self.follow_next),
             gear=self.gear,
             market=self.market,
